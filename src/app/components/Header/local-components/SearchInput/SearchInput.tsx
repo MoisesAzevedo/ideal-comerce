@@ -1,5 +1,6 @@
 import Image from "next/image";
 import styles from "./SearchInput.module.scss";
+import { getAssetPath } from "@/utils/paths";
 
 export default function SearchInput() {
   return (
@@ -7,7 +8,7 @@ export default function SearchInput() {
       {/* Botão de Submit Pesquisa */}
       <button type="submit" className={styles.searchButton}>
         <Image
-          src="/icons/search.svg"
+          src={getAssetPath("/icons/search.svg")}
           alt="Search"
           width={25}
           height={25}
@@ -19,7 +20,7 @@ export default function SearchInput() {
       <button type="button" className={styles.categoryButton}>
         Em Camisetas
         <Image
-          src="/icons/select--arrow.svg"
+          src={getAssetPath("/icons/select--arrow.svg")}
           alt="Select Arrow"
           width={9}
           height={10}

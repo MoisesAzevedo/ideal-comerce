@@ -1,6 +1,7 @@
 import Image from "next/image";
 import styles from "./Header.module.scss";
 import SearchInput from "./local-components/SearchInput/SearchInput";
+import { getAssetPath } from "@/utils/paths";
 
 export default function Header() {
   return (
@@ -8,7 +9,7 @@ export default function Header() {
       <div className={styles.content}>
         {/* Logo */}
         <Image
-          src="/logo-ideal.svg"
+          src={getAssetPath("/logo-ideal.svg")}
           alt="Ideal Logo"
           width={61}
           height={61}
