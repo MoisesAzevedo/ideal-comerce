@@ -1,0 +1,22 @@
+/* 1. Header */
+.header {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background: linear-gradient(90deg, #0d1a0e 0%, #1d2d1e 25.48%);
+}
+
+/* 2. div content no header */
+.content {
+  display: flex;
+  width: 1186px;
+  align-items: center;
+  position: relative;
+}
+
+/* 2. logo dentro da div content */
+.logo {
+  width: 61px;
+  height: 61px;
+  left: 0px;
+}
