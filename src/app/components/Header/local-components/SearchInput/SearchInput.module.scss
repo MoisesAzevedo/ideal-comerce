@@ -26,10 +26,16 @@
   &:hover {
     background-color: rgba(255, 255, 255, 0.1);
   }
+
+  &:hover .searchIcon {
+    filter: brightness(0.8);
+    color: var(--svg-hover);
+  }
 }
 
 .searchIcon {
-  filter: brightness(0) invert(1); /* cor do svg vai ser white */
+  filter: brightness(0) invert(1);
+  color: var(--svg-color);
 }
 
 /* 5. botão dentro do formulario */
@@ -55,6 +61,8 @@
   width: 9px;
   height: 10px;
   margin-left: 6px;
+  filter: brightness(0) invert(1);
+  color: var(--svg-color);
 }
 
 /* 6. input */

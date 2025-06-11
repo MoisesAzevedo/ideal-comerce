@@ -1,6 +1,7 @@
 import Image from "next/image";
 import styles from "./Header.module.scss";
 import SearchInput from "./local-components/SearchInput/SearchInput";
+import UserActions from "./local-components/UserActions/UserActions";
 import { getAssetPath } from "@/utils/paths";
 
 export default function Header() {
@@ -18,6 +19,9 @@ export default function Header() {
 
         {/* Input de Pesquisa */}
         <SearchInput />
+
+        {/* Ações do Usuário */}
+        <UserActions />
 
         {/* Conteúdo do header */}
       </div>

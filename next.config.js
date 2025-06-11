@@ -5,8 +5,12 @@ const nextConfig = {
   images: {
     unoptimized: true
   },
-  basePath: "/ideal-comerce",
-  assetPrefix: "/ideal-comerce/",
+  // Only apply basePath and assetPrefix for GitHub Pages deployment
+  ...(process.env.NODE_ENV === "production" &&
+    process.env.GITHUB_ACTIONS && {
+      basePath: "/ideal-comerce",
+      assetPrefix: "/ideal-comerce/"
+    }),
   distDir: "out"
 };
 
