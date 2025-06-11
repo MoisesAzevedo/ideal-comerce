@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import styles from "./UserActions.module.scss";
 import { getAssetPath } from "@/utils/paths";
 import { Tooltip } from "react-tooltip";
