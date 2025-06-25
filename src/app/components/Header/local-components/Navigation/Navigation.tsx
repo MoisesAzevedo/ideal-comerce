@@ -146,7 +146,7 @@ const Navigation = () => {
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >
-          <span
+          <h2
             style={{
               fontFamily: "Teko, Helvetica, Arial, sans-serif",
               fontWeight: 400,
@@ -158,11 +158,14 @@ const Navigation = () => {
               width: "100%",
               display: "flex",
               alignItems: "center",
-              height: "23px"
+              height: "34px",
+              gap: 4,
+              margin: 0
             }}
           >
             TODAS AS CATEGORIAS
-          </span>
+          </h2>
+
           <SelectArrow rotated={open} color="#1d2d1e" />
         </div>
         {open && (
@@ -231,36 +234,96 @@ const Navigation = () => {
             ))}
           </div>
         )}
-        <span
+        <h2
           className={styles.item}
-          style={{ left: 289, top: -1, position: "absolute" }}
+          style={{
+            left: 289,
+            top: -1,
+            position: "absolute",
+            fontFamily: "Teko, Helvetica, Arial, sans-serif",
+            fontWeight: 400,
+            color: "#1d2d1e",
+            fontSize: "1.5rem",
+            letterSpacing: 2,
+            lineHeight: "normal",
+            cursor: "pointer",
+            transition: "color 0.2s"
+          }}
         >
           CAMPING
-        </span>
-        <span
+        </h2>
+        <h2
           className={styles.item}
-          style={{ left: 390, top: -1, position: "absolute" }}
+          style={{
+            left: 390,
+            top: -1,
+            position: "absolute",
+            fontFamily: "Teko, Helvetica, Arial, sans-serif",
+            fontWeight: 400,
+            color: "#1d2d1e",
+            fontSize: "1.5rem",
+            letterSpacing: 2,
+            lineHeight: "normal",
+            cursor: "pointer",
+            transition: "color 0.2s"
+          }}
         >
           FARDAS E UNIFORMES
-        </span>
-        <span
+        </h2>
+        <h2
           className={styles.item}
-          style={{ left: 600, top: -1, position: "absolute" }}
+          style={{
+            left: 600,
+            top: -1,
+            position: "absolute",
+            fontFamily: "Teko, Helvetica, Arial, sans-serif",
+            fontWeight: 400,
+            color: "#1d2d1e",
+            fontSize: "1.5rem",
+            letterSpacing: 2,
+            lineHeight: "normal",
+            cursor: "pointer",
+            transition: "color 0.2s"
+          }}
         >
           CALÇADOS
-        </span>
-        <span
+        </h2>
+        <h2
           className={styles.item}
-          style={{ left: 711, top: -1, position: "absolute" }}
+          style={{
+            left: 711,
+            top: -1,
+            position: "absolute",
+            fontFamily: "Teko, Helvetica, Arial, sans-serif",
+            fontWeight: 400,
+            color: "#1d2d1e",
+            fontSize: "1.5rem",
+            letterSpacing: 2,
+            lineHeight: "normal",
+            cursor: "pointer",
+            transition: "color 0.2s"
+          }}
         >
           MOCHILAS E BOLSAS
-        </span>
-        <span
+        </h2>
+        <h2
           className={styles.item}
-          style={{ left: 908, top: -1, position: "absolute" }}
+          style={{
+            left: 908,
+            top: -1,
+            position: "absolute",
+            fontFamily: "Teko, Helvetica, Arial, sans-serif",
+            fontWeight: 400,
+            color: "#1d2d1e",
+            fontSize: "1.5rem",
+            letterSpacing: 2,
+            lineHeight: "normal",
+            cursor: "pointer",
+            transition: "color 0.2s"
+          }}
         >
           EQUIPAMENTOS TÁTICOS
-        </span>
+        </h2>
       </div>
     </div>
   );
