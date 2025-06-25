@@ -1,0 +1,30 @@
+.scrollToTopButton {
+  position: fixed;
+  right: 2rem;
+  bottom: 2rem;
+  width: 48px;
+  height: 48px;
+  background: #fff;
+  border: 1px solid #d1d5db;
+  border-radius: 50%;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #2b4d2b;
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+  z-index: 2000;
+}
+
+.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.scrollToTopButton:hover {
+  background: #f3f4f6;
+  color: #1d2d1e;
+}

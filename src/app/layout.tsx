@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { getAssetPath } from "@/utils/paths";
 import "./globals.css";
+import ScrollToTopButton from "@/app/components/ScrollToTopButton/ScrollToTopButton";
 
 export const metadata: Metadata = {
   title: "Ideal Uniformes | Equipamentos Militares ",
@@ -17,7 +18,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR">
-      <body className="antialiased">{children}</body>
+      <body className="antialiased">
+        {children}
+        <ScrollToTopButton />
+      </body>
     </html>
   );
 }

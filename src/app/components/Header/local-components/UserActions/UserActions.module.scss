@@ -1,6 +1,6 @@
 .userActions {
   display: flex;
-  gap: 10px;
+  gap: 4px; // diminui o espaçamento entre os botões
   align-items: center;
   position: absolute;
   right: 0;
@@ -9,21 +9,65 @@
 .actionButton {
   display: flex;
   align-items: center;
-  justify-content: center;
+  gap: 4px; // diminui o espaçamento entre ícone e label
   background: none;
   border: none;
   cursor: pointer;
-  padding: 8px;
-  border-radius: 4px;
-  transition: all 0.2s ease;
+  transition: background 0.2s;
+  padding: 4px 8px; // padding menor
+  border-radius: 6px;
 
-  &:hover .actionIcon {
-    filter: brightness(0.8);
-    color: var(--svg-hover);
+  &:hover,
+  &:focus {
+    background: #495949;
+    .actionIcon,
+    .actionLabel,
+    .actionArrow {
+      color: #fff;
+      fill: #fff;
+      /* Para svg inline */
+      filter: brightness(10);
+    }
   }
 }
 
 .actionIcon {
   filter: brightness(0) invert(1);
   color: var(--svg-color);
+  width: 26px !important;
+  height: 26px !important;
+}
+
+.actionLabel {
+  color: #fff;
+  font-family: "Teko", Helvetica, Arial, sans-serif;
+  font-size: 1.35rem;
+  letter-spacing: 1.2px;
+  transition: color 0.2s;
+}
+
+.actionArrow {
+  display: flex;
+  align-items: center;
+  color: #fff;
+  transition: color 0.2s;
+}
+
+.cartBadge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  background: #d6ff00;
+  color: #222;
+  font-size: 0.85rem;
+  font-weight: bold;
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  z-index: 2;
+  border: none;
 }

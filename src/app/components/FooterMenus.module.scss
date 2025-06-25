@@ -1,0 +1,96 @@
+.footerMenus {
+  background: #22382a;
+  color: #fff;
+  padding: 2rem 0 1rem 0;
+  font-size: 1rem;
+}
+
+.menusWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.menu {
+  min-width: 180px;
+  max-width: 260px;
+}
+
+.menuTitle {
+  font-weight: bold;
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+  display: block;
+  color: #e0e0e0;
+}
+
+.menuList {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1rem 0;
+}
+
+.menuItem {
+  margin-bottom: 0.3rem;
+}
+
+.submenu {
+  list-style: none;
+  padding-left: 0.5rem;
+  margin: 0.2rem 0 0.5rem 0;
+}
+
+.submenu li,
+.menuList a {
+  color: #b6c2b7;
+  text-decoration: none;
+  font-size: 0.98rem;
+}
+
+.submenu li a:hover {
+  text-decoration: underline;
+}
+
+.socialMedia {
+  display: flex;
+  gap: 0.7rem;
+  margin-bottom: 0.7rem;
+}
+
+.socialIcon {
+  background: #fff;
+  color: #22382a;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 1.2rem;
+  transition: background 0.2s, color 0.2s;
+}
+
+.socialIcon:hover {
+  background: #22382a;
+  color: #fff;
+  border: 1px solid #fff;
+}
+
+.appLink {
+  margin-top: 0.5rem;
+  color: #b6c2b7;
+  font-size: 0.97rem;
+}
+
+.appLink a {
+  color: #b6c2b7;
+  text-decoration: none;
+}
+
+.appLink a:hover {
+  text-decoration: underline;
+}
