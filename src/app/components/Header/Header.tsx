@@ -1,4 +1,3 @@
-import Image from "next/image";
 import styles from "./Header.module.scss";
 import SearchInput from "./local-components/SearchInput/SearchInput";
 import UserActions from "./local-components/UserActions/UserActions";

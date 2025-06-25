@@ -1,3 +1,4 @@
+import { Frame } from "./components/topInformation/componente";
 import Header from "./components/Header/Header";
 import Banner from "./components/Banner/Banner";
 import Products from "./components/Product_pagination/Products";
@@ -8,6 +9,7 @@ import FooterMenus from "./components/FooterMenus";
 export default function Home() {
   return (
     <main>
+      <Frame />
       <Header />
       <Banner />
       <InformativeBanners />
