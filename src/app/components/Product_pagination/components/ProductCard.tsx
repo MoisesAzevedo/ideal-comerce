@@ -1,6 +1,7 @@
 import React from "react";
 import type { Product } from "../data/products";
 import styles from "./ProductCard.module.scss";
+import Image from "next/image";
 
 export const ProductCard = ({ product }: { product: Product }) => {
   return (
@@ -9,10 +10,13 @@ export const ProductCard = ({ product }: { product: Product }) => {
       style={{ background: "rgba(0,0,0,0.01)" }}
     >
       <div className="relative w-full h-[243px] mb-2">
-        <img
+        <Image
           className="absolute w-full h-full top-0 left-0 object-cover rounded"
           alt={product.name}
           src={product.image}
+          fill
+          sizes="(max-width: 768px) 100vw, 203px"
+          priority={true}
         />
       </div>
       <div className="w-full font-teko text-[#000000a8] text-xs mb-1">

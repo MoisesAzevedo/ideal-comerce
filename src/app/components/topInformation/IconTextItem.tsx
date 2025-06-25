@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 
 interface IconTextItemProps {
   icon: string;
@@ -20,7 +21,7 @@ const IconTextItem: React.FC<IconTextItemProps> = ({
   style = {}
 }) => (
   <div className={`flex items-end ${className}`} style={style}>
-    <img className={iconClassName} alt={alt} src={icon} />
+    <Image className={iconClassName} alt={alt} src={icon} width={20} height={20} />
     <div className={`h-4 leading-tight ${textClassName}`}>{text}</div>
   </div>
 );

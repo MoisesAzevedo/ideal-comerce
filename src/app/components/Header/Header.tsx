@@ -3,6 +3,7 @@ import SearchInput from "./local-components/SearchInput/SearchInput";
 import UserActions from "./local-components/UserActions/UserActions";
 import Navigation from "./local-components/Navigation/Navigation";
 import { getAssetPath } from "@/utils/paths";
+import Image from "next/image";
 
 export default function Header() {
   return (
@@ -11,10 +12,13 @@ export default function Header() {
         <div className={styles.content}>
           {/* Logo */}
 
-          <img
+          <Image
             src={getAssetPath("/logo-mod.png")}
             alt="Ideal Logo"
             className={styles.logo}
+            width={120}
+            height={40}
+            priority
           />
 
           {/* Input de Pesquisa */}

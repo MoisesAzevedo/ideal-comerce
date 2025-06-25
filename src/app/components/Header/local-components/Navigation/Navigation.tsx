@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { getAssetPath } from "@/utils/paths";
+
 import styles from "./Navigation.module.scss";
 import SelectArrow from "./SelectArrow";
 
