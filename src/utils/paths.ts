@@ -4,13 +4,13 @@ export const getAssetPath = (path: string) => {
   const isGitHubPages =
     typeof window !== "undefined"
       ? window.location.hostname.includes("github.io")
-      : process.env.GITHUB_ACTIONS === "true";
+      : process.env.GITHUB_ACTIONS === "true" || process.env.GITHUB_PAGES === "true";
 
-  // Check if we're in production build for GitHub Pages
-  const isProductionForGitHub =
-    process.env.NODE_ENV === "production" &&
-    (process.env.GITHUB_ACTIONS === "true" || isGitHubPages);
-
-  const basePath = isProductionForGitHub ? "/ideal-comerce" : "";
-  return `${basePath}${path}`;
+  // In production and GitHub environment, use the base path
+  const basePath = isGitHubPages ? "/ideal-comerce" : "";
+  
+  // Ensure path starts with /
+  const normalizedPath = path.startsWith('/') ? path : `/${path}`;
+  
+  return `${basePath}${normalizedPath}`;
 };

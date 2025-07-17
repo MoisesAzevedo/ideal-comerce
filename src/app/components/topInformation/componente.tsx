@@ -1,9 +1,10 @@
 import React from "react";
 import IconTextItem from "./IconTextItem";
+import { getAssetPath } from "@/utils/paths";
 
 const items = [
   {
-    icon: "/icons/escudo.svg",
+    icon: getAssetPath("/icons/escudo.svg"),
     alt: "Escudo svg",
     text: "Compra Segura",
     iconClassName: "w-4 h-4",
@@ -11,7 +12,7 @@ const items = [
       "ml-2 font-teko font-light text-black text-sm tracking-[1.5px] leading-tight whitespace-nowrap h-4"
   },
   {
-    icon: "/icons/dolar.svg",
+    icon: getAssetPath("/icons/dolar.svg"),
     alt: "Dolar",
     text: "Melhores Preços",
     iconClassName: "w-4 h-4",
@@ -19,7 +20,7 @@ const items = [
       "ml-2 font-teko font-light text-black text-sm tracking-[1.5px] leading-tight whitespace-nowrap h-4"
   },
   {
-    icon: "/icons/like.svg",
+    icon: getAssetPath("/icons/like.svg"),
     alt: "Like",
     text: "Satisfação Garantida",
     iconClassName: "w-4 h-4",
@@ -27,7 +28,7 @@ const items = [
       "ml-2 font-teko font-light text-black text-sm tracking-[1.5px] leading-tight h-4"
   },
   {
-    icon: "/icons/truck.svg",
+    icon: getAssetPath("/icons/truck.svg"),
     alt: "Truck",
     text: "Frete Rápido",
     iconClassName: "w-4 h-4",
@@ -35,7 +36,7 @@ const items = [
       "ml-2 font-teko font-light text-black text-sm tracking-[1.5px] leading-tight h-4"
   },
   {
-    icon: "/icons/second_medal.svg",
+    icon: getAssetPath("/icons/second_medal.svg"),
     alt: "Second medal",
     text: "Qualidade Militar",
     iconClassName: "w-4 h-4",

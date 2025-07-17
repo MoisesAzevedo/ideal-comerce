@@ -1,4 +1,4 @@
-const isGithubPages = process.env.GITHUB_PAGES === "true";
+const isGithubPages = process.env.GITHUB_PAGES === "true" || process.env.GITHUB_ACTIONS === "true";
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
