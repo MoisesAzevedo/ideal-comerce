@@ -19,7 +19,7 @@
   inset: 0;
   width: 100%;
   height: 100%;
-  background-image: url("/img/banners/banner_performance.png");
+  background-image: var(--banner-bg-image, url("/img/banners/banner_performance.png"));
   background-size: cover;
   background-position: center;
   z-index: 0;

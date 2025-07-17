@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./Banner.module.scss";
+import { getAssetPath } from "@/utils/paths";
 
 const Frame = () => {
   const textContent = {
@@ -32,9 +33,13 @@ const Frame = () => {
 };
 
 const Banner = () => {
+  const bannerStyle = {
+    '--banner-bg-image': `url("${getAssetPath('/img/banners/banner_performance.png')}")`
+  } as React.CSSProperties;
+
   return (
     <div className={styles.banner}>
-      <div className={styles.bannerBg} />
+      <div className={styles.bannerBg} style={bannerStyle} />
       <Frame />
     </div>
   );
