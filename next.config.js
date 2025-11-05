@@ -3,15 +3,19 @@ const isNetlify = process.env.NETLIFY === "true";
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Usar export estático apenas para GitHub Pages (Netlify suporta API routes)
-  ...(isGithubPages && { output: "export" }),
-  basePath: isGithubPages ? "/ideal-comerce" : "",
-  assetPrefix: isGithubPages ? "/ideal-comerce/" : "",
-  trailingSlash: true,
+  // Configuração específica por plataforma
+  ...(isGithubPages && { 
+    output: "export",
+    basePath: "/ideal-comerce",
+    assetPrefix: "/ideal-comerce/",
+    distDir: "out"
+  }),
+  
+  // Para Netlify, manter configuração padrão para suportar API routes
+  trailingSlash: !isNetlify, // Netlify não precisa de trailing slash
   images: {
-    unoptimized: true // GitHub Pages e Netlify precisam de imagens não otimizadas
-  },
-  distDir: "out"
+    unoptimized: true // Necessário para ambas as plataformas
+  }
 };
 
 module.exports = nextConfig;

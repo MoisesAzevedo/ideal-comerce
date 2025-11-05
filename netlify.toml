@@ -1,6 +1,4 @@
-# Netlify configuration for Next.js deployment
-# This ensures API routes work properly as Netlify Functions
-
+# Netlify configuration for Next.js with API routes
 [build]
   command = "npm run build"
   publish = ".next"
@@ -8,11 +6,9 @@
 [build.environment]
   NETLIFY = "true"
 
-# Redirect all API routes to Netlify Functions
-[[redirects]]
-  from = "/api/*"
-  to = "/.netlify/functions/:splat"
-  status = 200
+# Plugin do Netlify para Next.js (converte API routes em funções serverless)
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
 
 # Handle client-side routing
 [[redirects]]
