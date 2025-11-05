@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import type { Product } from "../../../../../db-mock-data/featured-products";
 import type { ProductsQueryParams } from "../services/products-service";
 import { createProductsService } from "../services/products-service";
@@ -33,7 +33,7 @@ export function useProducts(params: ProductsQueryParams = {}): UseProductsReturn
   // Create service instance (could be moved to context for DI)
   const productsService = createProductsService();
 
-  const fetchProducts = async () => {
+  const fetchProducts = useCallback(async () => {
     try {
       setLoading(true);
       setError(null);
@@ -50,7 +50,7 @@ export function useProducts(params: ProductsQueryParams = {}): UseProductsReturn
     } finally {
       setLoading(false);
     }
-  };
+  }, [params, productsService]);
 
   useEffect(() => {
     let mounted = true;
@@ -68,7 +68,7 @@ export function useProducts(params: ProductsQueryParams = {}): UseProductsReturn
     return () => {
       mounted = false;
     };
-  }, [params.page, params.perPage, params.category, params.q]); // Re-fetch when params change
+  }, [fetchProducts]); // Re-fetch when fetchProducts changes
 
   const refetch = () => {
     fetchProducts();

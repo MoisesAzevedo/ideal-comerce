@@ -1,4 +1,3 @@
-import type { Product } from "../../../../../db-mock-data/featured-products";
 import type { ProductsApiResponse } from "../../../api/products/route";
 
 // Service interface - Responsibility: Define contract for products API communication

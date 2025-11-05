@@ -5,7 +5,7 @@
   --foreground: #171717;
   --svg-color: #f5f5f5;
   --svg-hover: #d4d4d4;
-  --font-primary: "Teko", Helvetica, Arial, sans-serif;
+  --font-primary: var(--font-teko), "Teko", Helvetica, Arial, sans-serif;
   --font-secondary: "Calibri", Arial, sans-serif;
 }
 

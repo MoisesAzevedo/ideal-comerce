@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import type { Product } from "../../../../../db-mock-data/featured-products";
 import fetchFeaturedProducts, { ProductsApiResponse } from "../api/productsService";
 
@@ -10,12 +10,15 @@ export function useProducts(options?: { page?: number; perPage?: number; categor
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
+  // Memoize options to prevent unnecessary re-renders
+  const memoizedOptions = useMemo(() => options, [options]);
+
   useEffect(() => {
     let mounted = true;
     setLoading(true);
     setError(null);
 
-    fetchFeaturedProducts(options)
+    fetchFeaturedProducts(memoizedOptions)
       .then((res: ProductsApiResponse) => {
         if (!mounted) return;
         setProducts(res.data ?? []);
@@ -32,7 +35,7 @@ export function useProducts(options?: { page?: number; perPage?: number; categor
     return () => {
       mounted = false;
     };
-  }, [options?.page, options?.perPage, options?.category, options?.q]);
+  }, [memoizedOptions]);
 
   return { products, loading, error } as const;
 }
