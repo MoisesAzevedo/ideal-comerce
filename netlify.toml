@@ -1,0 +1,21 @@
+# Netlify configuration for Next.js deployment
+# This ensures API routes work properly as Netlify Functions
+
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[build.environment]
+  NETLIFY = "true"
+
+# Redirect all API routes to Netlify Functions
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
+
+# Handle client-side routing
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
