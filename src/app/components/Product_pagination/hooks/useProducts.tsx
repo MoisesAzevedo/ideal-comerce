@@ -10,8 +10,13 @@ export function useProducts(options?: { page?: number; perPage?: number; categor
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
-  // Memoize options to prevent unnecessary re-renders
-  const memoizedOptions = useMemo(() => options, [options]);
+  // Memoize options by destructuring individual values to prevent unnecessary re-renders
+  const memoizedOptions = useMemo(() => options, [
+    options?.page,
+    options?.perPage,
+    options?.category,
+    options?.q
+  ]);
 
   useEffect(() => {
     let mounted = true;
