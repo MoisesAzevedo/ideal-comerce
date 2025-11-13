@@ -24,8 +24,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR">
-      <body className={`${teko.variable} antialiased`}>
+    <html lang="pt-BR" className={teko.variable}>
+      <body className="antialiased">
         {children}
         <ScrollToTopButton />
       </body>
