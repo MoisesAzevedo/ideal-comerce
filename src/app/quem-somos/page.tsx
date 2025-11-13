@@ -12,9 +12,7 @@ export const metadata: Metadata = {
 };
 
 const team: TeamMember[] = [
-  { id: 1, name: 'Guilherme Silva', role: 'Fundador & CEO', avatar: '/img/team/placeholder-1.jpg' },
-  { id: 2, name: 'Mariana Costa', role: 'Marketing', avatar: '/img/team/placeholder-2.jpg' },
-  { id: 3, name: 'Felipe Rocha', role: 'Produto', avatar: '/img/team/placeholder-3.jpg' }
+  { id: 1, name: 'Guilherme Silva', role: 'Fundador & CEO', avatar: '/img/team/placeholder-1.jpg' }
 ];
 
 export default function QuemSomosPage() {
