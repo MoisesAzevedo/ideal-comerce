@@ -1,53 +1,33 @@
-'use client';
+"use client";
 
-import { useEffect, useState, useMemo } from 'react';
-import type { Product } from '../../../../../db-mock-data/featured-products';
-import fetchFeaturedProducts, {
-  ProductsApiResponse,
-} from '../api/productsService';
+import { useEffect, useState, useCallback } from "react";
+import type { Product } from "../../../../../db-mock-data/featured-products";
+import fetchFeaturedProducts, { ProductsApiResponse } from "../api/productsService";
 
 // Hook com responsabilidade única: gerenciar fetch de produtos e expor estado
-export function useProducts(options?: {
-  page?: number;
-  perPage?: number;
-  category?: string;
-  q?: string;
-}) {
+export function useProducts(options?: { page?: number; perPage?: number; category?: string; q?: string }) {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
-  // Desestruture os valores e memoize um objeto estável para evitar warnings do eslint/react-hooks
-  const { page, perPage, category, q } = options ?? {};
 
-  const memoizedOptions = useMemo(
-    () => ({ page, perPage, category, q }),
-    [page, perPage, category, q],
-  );
-
-  useEffect(() => {
-    let mounted = true;
+  const fetchData = useCallback(async () => {
     setLoading(true);
     setError(null);
+    
+    try {
+      const res = await fetchFeaturedProducts(options);
+      setProducts(res.data ?? []);
+    } catch (err: any) {
+      setError(err?.message ?? "Erro ao buscar produtos");
+    } finally {
+      setLoading(false);
+    }
+  }, [options?.page, options?.perPage, options?.category, options?.q]);
 
-    fetchFeaturedProducts(memoizedOptions)
-      .then((res: ProductsApiResponse) => {
-        if (!mounted) return;
-        setProducts(res.data ?? []);
-      })
-      .catch((err) => {
-        if (!mounted) return;
-        setError(err?.message ?? 'Erro ao buscar produtos');
-      })
-      .finally(() => {
-        if (!mounted) return;
-        setLoading(false);
-      });
-
-    return () => {
-      mounted = false;
-    };
-  }, [memoizedOptions]);
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
 
   return { products, loading, error } as const;
 }
