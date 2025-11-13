@@ -1,56 +1,117 @@
-import React from "react";
-import type { Product } from "../data/products";
-import styles from "./ProductCard.module.scss";
-import Image from "next/image";
+'use client';
+import React from 'react';
+import type { Product } from '../data/products';
+import Image from 'next/image';
 
-export const ProductCard = ({ product }: { product: Product }) => {
+export const ProductCard = ({
+  product,
+  onBuy,
+}: {
+  product: Product;
+  onBuy?: (productId: number) => void;
+}) => {
+  
+  const [carrinho, setCarrinho] = React.useState<number[]>([]);
+  const [cont, setCont] = React.useState<number>(0);
+
+  const handleAddToCart = (productId: number) => {
+    setCarrinho((prevCarrinho) => [...prevCarrinho, productId]);
+    setCont((c) => c + 1);
+  };
+
   return (
     <div
-      className="relative w-[203px] h-[360px] flex flex-col items-start rounded shadow-sm p-2"
-      style={{ background: "rgba(0,0,0,0.01)" }}
+      data-name={`product-${product.id}`}
+      className="font-sans relative w-full max-w-[203px] h-auto flex flex-col items-start rounded shadow-sm p-2 phone:p-3 bg-black/[0.01]" 
     >
-      <div className="relative w-full h-[243px] mb-2">
+      <div
+        data-name={`product-image-${product.id}`}
+        className="relative w-full aspect-[203/243] mb-2 phone:mb-3"
+      >
         <Image
           className="absolute w-full h-full top-0 left-0 object-cover rounded"
           alt={product.name}
           src={product.image}
           fill
-          sizes="(max-width: 768px) 100vw, 203px"
+          sizes="(max-width: 350px) 150px, (max-width: 480px) 180px, 203px"
           priority={true}
         />
       </div>
-      <div className="w-full font-teko text-[#000000a8] text-xs mb-1">
+
+      <div
+        data-name={`product-category-${product.id}`}
+        className="w-full font-sans text-black/65 text-xs phone:text-sm mb-1"
+      >
         {product.category}
       </div>
-      <div className="w-full font-teko text-black text-xl mb-1 whitespace-nowrap overflow-hidden text-ellipsis">
+
+      <div
+        data-name={`product-name-${product.id}`}
+        className="w-full font-sans text-black text-base phone:text-lg lg:text-xl mb-1 phone:mb-2 whitespace-nowrap overflow-hidden text-ellipsis"
+      >
         {product.name}
       </div>
-      <div className="w-full flex items-end gap-2 mb-1">
-        <span className="font-teko text-black text-xl">R$ {product.price}</span>
+
+      <div
+        data-name={`product-pricing-${product.id}`}
+        className="w-full flex items-end gap-1 phone:gap-2 mb-1 phone:mb-2"
+      >
+        <span
+          data-name={`product-price-${product.id}`}
+          className="font-sans text-black text-base phone:text-lg lg:text-xl"
+        >
+          R$ {product.price}
+        </span>
         {product.oldPrice && (
-          <span className="font-teko text-[#848484] text-[15px] line-through">
+          <span
+            data-name={`product-oldprice-${product.id}`}
+            className="font-sans text-[#848484] text-xs phone:text-sm lg:text-[15px] line-through"
+          >
             R$ {product.oldPrice}
           </span>
         )}
       </div>
-      <div className="w-full flex items-center justify-between font-teko text-xs mb-2">
-        <div>
+
+      <div
+        data-name={`product-installment-${product.id}`}
+        className="w-full flex items-center justify-between font-sans text-xs phone:text-sm mb-2 phone:mb-3"
+      >
+        <div className="flex-1 min-w-0">
           <span className="text-[#848484]">ou </span>
           <span className="text-black">
-            {product.installment.split("de")[0]}de{" "}
+            {product.installment.split('de')[0]}de{' '}
           </span>
           <span className="text-[#848484]">
-            {product.installment.split("de")[1]}
+            {product.installment.split('de')[1]}
           </span>
         </div>
         {product.discount && (
-          <span className="ml-2 bg-[#495949] text-white rounded px-2 py-0.5 text-xs font-teko">
+          <span
+            data-name={`product-discount-${product.id}`}
+            className="ml-1 phone:ml-2 bg-[#495949] text-white rounded px-1 phone:px-2 py-0.5 text-xs font-sans flex-shrink-0"
+          >
             {product.discount}
           </span>
         )}
       </div>
-      <button className={styles.buyButton} type="button">
+
+      <button
+        data-name={`product-buy-${product.id}`}
+        className="w-full mt-2 phone:mt-2 p-2 phone:p-3 bg-[#495949] text-white font-sans text-sm phone:text-base lg:text-lg border-none rounded-md cursor-pointer transition-colors tracking-wide shadow-sm hover:bg-[#b7c7b7] hover:text-[#222]"
+        type="button"
+        onClick={() => onBuy?.(product.id)}
+        aria-label={`Comprar ${product.name}`}
+      >
         Comprar
+      </button>
+
+      <button
+        data-name={`product-addtocart-${product.id}`}
+        className="w-full mt-2 phone:mt-2 p-2 phone:p-3 bg-[#08d16d] text-white font-sans text-sm phone:text-base lg:text-lg border-none rounded-md cursor-pointer transition-colors tracking-wide shadow-sm hover:bg-[#013318] hover:text-[#fff]"
+        type="button"
+        onClick={() => handleAddToCart(product.id)}
+      >
+        Adicionar ao Carrinho
       </button>
     </div>
   );
