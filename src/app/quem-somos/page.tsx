@@ -28,7 +28,6 @@ export default function QuemSomosPage() {
           <AboutHero
             title="Quem somos?"
             subtitle="Somos uma equipe apaixonada por criar equipamentos e uniformes de qualidade."
-            imageSrc="/img/banners/about-banner.jpg"
           />
 
           <Section title="Nossa missão" className="mt-8">

@@ -1,13 +1,10 @@
-import Image from 'next/image';
 
 export default function AboutHero({
   title,
   subtitle,
-  imageSrc,
 }: {
   title: string;
   subtitle: string;
-  imageSrc?: string;
 }) {
   return (
     <section data-name="about-hero" className="w-full rounded overflow-hidden">

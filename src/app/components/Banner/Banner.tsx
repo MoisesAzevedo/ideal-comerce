@@ -69,9 +69,7 @@ const Frame = () => {
 };
 
 const Banner = () => {
-  const bannerStyle = {
-    '--banner-bg-image': `url("${getAssetPath('/img/banners/banner_performance.png')}")`
-  } as React.CSSProperties;
+
 
   return (
     <div data-name="banner" className="w-full min-h-[300px] phone:min-h-[350px] sm:min-h-[400px] lg:min-h-[470px] bg-cover bg-center flex items-center justify-center py-8 phone:py-10 lg:py-10 shadow-lg relative overflow-hidden">

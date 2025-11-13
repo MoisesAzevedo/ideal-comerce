@@ -6,13 +6,16 @@ export function useContactForm(initial?: Partial<ContactFormData>) {
   const [form, setForm] = useState<ContactFormData>({
     name: initial?.name ?? '',
     email: initial?.email ?? '',
-    message: initial?.message ?? ''
+    message: initial?.message ?? '',
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
 
-  function update<K extends keyof ContactFormData>(key: K, value: ContactFormData[K]) {
+  function update<K extends keyof ContactFormData>(
+    key: K,
+    value: ContactFormData[K],
+  ) {
     setForm((s) => ({ ...s, [key]: value }));
   }
 
@@ -21,14 +24,16 @@ export function useContactForm(initial?: Partial<ContactFormData>) {
     setError(null);
     setSuccess(null);
     try {
-      // validação simples
-      if (!form.name || !form.email || !form.message) throw new Error('Preencha todos os campos');
+      if (!form.name || !form.email || !form.message)
+        throw new Error('Preencha todos os campos');
       const res = await sendContactForm(form);
       if (!res.success) throw new Error(res.message || 'Erro desconhecido');
       setSuccess(res.message ?? 'Enviado');
       setForm({ name: '', email: '', message: '' });
-    } catch (err: any) {
-      setError(err.message ?? 'Erro ao enviar');
+    } catch (err: unknown) {
+      const message =
+        err instanceof Error ? err.message : String(err ?? 'Erro ao enviar');
+      setError(message);
     } finally {
       setLoading(false);
     }
