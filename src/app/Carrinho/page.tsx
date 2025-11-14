@@ -6,8 +6,7 @@ import aggregateCart from './utils/cartHelpers';
 import CartItemRow from './Components/CartItemRow';
 import Link from 'next/link';
 import { formatBRL } from './utils/format';
-import Header from '../components/Header/Header';
-import FooterMenus from '../components/Footer/FooterMenus';
+import SharedPageLayout from '../layouts/SharedPageLayout';
 
 export default function CartPage() {
   const { cartIds, clearCart } = useCart();
@@ -17,12 +16,11 @@ export default function CartPage() {
     [cartIds],
   );
 
-  const subtotal = items.reduce((s, it) => s + it.product.price * it.qty, 0);
+  const subtotal = items.reduce((s, it) => s + (it.product.price ?? it.product.sale_price) * it.qty, 0);
 
   return (
-    <>
-      <Header />
-      <main className="container mx-auto py-8 px-4 phone:px-6">
+    <SharedPageLayout showNavigation={false}>
+      <div className="container mx-auto py-8 px-4 phone:px-6">
         <h1 className="text-2xl phone:text-3xl font-bold mb-6">Seu Carrinho</h1>
 
         {items.length === 0 ? (
@@ -64,11 +62,11 @@ export default function CartPage() {
                           </span>
                         </div>
                         <div className="text-base text-[#666]">
-                          {formatBRL(it.product.price)} cada
+                          {formatBRL(it.product.price ?? it.product.sale_price)} cada
                         </div>
                       </div>
                       <div className="pl-2 font-medium">
-                        {formatBRL(it.product.price * it.qty)}
+                        {formatBRL((it.product.price ?? it.product.sale_price) * it.qty)}
                       </div>
                     </div>
                   ))}
@@ -98,8 +96,7 @@ export default function CartPage() {
             </aside>
           </div>
         )}
-      </main>
-      <FooterMenus />
-    </>
+      </div>
+    </SharedPageLayout>
   );
 }

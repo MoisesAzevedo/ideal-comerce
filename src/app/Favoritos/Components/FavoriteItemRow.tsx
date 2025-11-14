@@ -29,7 +29,7 @@ export default function FavoriteItemRow({ product }: { product: Product }) {
       </div>
 
       <div className="text-right mr-2">
-        <div className="font-semibold">{formatBRL(product.price)}</div>
+        <div className="font-semibold">{formatBRL(product.price ?? product.sale_price)}</div>
       </div>
 
       <div className="flex items-center gap-2">

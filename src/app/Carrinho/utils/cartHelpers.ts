@@ -6,10 +6,10 @@ export type AggregatedItem = {
 };
 
 export function aggregateCart(
-  cartIds: number[],
+  cartIds: string[],
   products: Product[],
 ): AggregatedItem[] {
-  const map = new Map<number, number>();
+  const map = new Map<string, number>();
   for (const id of cartIds) map.set(id, (map.get(id) ?? 0) + 1);
 
   const items: AggregatedItem[] = [];

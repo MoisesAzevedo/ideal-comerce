@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { ProductCard } from "./components/ProductCard";
+import { ProductCard } from "../ProductCard/ProductCard";
 import useProducts from "./hooks/useProducts";
 import { useProductNavigation } from "./hooks/useProductNavigation";
 
@@ -18,7 +18,7 @@ const Products = () => {
     rows.push(visibleProducts.slice(i, i + 4));
   }
 
-  const handleBuyProduct = (productId: number) => {
+  const handleBuyProduct = (productId: string) => {
     buyProduct(productId);
   };
 

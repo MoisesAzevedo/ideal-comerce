@@ -1,7 +1,6 @@
 'use client';
 import React from 'react';
-import Header from '../components/Header/Header';
-import FooterMenus from '../components/Footer/FooterMenus';
+import SharedPageLayout from '../layouts/SharedPageLayout';
 import { useFavorites } from './favorites';
 import { products } from '../../../db';
 import FavoriteItemRow from './Components/FavoriteItemRow';
@@ -16,9 +15,8 @@ export default function FavoritesPage() {
   );
 
   return (
-    <>
-      <Header />
-      <main className="container mx-auto py-8 px-4 phone:px-6">
+    <SharedPageLayout>
+      <div className="container mx-auto py-8 px-4 phone:px-6">
         <h1 className="text-2xl phone:text-3xl font-bold mb-6">
           Seus Favoritos
         </h1>
@@ -51,8 +49,7 @@ export default function FavoritesPage() {
             </div>
           </div>
         )}
-      </main>
-      <FooterMenus />
-    </>
+      </div>
+    </SharedPageLayout>
   );
 }

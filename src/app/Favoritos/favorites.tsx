@@ -2,10 +2,10 @@
 import React from 'react';
 
 type FavoritesContextValue = {
-  favoriteIds: number[];
-  addFavorite: (id: number) => void;
-  removeFavorite: (id: number) => void;
-  isFavorite: (id: number) => boolean;
+  favoriteIds: string[];
+  addFavorite: (id: string) => void;
+  removeFavorite: (id: string) => void;
+  isFavorite: (id: string) => boolean;
   clearFavorites: () => void;
 };
 
@@ -14,7 +14,7 @@ const FavoritesContext = React.createContext<FavoritesContextValue | undefined>(
 );
 
 export function FavoritesProvider({ children }: { children: React.ReactNode }) {
-  const [favoriteIds, setFavoriteIds] = React.useState<number[]>(() => {
+  const [favoriteIds, setFavoriteIds] = React.useState<string[]>(() => {
     try {
       if (typeof window === 'undefined') return [];
       const raw = localStorage.getItem('favoriteIds');
@@ -32,12 +32,12 @@ export function FavoritesProvider({ children }: { children: React.ReactNode }) {
     }
   }, [favoriteIds]);
 
-  const addFavorite = (id: number) =>
+  const addFavorite = (id: string) =>
     setFavoriteIds((s) => (s.includes(id) ? s : [...s, id]));
-  const removeFavorite = (id: number) =>
+  const removeFavorite = (id: string) =>
     setFavoriteIds((s) => s.filter((x) => x !== id));
   const clearFavorites = () => setFavoriteIds([]);
-  const isFavorite = (id: number) => favoriteIds.includes(id);
+  const isFavorite = (id: string) => favoriteIds.includes(id);
 
   return (
     <FavoritesContext.Provider

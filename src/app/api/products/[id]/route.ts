@@ -4,20 +4,10 @@
  */
 
 import { NextResponse } from "next/server";
+import { products } from '../../../../../db';
 
 // Garantir que a rota API não seja exportada como HTML estático
 export const dynamic = "force-dynamic";
-
-// Mock data para desenvolvimento
-const mockProduct = {
-  id: 1,
-  name: 'Produto Exemplo API',
-  price: 199.99,
-  description: 'Descrição do produto via API',
-  images: ['/img/product-api.jpg'],
-  category: 'categoria-api',
-  brand: 'Marca API'
-};
 
 export async function GET(
   request: Request,
@@ -25,22 +15,9 @@ export async function GET(
 ) {
   try {
     const { id } = await params;
-    const productId = parseInt(id, 10);
 
-    // Validar ID
-    if (isNaN(productId) || productId <= 0) {
-      return NextResponse.json(
-        { 
-          success: false, 
-          message: "ID do produto inválido",
-          product: null 
-        },
-        { status: 400 }
-      );
-    }
-
-    // Buscar produto - usando mock por enquanto
-    const product = productId === 1 ? mockProduct : null;
+    // Buscar produto na lista de produtos
+    const product = products.find(p => p.id === id);
 
     if (!product) {
       return NextResponse.json(

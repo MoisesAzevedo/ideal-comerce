@@ -17,6 +17,7 @@ const SelectArrow = ({
       transform: rotated ? "rotate(180deg)" : "rotate(0deg)",
       display: "block"
     }}
+    data-name="select-arrow-svg"
   >
     <path
       d="M4 6L8 10L12 6"

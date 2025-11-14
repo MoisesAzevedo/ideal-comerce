@@ -10,7 +10,7 @@ module.exports = {
       'xs': '350px',       // Dispositivos muito pequenos
       'phone': '480px',    // Breakpoint customizado para dispositivos móveis
       'tablet': '768px',   // Tablets
-      'lg': '1024px',      // Laptops
+      'lg': '1050px',      // Laptops
       'xl': '1280px',      // Desktops
       '2xl': '1536px',     // Telas grandes
     },

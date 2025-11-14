@@ -1,0 +1,57 @@
+/**
+ * Styles: ProductDetails
+ * Responsabilidade única: Estilos para seção de detalhes do produto
+ */
+
+.detailsContainer {
+  padding: 1rem;
+  
+  @media (min-width: 768px) {
+    padding: 1.5rem;
+  }
+}
+
+.section {
+  margin-bottom: 1.5rem;
+  
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.sectionTitle {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 0.75rem;
+}
+
+.description {
+  color: #4b5563;
+  line-height: 1.6;
+  font-size: 0.9rem;
+  
+  @media (min-width: 768px) {
+    font-size: 1rem;
+  }
+}
+
+.stockInfo {
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  background-color: #f9fafb;
+  border: 1px solid #e5e7eb;
+}
+
+.stockText {
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.inStock {
+  color: #059669;
+}
+
+.outOfStock {
+  color: #dc2626;
+}

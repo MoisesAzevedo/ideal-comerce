@@ -25,7 +25,7 @@ export default function CartItemRow({ product, qty }: AggregatedItem) {
         </div>
         <div className="text-xs text-[#666]">{product.category}</div>
         <div className="text-sm font-medium mt-2">
-          {formatBRL(product.price)}
+          {formatBRL(product.price ?? product.sale_price)}
         </div>
       </div>
 
@@ -48,7 +48,7 @@ export default function CartItemRow({ product, qty }: AggregatedItem) {
       </div>
 
       <div className="w-24 text-right">
-        <div className="font-semibold">{formatBRL(product.price * qty)}</div>
+        <div className="font-semibold">{formatBRL((product.price ?? product.sale_price) * qty)}</div>
         <button
           className="text-xs text-red-600 mt-1"
           onClick={() => removeAll(product.id)}

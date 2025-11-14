@@ -1,22 +1,141 @@
-/* 1. Header */
+/* Header Container */
 .header {
   width: 100%;
-  height: 60px;
+  height: auto;
+  min-height: 60px;
   display: flex;
   justify-content: center;
+  align-items: center;
   background: linear-gradient(90deg, #0d1a0e 0%, #1d2d1e 25.48%);
+  padding: 0 1rem;
+
+  @media (max-width: 767px) {
+    min-height: 70px;
+    position: relative;
+  }
 }
 
-/* 2. div content no header */
+/* Content Container */
 .content {
   display: flex;
-  width: 1186px;
+  width: 100%;
+  max-width: 1186px;
   align-items: center;
-  position: relative;
+  justify-content: space-between;
+  gap: 1rem;
+
+  @media (max-width: 767px) {
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+
+  /* Ajustes específicos para tablet (768px+) */
+  @media (min-width: 768px) {
+    justify-content: flex-start;
+    gap: 2rem;
+  }
 }
 
-/* 2. logo dentro da div content */
+/* Logo Wrapper */
+.logoWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  z-index: 10;
+
+  @media (max-width: 767px) {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  /* Garante visibilidade e posicionamento correto em tablet (768px+) */
+  @media (min-width: 768px) {
+    position: relative;
+    order: -1;
+    margin-right: auto;
+  }
+}
+
+/* Logo Image */
 .logo {
   height: 40px;
-  left: 0px;
+  width: auto;
+  object-fit: contain;
+
+  @media (max-width: 480px) {
+    height: 35px;
+  }
 }
+
+/* Desktop Search */
+.desktopSearch {
+  display: flex;
+  flex: 1 1 auto;
+  align-items: center;
+  min-width: 200px;
+  max-width: 700px;
+
+  @media (max-width: 767px) {
+    display: none;
+  }
+
+  /* Ajustes específicos para tablet (768px+) */
+  @media (min-width: 768px) {
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+}
+
+/* Mobile Search */
+.mobileSearch {
+  display: none;
+
+  @media (max-width: 767px) {
+    display: block;
+    width: 100%;
+    padding: 0 0.5rem;
+  }
+}
+
+/* Actions Container */
+.actionsContainer {
+  flex-shrink: 0;
+
+  @media (max-width: 767px) {
+    margin-left: auto;
+    display: flex;
+    justify-content: flex-end;
+  }
+}
+
+/* Burger Menu */
+.burgerMenu {
+  display: none;
+  background: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 0.5rem;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s ease;
+  flex-shrink: 0;
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  &:active {
+    opacity: 0.6;
+  }
+
+  @media (max-width: 767px) {
+    display: flex;
+    position: absolute;
+    left: 1rem;
+  }
+}
+

@@ -1,0 +1,83 @@
+/**
+ * Styles: ProductImageGallery
+ * Responsabilidade única: Estilos para galeria de imagens do produto
+ */
+
+.gallery {
+  width: 100%;
+}
+
+.mainImageContainer {
+  width: 100%;
+  margin-bottom: 1rem;
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.5rem;
+  background-color: #f3f4f6;
+  aspect-ratio: 1 / 1;
+}
+
+.mainImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+  
+  &:hover {
+    transform: scale(1.05);
+  }
+}
+
+.thumbnailsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+  
+  /* Responsivo para diferentes tamanhos de tela */
+  @media (min-width: 768px) {
+    justify-content: flex-start;
+  }
+}
+
+.thumbnail {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.375rem;
+  border: 2px solid transparent;
+  transition: all 0.2s ease;
+  width: 80px;
+  height: 80px;
+  
+  &:hover {
+    border-color: #93c5fd;
+  }
+  
+  &:focus {
+    outline: none;
+    border-color: #3b82f6;
+  }
+}
+
+.thumbnailActive {
+  border-color: #3b82f6;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.thumbnailImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Breakpoints específicos para a galeria */
+@media (min-width: 1050px) {
+  .thumbnailsContainer {
+    max-width: none;
+  }
+  
+  .thumbnail {
+    width: 100px;
+    height: 100px;
+  }
+}

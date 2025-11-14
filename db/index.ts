@@ -7,7 +7,6 @@ export * from './types';
 // Data
 export * from './data/products';
 export * from './data/categories';
-export { getProductById } from './data/products';
 
 // Utils (NEW)
 export * from './utils';

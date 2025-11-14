@@ -2,11 +2,11 @@
 import React from 'react';
 
 type CartContextValue = {
-  cartIds: number[];
-  addToCart: (id: number) => void;
+  cartIds: string[];
+  addToCart: (id: string) => void;
   clearCart: () => void;
-  removeOne: (id: number) => void;
-  removeAll: (id: number) => void;
+  removeOne: (id: string) => void;
+  removeAll: (id: string) => void;
 };
 
 const CartContext = React.createContext<CartContextValue | undefined>(
@@ -14,7 +14,7 @@ const CartContext = React.createContext<CartContextValue | undefined>(
 );
 
 export function CartProvider({ children }: { children: React.ReactNode }) {
-  const [cartIds, setCartIds] = React.useState<number[]>(() => {
+  const [cartIds, setCartIds] = React.useState<string[]>(() => {
     try {
       if (typeof window === 'undefined') return [];
       const raw = localStorage.getItem('cartIds');
@@ -32,9 +32,9 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     }
   }, [cartIds]);
 
-  const addToCart = (id: number) => setCartIds((s) => [...s, id]);
+  const addToCart = (id: string) => setCartIds((s) => [...s, id]);
   const clearCart = () => setCartIds([]);
-  const removeOne = (id: number) =>
+  const removeOne = (id: string) =>
     setCartIds((s) => {
       const idx = s.indexOf(id);
       if (idx === -1) return s;
@@ -42,7 +42,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       copy.splice(idx, 1);
       return copy;
     });
-  const removeAll = (id: number) =>
+  const removeAll = (id: string) =>
     setCartIds((s) => s.filter((x) => x !== id));
 
   return (

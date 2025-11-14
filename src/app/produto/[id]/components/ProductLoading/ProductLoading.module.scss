@@ -1,0 +1,107 @@
+/**
+ * Styles: ProductLoading
+ * Responsabilidade única: Estilos para skeleton loading da página de produto
+ */
+
+/* Animação de shimmer */
+@keyframes shimmer {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: calc(200px + 100%) 0;
+  }
+}
+
+.skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200px 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 0.5rem;
+}
+
+.mainImageSkeleton {
+  @extend .skeleton;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  margin-bottom: 1rem;
+}
+
+.thumbnailsSkeleton {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.thumbnailSkeleton {
+  @extend .skeleton;
+  width: 80px;
+  height: 80px;
+  
+  @media (min-width: 1050px) {
+    width: 100px;
+    height: 100px;
+  }
+}
+
+.detailsSection {
+  padding: 1rem;
+  
+  @media (min-width: 768px) {
+    padding: 1.5rem;
+  }
+}
+
+.titleSkeleton {
+  @extend .skeleton;
+  height: 2rem;
+  width: 80%;
+  margin-bottom: 0.5rem;
+  
+  @media (min-width: 768px) {
+    height: 2.5rem;
+  }
+}
+
+.subtitleSkeleton {
+  @extend .skeleton;
+  height: 1rem;
+  width: 60%;
+  margin-bottom: 1.5rem;
+}
+
+.priceSkeleton {
+  @extend .skeleton;
+  height: 2.5rem;
+  width: 50%;
+  margin-bottom: 0.5rem;
+}
+
+.installmentSkeleton {
+  @extend .skeleton;
+  height: 1rem;
+  width: 70%;
+  margin-bottom: 1.5rem;
+}
+
+.descriptionSkeleton {
+  margin-bottom: 1.5rem;
+}
+
+.descriptionLine {
+  @extend .skeleton;
+  height: 1rem;
+  width: 100%;
+  margin-bottom: 0.5rem;
+  
+  &:last-child {
+    width: 80%;
+    margin-bottom: 0;
+  }
+}
+
+.actionsSkeleton {
+  @extend .skeleton;
+  height: 8rem;
+  width: 100%;
+}

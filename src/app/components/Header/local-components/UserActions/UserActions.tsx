@@ -15,38 +15,41 @@ export default function UserActions() {
   const cartCount = cartIds.length;
 
   return (
-    <div className={styles.userActions}>
+    <div className={styles.userActions} data-name="user-actions-root">
       {/* Conta */}
-      <button className={styles.actionButton}>
+      <button className={styles.actionButton} data-name="action-account">
         <Image
           src={getAssetPath('/icons/military-user.svg')}
           alt="Conta"
           width={20}
           height={20}
           className={styles.actionIcon}
+          data-name="icon-account"
         />
-        <span className={styles.actionLabel}>Entrar</span>
-        <span className={styles.actionArrow}>
+        <span className={styles.actionLabel} data-name="label-account">Entrar</span>
+        <span className={styles.actionArrow} data-name="arrow-account">
           <SelectArrow color="#f8f8f8" />
         </span>
       </button>
       {/* Favoritos */}
-      <Link href="/Favoritos">
-        <button className={styles.actionButton}>
+      <Link href="/Favoritos" data-name="link-favoritos">
+        <button className={styles.actionButton} data-name="action-favoritos">
           <Image
             src={getAssetPath('/icons/medal.svg')}
             alt="Favoritos"
             width={20}
             height={20}
             className={styles.actionIcon}
+            data-name="icon-favoritos"
           />
-          <span className={styles.actionLabel}>Favoritos</span>
+          <span className={styles.actionLabel} data-name="label-favoritos">Favoritos</span>
         </button>
       </Link>
       {/* Carrinho */}
-      <Link href="/Carrinho">
+      <Link href="/Carrinho" data-name="link-carrinho">
         <button
           className={styles.actionButton}
+          data-name="action-carrinho"
           onMouseEnter={() => setActiveTooltip('carrinho')}
           onMouseLeave={() => setActiveTooltip(null)}
           data-tooltip-id="carrinho-tooltip"
@@ -59,8 +62,9 @@ export default function UserActions() {
             width={20}
             height={20}
             className={styles.actionIcon}
+            data-name="icon-carrinho"
           />
-          <span className={styles.cartBadge}>{cartCount}</span>
+          <span className={styles.cartBadge} data-name="cart-badge">{cartCount}</span>
         </button>
       </Link>
       {/* Tooltip apenas para o carrinho */}
@@ -68,6 +72,7 @@ export default function UserActions() {
         id="carrinho-tooltip"
         place="bottom"
         isOpen={activeTooltip === 'carrinho'}
+        data-name="tooltip-carrinho"
         style={{
           backgroundColor: 'rgba(0, 0, 0)',
           color: 'white',

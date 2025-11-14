@@ -47,7 +47,7 @@ const items = [
 
 export const Frame: React.FC = () => {
   return (
-    <div className="w-full flex justify-center bg-white py-0.5 border-b border-gray-200 items-end min-h-0">
+    <div className="w-full hidden md:flex justify-center bg-white py-0.5 border-b border-gray-200 items-end min-h-0">
       <div className="flex gap-6 items-end">
         {items.map((item, idx) => (
           <div key={idx} className="flex items-end h-full">

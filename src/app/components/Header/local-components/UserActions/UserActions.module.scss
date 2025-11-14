@@ -2,8 +2,6 @@
   display: flex;
   gap: 4px; // diminui o espaçamento entre os botões
   align-items: center;
-  position: absolute;
-  right: 0;
 }
 
 .actionButton {
@@ -71,3 +69,19 @@
   z-index: 2;
   border: none;
 }
+
+/* Tablet (768px a 1049px) */
+@media (max-width: 1049px) {
+  .actionLabel,
+  .actionArrow {
+    display: none;
+  }
+}
+
+/* Mobile - Ocultar botão de conta */
+@media (max-width: 479px) {
+  .actionButton[data-name="action-account"] {
+    display: none;
+  }
+}
+

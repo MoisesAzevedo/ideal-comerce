@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
-import Header from '../components/Header/Header';
-import FooterMenus from '../components/Footer/FooterMenusNew';
+import SharedPageLayout from '../layouts/SharedPageLayout';
 import FaleConosco from './FaleConosco';
 
 export const metadata: Metadata = {
@@ -10,20 +9,12 @@ export const metadata: Metadata = {
 
 export default function FaleConoscoPage() {
   return (
-    <main data-name="page-faleconosco" className="font-sans">
-      <div data-name="header-wrapper">
-        <Header />
-      </div>
-
+    <SharedPageLayout className="font-sans">
       <section className="w-full bg-white">
         <div className="mx-auto max-w-container px-4 phone:px-6 lg:px-8 py-12 phone:py-16">
           <FaleConosco />
         </div>
       </section>
-
-      <div data-name="footer-wrapper">
-        <FooterMenus />
-      </div>
-    </main>
+    </SharedPageLayout>
   );
 }

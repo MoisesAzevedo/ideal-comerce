@@ -1,0 +1,98 @@
+/* Overlay */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  z-index: 998;
+}
+
+.overlayOpen {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Sidebar */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 280px;
+  max-width: 85%;
+  height: 100%;
+  background-color: #ffffff;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.15);
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+  z-index: 999;
+  overflow-y: auto;
+}
+
+.sidebarOpen {
+  transform: translateX(0);
+}
+
+/* Sidebar Header */
+.sidebarHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  background: linear-gradient(90deg, #0d1a0e 0%, #1d2d1e 25.48%);
+  color: white;
+  min-height: 60px;
+}
+
+.headerLeft {
+  display: flex;
+  align-items: center;
+
+  // AccountButton visível apenas em telas menores que 480px
+  :global(.accountButton) {
+    display: none;
+
+    @media (max-width: 479px) {
+      display: flex;
+    }
+  }
+}
+
+.categoriesTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0;
+
+  @media (max-width: 479px) {
+    display: none;
+  }
+}
+
+.closeButton {
+  background: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s ease;
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  &:active {
+    opacity: 0.6;
+  }
+}
+
+/* Sidebar Content */
+.sidebarContent {
+  padding: 1.5rem;
+}

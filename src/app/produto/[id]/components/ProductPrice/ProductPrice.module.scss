@@ -1,0 +1,55 @@
+/**
+ * Styles: ProductPrice
+ * Responsabilidade única: Estilos para exibição de preços do produto
+ */
+
+.container {
+  margin-bottom: 1.5rem;
+}
+
+.discountBadge {
+  display: inline-block;
+  background-color: #ef4444;
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.375rem;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+}
+
+.currentPrice {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #059669;
+  line-height: 1.2;
+  margin-bottom: 0.25rem;
+  
+  @media (min-width: 768px) {
+    font-size: 2.25rem;
+  }
+}
+
+.originalPrice {
+  font-size: 0.875rem;
+  color: #6b7280;
+  text-decoration: line-through;
+  margin-bottom: 0.5rem;
+}
+
+.installmentInfo {
+  font-size: 0.875rem;
+  color: #4b5563;
+  margin-bottom: 0.25rem;
+  
+  @media (min-width: 768px) {
+    font-size: 1rem;
+  }
+}
+
+.savings {
+  font-size: 0.875rem;
+  color: #059669;
+  font-weight: 600;
+}

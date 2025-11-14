@@ -2,43 +2,18 @@
   position: sticky;
   top: 0;
   z-index: 1000;
-  width: 1280px;
-  height: 32px;
+  width: 100%;
+  margin: 0;
+  height: 34px;
   background: #fff;
   display: flex;
+  justify-content: center;
   align-items: center;
-  gap: 0;
-}
-
-.categories {
-  position: absolute;
-  top: 0;
-  left: 35px;
-  width: 229px;
-  height: 23px;
-  display: flex;
-  align-items: center;
-}
-
-.category {
-  font-family: "Teko", Helvetica, Arial, sans-serif;
-  font-weight: 400;
-  color: #1d2d1e;
-  font-size: 1.5rem;
-  letter-spacing: 2px;
-  line-height: normal;
-  margin-right: 8px;
-}
-
-.icon {
-  width: 20px;
-  height: 20px;
-  background: url("/icons.png") no-repeat center/contain;
-  display: inline-block;
+  padding: 0 1rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .item {
-  position: absolute;
   font-family: "Teko", Helvetica, Arial, sans-serif;
   font-weight: 400;
   color: #1d2d1e;
@@ -47,29 +22,101 @@
   line-height: normal;
   cursor: pointer;
   transition: color 0.2s;
+  position: relative;
 }
 
 .item:hover {
   color: #2b4d2b;
 }
 
-.item:nth-of-type(2) {
-  left: 289px;
-  top: 0;
+/* Oculta a partir do 5º item em telas de laptop (1050px - 1279px) */
+@media (min-width: 1050px) and (max-width: 1279px) {
+  .item:nth-child(5),
+  .item:nth-child(6),
+  .item:nth-child(7),
+  .item:nth-child(8),
+  .item:nth-child(9) {
+    display: none !important;
+  }
 }
-.item:nth-of-type(3) {
-  left: 390px;
-  top: 0;
+
+/* Oculta a partir do 4º item em telas de tablet (768px - 1049px) */
+@media (min-width: 768px) and (max-width: 1049px) {
+  .item:nth-child(4),
+  .item:nth-child(5),
+  .item:nth-child(6),
+  .item:nth-child(7),
+  .item:nth-child(8),
+  .item:nth-child(9) {
+    display: none !important;
+  }
 }
-.item:nth-of-type(4) {
-  left: 600px;
-  top: 0;
+
+/* Oculta toda a navegação em telas menores que tablet (abaixo de 768px) */
+@media (max-width: 767px) {
+  .navigation {
+    display: none;
+  }
 }
-.item:nth-of-type(5) {
-  left: 711px;
-  top: 0;
+
+/* Estilos do dropdown de categorias */
+.dropdown {
+  position: absolute;
+  top: 34px;
+  left: 0;
+  width: 100%;
+  min-width: 1000px;
+  height: 400px;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  border-radius: 6px;
+  z-index: 10;
+  padding: 24px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 16px;
+  align-items: start;
+  justify-items: start;
+  overflow-y: auto;
 }
-.item:nth-of-type(6) {
-  left: 908px;
-  top: 0;
+
+/* Ajustes para telas de laptop (1050px - 1279px) */
+@media (min-width: 1050px) and (max-width: 1279px) {
+  .dropdown {
+    min-width: 900px;
+    height: 380px;
+    padding: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 14px;
+  }
+}
+
+/* Ajustes para telas de tablet (768px - 1049px) */
+@media (min-width: 768px) and (max-width: 1049px) {
+  .dropdown {
+    min-width: 700px;
+    max-width: calc(100vw - 2rem);
+    height: 350px;
+    padding: 16px;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px;
+    font-size: 0.9rem;
+  }
+}
+
+/* Ajustes para mobile (abaixo de 768px) */
+@media (max-width: 767px) {
+  .dropdown {
+    min-width: auto;
+    width: calc(100vw - 1rem);
+    max-width: 100%;
+    height: auto;
+    max-height: 70vh;
+    padding: 12px;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 10px;
+    font-size: 0.85rem;
+    left: 0.5rem;
+    right: 0.5rem;
+  }
 }

@@ -1,0 +1,43 @@
+.accountButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 0.5rem;
+  transition: opacity 0.2s ease;
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  &:active {
+    opacity: 0.6;
+  }
+}
+
+.accountIcon {
+  width: 20px;
+  height: 20px;
+}
+
+.accountLabel {
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.accountArrow {
+  display: flex;
+  align-items: center;
+}
+
+/* Variantes */
+.header {
+  // Estilos específicos para o header, se necessário
+}
+
+.sidebar {
+  // Estilos específicos para a sidebar, se necessário
+}
