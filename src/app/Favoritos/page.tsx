@@ -3,7 +3,7 @@ import React from 'react';
 import Header from '../components/Header/Header';
 import FooterMenus from '../components/Footer/FooterMenus';
 import { useFavorites } from './favorites';
-import { products } from '@/app/components/Product_pagination/data/products';
+import { products } from '../../../db';
 import FavoriteItemRow from './Components/FavoriteItemRow';
 import Link from 'next/link';
 

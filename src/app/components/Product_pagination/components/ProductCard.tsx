@@ -1,11 +1,11 @@
 'use client';
 import React, { useState } from 'react';
-import type { Product } from '../data/products';
+import type { Product } from '../../../../../db/types';
 import Image from 'next/image';
 import { useCart } from '../../../Carrinho/cart';
 import ConfirmationModal from '../../../Carrinho/Components/ModalConfirmation/ConfirmationModal';
 import aggregateCart from '../../../Carrinho/utils/cartHelpers';
-import { products as allProducts } from '../data/products';
+import { products as allProducts } from '../../../../../db';
 
 export const ProductCard = ({
   product,
@@ -40,7 +40,7 @@ export const ProductCard = ({
         <Image
           className="absolute w-full h-full top-0 left-0 object-cover rounded"
           alt={product.name}
-          src={product.image}
+          src={product.images[0]}
           fill
           sizes="(max-width: 350px) 150px, (max-width: 480px) 180px, 203px"
           priority={true}
@@ -88,18 +88,18 @@ export const ProductCard = ({
         <div className="flex-1 min-w-0">
           <span className="text-[#848484]">ou </span>
           <span className="text-black">
-            {product.installment.split('de')[0]}de{' '}
+            {product.installmentCount}x de{' '}
           </span>
           <span className="text-[#848484]">
-            {product.installment.split('de')[1]}
+            R$ {product.installmentValue.toFixed(2).replace('.', ',')}
           </span>
         </div>
-        {product.discount && (
+        {product.percentual_discount && (
           <span
             data-name={`product-discount-${product.id}`}
             className="ml-1 phone:ml-2 bg-[#495949] text-white rounded px-1 phone:px-2 py-0.5 text-xs font-sans flex-shrink-0"
           >
-            {product.discount}
+            {product.percentual_discount}% OFF
           </span>
         )}
       </div>

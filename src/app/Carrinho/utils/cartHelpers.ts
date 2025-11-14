@@ -1,4 +1,4 @@
-import type { Product } from '@/app/components/Product_pagination/data/products';
+import type { Product } from '../../../../db/types';
 
 export type AggregatedItem = {
   product: Product;

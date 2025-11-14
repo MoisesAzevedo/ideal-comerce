@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 import { useCart } from './cart';
-import { products } from '@/app/components/Product_pagination/data/products';
+import { products } from '../../../db';
 import aggregateCart from './utils/cartHelpers';
 import CartItemRow from './Components/CartItemRow';
 import Link from 'next/link';

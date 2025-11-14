@@ -1,6 +1,6 @@
 "use client";
 import React from 'react';
-import useContactForm from '../useContactForm';
+import useContactForm from './useContactForm';
 
 export default function FaleConosco() {
   const { form, update, submit, loading, error, success } = useContactForm();

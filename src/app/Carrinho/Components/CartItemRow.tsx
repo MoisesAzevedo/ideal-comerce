@@ -12,7 +12,7 @@ export default function CartItemRow({ product, qty }: AggregatedItem) {
     <div className="flex items-center gap-4 py-3 border-b last:border-b-0">
       <div className="w-20 h-20 relative flex-shrink-0">
         <Image
-          src={product.image}
+          src={product.images[0]}
           alt={product.name}
           fill
           className="object-cover rounded"
