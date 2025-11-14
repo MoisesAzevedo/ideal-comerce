@@ -1,8 +1,11 @@
 'use client';
-import React from 'react';
-import type { Product } from '../../../../../db';
-import { useProductDisplay } from '../hooks/useProductDisplay';
+import React, { useState } from 'react';
+import type { Product } from '../data/products';
 import Image from 'next/image';
+import { useCart } from '../../../Carrinho/cart';
+import ConfirmationModal from '../../../Carrinho/Components/ModalConfirmation/ConfirmationModal';
+import aggregateCart from '../../../Carrinho/utils/cartHelpers';
+import { products as allProducts } from '../data/products';
 
 export const ProductCard = ({
   product,
@@ -11,22 +14,24 @@ export const ProductCard = ({
   product: Product;
   onBuy?: (productId: number) => void;
 }) => {
-  
-  const [carrinho, setCarrinho] = React.useState<number[]>([]);
-  const [cont, setCont] = React.useState<number>(0);
-  
-  // Use hook for product display logic
-  const displayInfo = useProductDisplay(product);
+  const { addToCart, cartIds } = useCart();
+  const [showConfirmation, setShowConfirmation] = useState(false);
+  const [lastSubtotal, setLastSubtotal] = useState<number | null>(null);
 
-  const handleAddToCart = (productId: number) => {
-    setCarrinho((prevCarrinho) => [...prevCarrinho, productId]);
-    setCont((c) => c + 1);
+  const handleAdd = (productId: number) => {
+    addToCart(productId);
+    // compute new subtotal after adding this id
+    const nextIds = [...cartIds, productId];
+    const items = aggregateCart(nextIds, allProducts);
+    const subtotal = items.reduce((s, it) => s + it.product.price * it.qty, 0);
+    setLastSubtotal(subtotal);
+    setShowConfirmation(true);
   };
 
   return (
     <div
       data-name={`product-${product.id}`}
-      className="font-sans relative w-full max-w-[203px] h-auto flex flex-col items-start rounded shadow-sm p-2 phone:p-3 bg-black/[0.01]" 
+      className="font-sans relative w-full max-w-[203px] h-auto flex flex-col items-start rounded shadow-sm p-2 phone:p-3 bg-black/[0.01]"
     >
       <div
         data-name={`product-image-${product.id}`}
@@ -35,7 +40,7 @@ export const ProductCard = ({
         <Image
           className="absolute w-full h-full top-0 left-0 object-cover rounded"
           alt={product.name}
-          src={product.images[0]}
+          src={product.image}
           fill
           sizes="(max-width: 350px) 150px, (max-width: 480px) 180px, 203px"
           priority={true}
@@ -66,7 +71,7 @@ export const ProductCard = ({
         >
           R$ {product.price}
         </span>
-        {displayInfo.hasOldPrice && (
+        {product.oldPrice && (
           <span
             data-name={`product-oldprice-${product.id}`}
             className="font-sans text-[#848484] text-xs phone:text-sm lg:text-[15px] line-through"
@@ -81,26 +86,20 @@ export const ProductCard = ({
         className="w-full flex items-center justify-between font-sans text-xs phone:text-sm mb-2 phone:mb-3"
       >
         <div className="flex-1 min-w-0">
-          {displayInfo.hasInstallments ? (
-            <>
-              <span className="text-[#848484]">ou </span>
-              <span className="text-black">
-                {product.installmentCount}x de{' '}
-              </span>
-              <span className="text-[#848484]">
-                R$ {displayInfo.formattedInstallmentValue}
-              </span>
-            </>
-          ) : (
-            <span className="text-[#848484]">Pagamento à vista</span>
-          )}
+          <span className="text-[#848484]">ou </span>
+          <span className="text-black">
+            {product.installment.split('de')[0]}de{' '}
+          </span>
+          <span className="text-[#848484]">
+            {product.installment.split('de')[1]}
+          </span>
         </div>
-        {displayInfo.hasDiscount && (
+        {product.discount && (
           <span
             data-name={`product-discount-${product.id}`}
             className="ml-1 phone:ml-2 bg-[#495949] text-white rounded px-1 phone:px-2 py-0.5 text-xs font-sans flex-shrink-0"
           >
-            {displayInfo.formattedDiscount}
+            {product.discount}
           </span>
         )}
       </div>
@@ -117,12 +116,19 @@ export const ProductCard = ({
 
       <button
         data-name={`product-addtocart-${product.id}`}
-        className="w-full mt-2 phone:mt-2 p-2 phone:p-3 bg-[#08d16d] text-white font-sans text-sm phone:text-base lg:text-lg border-none rounded-md cursor-pointer transition-colors tracking-wide shadow-sm hover:bg-[#013318] hover:text-[#fff]"
+        className="w-full mt-2 phone:mt-2 p-2 phone:p-3 bg-[#b7c7b7] text-[#222] font-sans text-sm phone:text-base lg:text-lg border-none rounded-md cursor-pointer transition-colors tracking-wide shadow-sm hover:bg-[#495949] hover:text-white"
         type="button"
-        onClick={() => handleAddToCart(product.id)}
+        onClick={() => handleAdd(product.id)}
       >
         Adicionar ao Carrinho
       </button>
+      <ConfirmationModal
+        open={showConfirmation}
+        onClose={() => setShowConfirmation(false)}
+        productName={product.name}
+        productPrice={product.price}
+        subtotal={lastSubtotal ?? undefined}
+      />
     </div>
   );
 };
