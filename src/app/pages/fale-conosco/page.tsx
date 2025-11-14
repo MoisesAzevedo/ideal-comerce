@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
-import Header from '../components/Header/Header';
-import FooterMenus from '../components/Footer/FooterMenusNew';
-import FaleConosco from './FaleConosco';
+import Header from '../../components/Header/Header';
+import FooterMenus from '../../components/Footer/FooterMenusNew';
+import FaleConosco from './components/FaleConosco';
 
 export const metadata: Metadata = {
   title: 'Fale Conosco | Ideal E-commerce',

@@ -1,14 +1,6 @@
-import type { Product } from "../../../../../db-mock-data/featured-products";
+import type { Product, ProductsResponse } from "../../../../../db";
 
-export interface ProductsApiResponse {
-  data: Product[];
-  meta: {
-    page: number;
-    perPage: number;
-    total: number;
-    totalPages: number;
-  };
-}
+export interface ProductsApiResponse extends ProductsResponse {}
 
 // Responsabilidade única: chamar o endpoint /api/products e retornar dados tipados
 export async function fetchFeaturedProducts(params?: {

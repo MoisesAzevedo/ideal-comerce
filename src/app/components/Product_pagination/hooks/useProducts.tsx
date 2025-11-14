@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState, useCallback } from "react";
-import type { Product } from "../../../../../db-mock-data/featured-products";
+import type { Product } from "../../../../../db";
 import fetchFeaturedProducts, { ProductsApiResponse } from "../api/productsService";
 
 // Hook com responsabilidade única: gerenciar fetch de produtos e expor estado

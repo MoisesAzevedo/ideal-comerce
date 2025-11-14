@@ -3,9 +3,11 @@
 import React from "react";
 import { ProductCard } from "./components/ProductCard";
 import useProducts from "./hooks/useProducts";
+import { useProductNavigation } from "./hooks/useProductNavigation";
 
 const Products = () => {
   const { products, loading, error } = useProducts({ perPage: 16 });
+  const { buyProduct } = useProductNavigation();
 
   // Exibe os produtos retornados pela API (já paginados)
   const visibleProducts = products ?? [];
@@ -15,6 +17,10 @@ const Products = () => {
   for (let i = 0; i < visibleProducts.length; i += 4) {
     rows.push(visibleProducts.slice(i, i + 4));
   }
+
+  const handleBuyProduct = (productId: number) => {
+    buyProduct(productId);
+  };
 
   return (
     <div className="flex flex-col items-center w-full mt-16">
@@ -35,7 +41,11 @@ const Products = () => {
           {rows.map((row, idx) => (
             <div key={idx} className="flex flex-row gap-8 justify-center w-full">
               {row.map((product) => (
-                <ProductCard key={product.id} product={product} />
+                <ProductCard 
+                  key={product.id} 
+                  product={product} 
+                  onBuy={() => handleBuyProduct(product.id)}
+                />
               ))}
             </div>
           ))}

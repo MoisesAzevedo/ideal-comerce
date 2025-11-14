@@ -3,8 +3,8 @@ import AboutHero from './components/AboutHero';
 import Section from './components/Section';
 import TeamCard from './components/TeamCard';
 import type { TeamMember } from './types';
-import FooterMenus from '../components/Footer/FooterMenusNew';
-import Header from '../components/Header/Header';
+import FooterMenus from '../../components/Footer/FooterMenusNew';
+import Header from '../../components/Header/Header';
 
 export const metadata: Metadata = {
   title: 'Quem Somos | Ideal E-commerce',

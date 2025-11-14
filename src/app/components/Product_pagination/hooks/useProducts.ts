@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState, useCallback } from "react";
-import type { Product } from "../../../../../db-mock-data/featured-products";
+import type { Product } from "../../../../../db";
 import type { ProductsQueryParams } from "../services/products-service";
 import { createProductsService } from "../services/products-service";
 

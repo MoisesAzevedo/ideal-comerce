@@ -1,6 +1,7 @@
 'use client';
 import React from 'react';
-import type { Product } from '../data/products';
+import type { Product } from '../../../../../db';
+import { useProductDisplay } from '../hooks/useProductDisplay';
 import Image from 'next/image';
 
 export const ProductCard = ({
@@ -13,6 +14,9 @@ export const ProductCard = ({
   
   const [carrinho, setCarrinho] = React.useState<number[]>([]);
   const [cont, setCont] = React.useState<number>(0);
+  
+  // Use hook for product display logic
+  const displayInfo = useProductDisplay(product);
 
   const handleAddToCart = (productId: number) => {
     setCarrinho((prevCarrinho) => [...prevCarrinho, productId]);
@@ -31,7 +35,7 @@ export const ProductCard = ({
         <Image
           className="absolute w-full h-full top-0 left-0 object-cover rounded"
           alt={product.name}
-          src={product.image}
+          src={product.images[0]}
           fill
           sizes="(max-width: 350px) 150px, (max-width: 480px) 180px, 203px"
           priority={true}
@@ -62,7 +66,7 @@ export const ProductCard = ({
         >
           R$ {product.price}
         </span>
-        {product.oldPrice && (
+        {displayInfo.hasOldPrice && (
           <span
             data-name={`product-oldprice-${product.id}`}
             className="font-sans text-[#848484] text-xs phone:text-sm lg:text-[15px] line-through"
@@ -77,20 +81,26 @@ export const ProductCard = ({
         className="w-full flex items-center justify-between font-sans text-xs phone:text-sm mb-2 phone:mb-3"
       >
         <div className="flex-1 min-w-0">
-          <span className="text-[#848484]">ou </span>
-          <span className="text-black">
-            {product.installment.split('de')[0]}de{' '}
-          </span>
-          <span className="text-[#848484]">
-            {product.installment.split('de')[1]}
-          </span>
+          {displayInfo.hasInstallments ? (
+            <>
+              <span className="text-[#848484]">ou </span>
+              <span className="text-black">
+                {product.installmentCount}x de{' '}
+              </span>
+              <span className="text-[#848484]">
+                R$ {displayInfo.formattedInstallmentValue}
+              </span>
+            </>
+          ) : (
+            <span className="text-[#848484]">Pagamento à vista</span>
+          )}
         </div>
-        {product.discount && (
+        {displayInfo.hasDiscount && (
           <span
             data-name={`product-discount-${product.id}`}
             className="ml-1 phone:ml-2 bg-[#495949] text-white rounded px-1 phone:px-2 py-0.5 text-xs font-sans flex-shrink-0"
           >
-            {product.discount}
+            {displayInfo.formattedDiscount}
           </span>
         )}
       </div>
