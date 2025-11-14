@@ -1,7 +1,11 @@
 'use client';
-import React from 'react';
+import React, { useState } from 'react';
 import type { Product } from '../data/products';
 import Image from 'next/image';
+import { useCart } from '../../../Carrinho/cart';
+import ConfirmationModal from '../../../Carrinho/Components/ModalConfirmation/ConfirmationModal';
+import aggregateCart from '../../../Carrinho/utils/cartHelpers';
+import { products as allProducts } from '../data/products';
 
 export const ProductCard = ({
   product,
@@ -10,19 +14,24 @@ export const ProductCard = ({
   product: Product;
   onBuy?: (productId: number) => void;
 }) => {
-  
-  const [carrinho, setCarrinho] = React.useState<number[]>([]);
-  const [cont, setCont] = React.useState<number>(0);
+  const { addToCart, cartIds } = useCart();
+  const [showConfirmation, setShowConfirmation] = useState(false);
+  const [lastSubtotal, setLastSubtotal] = useState<number | null>(null);
 
-  const handleAddToCart = (productId: number) => {
-    setCarrinho((prevCarrinho) => [...prevCarrinho, productId]);
-    setCont((c) => c + 1);
+  const handleAdd = (productId: number) => {
+    addToCart(productId);
+    // compute new subtotal after adding this id
+    const nextIds = [...cartIds, productId];
+    const items = aggregateCart(nextIds, allProducts);
+    const subtotal = items.reduce((s, it) => s + it.product.price * it.qty, 0);
+    setLastSubtotal(subtotal);
+    setShowConfirmation(true);
   };
 
   return (
     <div
       data-name={`product-${product.id}`}
-      className="font-sans relative w-full max-w-[203px] h-auto flex flex-col items-start rounded shadow-sm p-2 phone:p-3 bg-black/[0.01]" 
+      className="font-sans relative w-full max-w-[203px] h-auto flex flex-col items-start rounded shadow-sm p-2 phone:p-3 bg-black/[0.01]"
     >
       <div
         data-name={`product-image-${product.id}`}
@@ -107,12 +116,19 @@ export const ProductCard = ({
 
       <button
         data-name={`product-addtocart-${product.id}`}
-        className="w-full mt-2 phone:mt-2 p-2 phone:p-3 bg-[#08d16d] text-white font-sans text-sm phone:text-base lg:text-lg border-none rounded-md cursor-pointer transition-colors tracking-wide shadow-sm hover:bg-[#013318] hover:text-[#fff]"
+        className="w-full mt-2 phone:mt-2 p-2 phone:p-3 bg-[#b7c7b7] text-[#222] font-sans text-sm phone:text-base lg:text-lg border-none rounded-md cursor-pointer transition-colors tracking-wide shadow-sm hover:bg-[#495949] hover:text-white"
         type="button"
-        onClick={() => handleAddToCart(product.id)}
+        onClick={() => handleAdd(product.id)}
       >
         Adicionar ao Carrinho
       </button>
+      <ConfirmationModal
+        open={showConfirmation}
+        onClose={() => setShowConfirmation(false)}
+        productName={product.name}
+        productPrice={product.price}
+        subtotal={lastSubtotal ?? undefined}
+      />
     </div>
   );
 };

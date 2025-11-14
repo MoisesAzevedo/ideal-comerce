@@ -4,6 +4,7 @@ import UserActions from "./local-components/UserActions/UserActions";
 import Navigation from "./local-components/Navigation/Navigation";
 import { getAssetPath } from "@/utils/paths";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Header() {
   return (
@@ -11,7 +12,7 @@ export default function Header() {
       <header className={styles.header}>
         <div className={styles.content}>
           {/* Logo */}
-
+          <Link href="/"> 
           <Image
             src={getAssetPath("/logo-mod.png")}
             alt="Ideal Logo"
@@ -20,6 +21,7 @@ export default function Header() {
             height={40}
             priority
           />
+          </Link>
 
           {/* Input de Pesquisa */}
           <SearchInput />
