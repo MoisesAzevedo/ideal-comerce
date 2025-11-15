@@ -10,10 +10,8 @@ import { products as allProducts } from '../../../../db';
 
 export const ProductCard = ({
   product,
-  onBuy,
 }: {
   product: Product;
-  onBuy?: (productId: string) => void;
 }) => {
   const { addToCart, cartIds } = useCart();
   const [showConfirmation, setShowConfirmation] = useState(false);

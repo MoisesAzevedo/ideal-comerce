@@ -1,39 +1,38 @@
 'use client';
 import React from 'react';
-import Modal from './Modal';
-import type { ConfirmationModalProps } from './types';
+import Modal from '@/app/Carrinho/Components/ModalConfirmation/Modal';
+import type { ModalProps } from '@/app/Carrinho/Components/ModalConfirmation/types';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
-import styles from '../../Modal.module.scss'
 
-export default function ConfirmationModal({
+type Props = ModalProps & {
+  productName?: string;
+};
+
+export default function FavoriteConfirmationModal({
   open,
   onClose,
   productName,
-  onViewCart,
-}: ConfirmationModalProps) {
+}: Props) {
   const router = useRouter();
 
-  const handleViewCart = () => {
+  const handleViewFavorites = () => {
     onClose();
-    if (onViewCart) return onViewCart();
-    router.push('/Carrinho');
+    router.push('/Favoritos');
   };
 
   return (
     <Modal open={open} onClose={onClose}>
-      <div className="flex flex-col gap-4">
-        <Image src={'/icons/Check.svg'} alt="Check" width={90} height={90} className={styles.check} />
+      <div className="flex flex-col items-center justify-center text-center py-1">
+        <Image src={'/icons/Check.svg'} alt="Check" width={90} height={90} />
         <h3 className="text-lg phone:text-xl font-semibold">
-          {productName} foi adicionado à sua mochila.
+          Favorito adicionado
         </h3>
         {productName && (
           <p className="text-sm text-[#333]">
-            O produto <strong>{productName} </strong> está na mochila.
+            {productName} foi adicionado aos seus favoritos.
           </p>
         )}
-
-      
 
         <div className="flex items-center gap-2 mt-2">
           <button
@@ -41,15 +40,15 @@ export default function ConfirmationModal({
             onClick={onClose}
             className="flex-1 phone:flex-none phone:px-4 phone:py-2 px-3 py-2 bg-gray-100 rounded text-sm phone:text-base"
           >
-            Continuar comprando
+            Continuar navegando
           </button>
 
-            <button
+          <button
             type="button"
-            onClick={handleViewCart}
+            onClick={handleViewFavorites}
             className="flex-1 phone:flex-none phone:px-4 phone:py-2 px-3 py-2 bg-[#495949] text-white rounded text-sm phone:text-base"
           >
-            Ver mochila
+            Ver favoritos
           </button>
         </div>
       </div>

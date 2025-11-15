@@ -41,6 +41,9 @@ const FooterMenus = () => (
               <li>
                 <a href="/institucional/lojasfisicas">Lojas Físicas</a>
               </li>
+              <li>
+                <a href="/quem-somos">Quem Somos </a>
+              </li>
             </ul>
           </li>
         </ul>
@@ -112,6 +115,9 @@ const FooterMenus = () => (
             <ul className={styles.submenu}>
               <li>
                 <a href="/ajuda">TIRE SUAS DÚVIDAS</a>
+              </li>
+              <li>
+                <a href="/fale-conosco"> Fale Conosco </a>
               </li>
             </ul>
           </li>

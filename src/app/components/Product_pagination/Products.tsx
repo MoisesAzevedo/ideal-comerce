@@ -44,7 +44,6 @@ const Products = () => {
                 <ProductCard 
                   key={product.id} 
                   product={product} 
-                  onBuy={() => handleBuyProduct(product.id)}
                 />
               ))}
             </div>

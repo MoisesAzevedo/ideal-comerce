@@ -21,7 +21,6 @@ interface ProductPriceProps {
 export function ProductPrice({
   salePrice,
   discountPrice,
-  oldPrice,
   installmentCount,
   installmentValue,
   percentualDiscount,

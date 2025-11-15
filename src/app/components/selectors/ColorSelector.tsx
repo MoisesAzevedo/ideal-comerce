@@ -5,7 +5,6 @@
 
 'use client';
 
-import { useState } from 'react';
 import styles from './ColorSelector.module.scss';
 
 interface ColorOption {

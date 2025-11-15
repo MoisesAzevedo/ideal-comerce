@@ -5,7 +5,6 @@
 
 'use client';
 
-import { useState } from 'react';
 import styles from './SizeSelector.module.scss';
 
 interface SizeOption {

@@ -34,14 +34,14 @@ export default function FavoriteItemRow({ product }: { product: Product }) {
 
       <div className="flex items-center gap-2">
         <button
-          className="px-3 py-2 bg-[#495949] text-white rounded text-sm"
+          className="px-3 py-2 bg-[#495949] text-white rounded text-sm hover:bg-[#334033] transition"
           onClick={() => addToCart(product.id)}
         >
           Adicionar à mochila
         </button>
 
         <button
-          className="px-3 py-2 border rounded text-sm text-red-600"
+          className="px-3 py-2 border rounded text-sm text-red-600 hover:bg-red-600 hover:text-white transition"
           onClick={() => removeFavorite(product.id)}
           aria-pressed={isFavorite(product.id)}
         >

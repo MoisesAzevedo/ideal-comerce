@@ -21,7 +21,8 @@ export function ProductDetails({ product }: ProductDetailsProps) {
     <div data-name="product-details" className={styles.detailsContainer}>
       {/* Título do produto */}
       <section data-name="product-title-section" className={styles.section}>
-        <ProductTitle 
+        <ProductTitle
+          id={product.id}
           name={product.name}
           sku={product.sku}
           category={product.category}
@@ -30,7 +31,7 @@ export function ProductDetails({ product }: ProductDetailsProps) {
 
       {/* Preço do produto */}
       <section data-name="product-price-section" className={styles.section}>
-        <ProductPrice 
+        <ProductPrice
           salePrice={product.sale_price}
           discountPrice={product.discount_price}
           oldPrice={product.oldPrice}
@@ -44,9 +45,11 @@ export function ProductDetails({ product }: ProductDetailsProps) {
       {/* Seletor de tamanhos */}
       {product.sizes && product.sizes.length > 0 && (
         <section data-name="product-size-section" className={styles.section}>
-          <SizeSelector 
+          <SizeSelector
             sizes={product.sizes}
-            onSizeChange={(sizeValue) => console.log('Tamanho selecionado:', sizeValue)}
+            onSizeChange={(sizeValue) =>
+              console.log('Tamanho selecionado:', sizeValue)
+            }
           />
         </section>
       )}
@@ -54,16 +57,18 @@ export function ProductDetails({ product }: ProductDetailsProps) {
       {/* Seletor de cores */}
       {product.colors && product.colors.length > 0 && (
         <section data-name="product-color-section" className={styles.section}>
-          <ColorSelector 
+          <ColorSelector
             colors={product.colors}
-            onColorChange={(colorValue) => console.log('Cor selecionada:', colorValue)}
+            onColorChange={(colorValue) =>
+              console.log('Cor selecionada:', colorValue)
+            }
           />
         </section>
       )}
 
       {/* Ações do produto (adicionar à mochila, favoritos, etc.) */}
       <section data-name="product-actions-section" className={styles.section}>
-        <ProductActions 
+        <ProductActions
           product={product}
           stockQuantity={product.stock_quantity}
         />
@@ -72,16 +77,15 @@ export function ProductDetails({ product }: ProductDetailsProps) {
       {/* Informações de estoque */}
       <section data-name="product-stock-section" className={styles.section}>
         <div data-name="stock-info" className={styles.stockInfo}>
-          <span 
-            data-name="stock-quantity" 
+          <span
+            data-name="stock-quantity"
             className={`${styles.stockText} ${
               product.stock_quantity > 0 ? styles.inStock : styles.outOfStock
             }`}
           >
-            {product.stock_quantity > 0 
-              ? `${product.stock_quantity} unidades em estoque` 
-              : 'Produto esgotado'
-            }
+            {product.stock_quantity > 0
+              ? `${product.stock_quantity} unidades em estoque`
+              : 'Produto esgotado'}
           </span>
         </div>
       </section>

@@ -5,6 +5,7 @@ import { useFavorites } from './favorites';
 import { products } from '../../../db';
 import FavoriteItemRow from './Components/FavoriteItemRow';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function FavoritesPage() {
   const { favoriteIds, clearFavorites } = useFavorites();
@@ -22,8 +23,9 @@ export default function FavoritesPage() {
         </h1>
 
         {favoriteProducts.length === 0 ? (
-          <div className="text-center py-20">
-            <p className="mb-4">Você ainda não adicionou favoritos.</p>
+          <div className="flex flex-col items-center justify-center text-center py-20">
+            <Image src={'/img/Estrela-Verde.png'} width={70} height={70} alt='Estrela' />
+            <p className="mb-4"> <strong> Você ainda não adicionou nada ao seus favoritos. </strong> </p>
             <Link
               href="/"
               className="inline-block px-4 py-2 bg-[#495949] text-white rounded"
@@ -33,19 +35,18 @@ export default function FavoritesPage() {
           </div>
         ) : (
           <div className="bg-white p-4 rounded shadow-sm">
-            <div className="flex justify-end mb-4">
-              <button
-                onClick={() => clearFavorites()}
-                className="px-3 py-2 border rounded text-sm"
-              >
-                Limpar favoritos
-              </button>
-            </div>
-
             <div className="flex flex-col">
               {favoriteProducts.map((p) => (
                 <FavoriteItemRow key={p.id} product={p} />
               ))}
+            </div>
+                <div className="flex justify-end mb-4">
+              <button
+                onClick={() => clearFavorites()}
+                className="px-3 py-2 bg-[#495949] text-white rounded text-sm hover:bg-[#334033] transition"
+              >
+                Limpar favoritos
+              </button>
             </div>
           </div>
         )}

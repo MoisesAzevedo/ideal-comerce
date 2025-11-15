@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useCallback } from "react";
 import type { Product } from "../../../../../db";
-import fetchFeaturedProducts, { ProductsApiResponse } from "../api/productsService";
+import fetchFeaturedProducts from "../api/productsService";
 
 // Hook com responsabilidade única: gerenciar fetch de produtos e expor estado
 export function useProducts(options?: { page?: number; perPage?: number; category?: string; q?: string }) {
