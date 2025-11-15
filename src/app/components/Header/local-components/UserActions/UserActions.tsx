@@ -45,7 +45,7 @@ export default function UserActions() {
           <span className={styles.actionLabel} data-name="label-favoritos">Favoritos</span>
         </button>
       </Link>
-      {/* Carrinho */}
+      {/* Mochila */}
       <Link href="/Carrinho" data-name="link-carrinho">
         <button
           className={styles.actionButton}
@@ -53,12 +53,12 @@ export default function UserActions() {
           onMouseEnter={() => setActiveTooltip('carrinho')}
           onMouseLeave={() => setActiveTooltip(null)}
           data-tooltip-id="carrinho-tooltip"
-          data-tooltip-content="Carrinho"
+          data-tooltip-content="Mochila"
           style={{ position: 'relative' }}
         >
           <Image
             src={getAssetPath('/icons/bag.svg')}
-            alt="Carrinho"
+            alt="Mochila"
             width={20}
             height={20}
             className={styles.actionIcon}
@@ -67,7 +67,7 @@ export default function UserActions() {
           <span className={styles.cartBadge} data-name="cart-badge">{cartCount}</span>
         </button>
       </Link>
-      {/* Tooltip apenas para o carrinho */}
+      {/* Tooltip apenas para a mochila */}
       <Tooltip
         id="carrinho-tooltip"
         place="bottom"

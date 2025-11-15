@@ -37,7 +37,7 @@ export default function FavoriteItemRow({ product }: { product: Product }) {
           className="px-3 py-2 bg-[#495949] text-white rounded text-sm"
           onClick={() => addToCart(product.id)}
         >
-          Adicionar ao carrinho
+          Adicionar à mochila
         </button>
 
         <button

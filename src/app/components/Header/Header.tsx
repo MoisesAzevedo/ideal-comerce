@@ -38,8 +38,9 @@ export default function Header({ showNavigation = true }: HeaderProps) {
               src={getAssetPath("/logo-mod.png")}
               alt="Ideal Logo"
               className={styles.logo}
-              width={120}
+              width={0}
               height={40}
+              style={{ width: 'auto', height: '40px' }}
               priority
               data-name="logo-image"
             />

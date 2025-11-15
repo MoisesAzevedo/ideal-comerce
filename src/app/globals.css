@@ -7,6 +7,19 @@
   --svg-hover: #d4d4d4;
   --font-primary: var(--font-teko), "Teko", Helvetica, Arial, sans-serif;
   --font-secondary: "Calibri", Arial, sans-serif;
+  --color-primary-green: #495949;
+  --color-light-green: #059669;
+  
+  /* Breakpoints */
+  --breakpoint-xs: 350px;      /* Dispositivos muito pequenos */
+  --breakpoint-phone: 480px;   /* Dispositivos móveis */
+  --breakpoint-tablet: 768px;  /* Tablets */
+  --breakpoint-lg: 1050px;     /* Laptops */
+  --breakpoint-xl: 1280px;     /* Desktops */
+  --breakpoint-2xl: 1536px;    /* Telas grandes */
+  
+  /* Container máximo */
+  --max-width-container: 1200px;
 }
 
 /* Removendo o modo dark automático para forçar sempre o modo claro */
@@ -21,10 +34,24 @@ body,
 html {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-primary);
+  font-family: var(--font-secondary);
 }
 
+/* Aplicar fonte primária especificamente para títulos */
+h1, h2, h3, h4, h5, h6,
+.font-primary,
+.use-font-primary {
+  font-family: var(--font-primary) !important;
+}
+
+/* Aplicar fonte secundária para textos normais */
+p, span, div, a, li, td, th,
 .font-secondary,
 .use-font-secondary {
   font-family: var(--font-secondary) !important;
+}
+
+/* Manter fonte primária para classes específicas do Tailwind */
+.font-teko {
+  font-family: var(--font-primary) !important;
 }

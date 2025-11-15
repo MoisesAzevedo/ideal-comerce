@@ -6,6 +6,7 @@
 import { Frame } from "../components/topInformation/componente";
 import Header from "../components/Header/Header";
 import FooterMenus from "../components/Footer/FooterMenus";
+import ScrollToTopButton from "../components/ScrollToTopButton/ScrollToTopButton";
 
 interface SharedPageLayoutProps {
   children: React.ReactNode;
@@ -43,6 +44,9 @@ export default function SharedPageLayout({
       <footer data-name="main-footer">
         <FooterMenus />
       </footer>
+
+      {/* Scroll to Top Button */}
+      <ScrollToTopButton />
     </div>
   );
 }

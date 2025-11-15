@@ -128,7 +128,7 @@ export const ProductCard = ({
         type="button"
         onClick={() => handleAdd(product.id)}
       >
-        Adicionar ao Carrinho
+        Adicionar à Mochila
       </button>
       <ConfirmationModal
         open={showConfirmation}

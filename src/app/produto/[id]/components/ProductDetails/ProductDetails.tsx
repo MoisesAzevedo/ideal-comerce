@@ -8,8 +8,8 @@
 import { Product } from '../../../../../../db/types';
 import { ProductTitle } from '../ProductTitle/ProductTitle';
 import { ProductPrice } from '../ProductPrice/ProductPrice';
-import { ProductAttributes } from '../ProductAttributes/ProductAttributes';
 import { ProductActions } from '../ProductActions/ProductActions';
+import { SizeSelector, ColorSelector } from '@/app/components';
 import styles from './ProductDetails.module.scss';
 
 interface ProductDetailsProps {
@@ -41,24 +41,27 @@ export function ProductDetails({ product }: ProductDetailsProps) {
         />
       </section>
 
-      {/* Descrição do produto */}
-      <section data-name="product-description-section" className={styles.section}>
-        <h3 data-name="description-title" className={styles.sectionTitle}>
-          Descrição
-        </h3>
-        <p data-name="product-description" className={styles.description}>
-          {product.description}
-        </p>
-      </section>
-
-      {/* Atributos do produto */}
-      {product.attributes && (
-        <section data-name="product-attributes-section" className={styles.section}>
-          <ProductAttributes attributes={product.attributes} />
+      {/* Seletor de tamanhos */}
+      {product.sizes && product.sizes.length > 0 && (
+        <section data-name="product-size-section" className={styles.section}>
+          <SizeSelector 
+            sizes={product.sizes}
+            onSizeChange={(sizeValue) => console.log('Tamanho selecionado:', sizeValue)}
+          />
         </section>
       )}
 
-      {/* Ações do produto (adicionar ao carrinho, favoritos, etc.) */}
+      {/* Seletor de cores */}
+      {product.colors && product.colors.length > 0 && (
+        <section data-name="product-color-section" className={styles.section}>
+          <ColorSelector 
+            colors={product.colors}
+            onColorChange={(colorValue) => console.log('Cor selecionada:', colorValue)}
+          />
+        </section>
+      )}
+
+      {/* Ações do produto (adicionar à mochila, favoritos, etc.) */}
       <section data-name="product-actions-section" className={styles.section}>
         <ProductActions 
           product={product}

@@ -1,0 +1,117 @@
+/**
+ * Styles: ColorSelector
+ * Responsabilidade única: Estilos para seleção de cores
+ */
+
+.container {
+  margin-bottom: 1.5rem;
+}
+
+.labelRow {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.label {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 0;
+}
+
+.selectedInline {
+  font-size: 0.875rem;
+  color: #495949;
+  font-weight: 500;
+  background-color: rgba(73, 89, 73, 0.1);
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+}
+
+.optionsGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  max-width: 300px;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 2px solid #d1d5db;
+  border-radius: 50%;
+  background-color: #ffffff;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  
+  &:hover:not(:disabled) {
+    border-color: #495949;
+    background-color: #f9fafb;
+  }
+  
+  &:focus {
+    outline: none;
+    border-color: #495949;
+    box-shadow: 0 0 0 3px rgba(73, 89, 73, 0.1);
+  }
+}
+
+.colorSwatch {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: var(--color-value);
+  border: 1px solid #d1d5db;
+  flex-shrink: 0;
+}
+
+.colorName {
+  flex: 1;
+  text-align: left;
+}
+
+.selected {
+  border-color: #495949;
+  background-color: rgba(73, 89, 73, 0.05);
+  
+  .colorSwatch {
+    border-color: #495949;
+    box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #495949;
+  }
+}
+
+.unavailable {
+  border-color: #e5e7eb;
+  background-color: #f3f4f6;
+  color: #9ca3af;
+  cursor: not-allowed;
+  
+  .colorSwatch {
+    opacity: 0.5;
+    position: relative;
+    
+    &::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: -2px;
+      right: -2px;
+      height: 1px;
+      background-color: #9ca3af;
+      transform: translateY(-50%) rotate(-45deg);
+    }
+  }
+}
+
+.selectedText {
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+  color: #495949;
+  font-weight: 500;
+}

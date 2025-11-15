@@ -1,6 +1,21 @@
 // Centralized type definitions for the mock database
 // Responsibility: Define all data types used across the application
 
+// Size selector types
+export interface SizeOption {
+  value: string;
+  label: string;
+  available: boolean;
+}
+
+// Color selector types  
+export interface ColorOption {
+  value: string;
+  label: string;
+  hex: string;
+  available: boolean;
+}
+
 export interface Product {
   id: string; // UUID
   sku: string; // VARCHAR(50) UNIQUE - Código interno único
@@ -18,7 +33,9 @@ export interface Product {
   height_cm?: number | null; // DECIMAL(10,2) - Altura
   length_cm?: number | null; // DECIMAL(10,2) - Comprimento
   images: string[]; // JSONB - Lista de URLs de imagem
-  attributes?: Record<string, any> | null; // JSONB - Atributos dinâmicos (cor, tamanho, voltagem etc.)
+  attributes?: Record<string, any> | null; // JSONB - Atributos dinâmicos (exceto cor e tamanho)
+  sizes?: SizeOption[] | null; // JSONB - Opções de tamanho disponíveis
+  colors?: ColorOption[] | null; // JSONB - Opções de cor disponíveis
   status: 'active' | 'inactive' | 'archived'; // ENUM - Status do produto
   created_at: Date; // TIMESTAMP - Data de criação
   updated_at: Date; // TIMESTAMP - Última atualização

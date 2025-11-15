@@ -1,0 +1,104 @@
+/**
+ * Styles: SizeSelector
+ * Responsabilidade única: Estilos para seleção de tamanhos
+ */
+
+.container {
+  margin-bottom: 1.5rem;
+}
+
+.labelRow {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.label {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 0;
+}
+
+.selectedInline {
+  font-size: 0.875rem;
+  color: #495949;
+  font-weight: 500;
+  background-color: rgba(73, 89, 73, 0.1);
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+}
+
+.optionsGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  max-width: 300px;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  min-height: 36px;
+  padding: 0.25rem;
+  border: 2px solid #d1d5db;
+  border-radius: 0.375rem;
+  background-color: #ffffff;
+  color: #374151;
+  font-size: 0.75rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  
+  &:hover:not(:disabled) {
+    border-color: #495949;
+    background-color: #f9fafb;
+  }
+  
+  &:focus {
+    outline: none;
+    border-color: #495949;
+    box-shadow: 0 0 0 3px rgba(73, 89, 73, 0.1);
+  }
+}
+
+.selected {
+  border-color: #495949;
+  background-color: #495949;
+  color: #ffffff;
+  
+  &:hover {
+    border-color: #3a4a3a;
+    background-color: #3a4a3a;
+  }
+}
+
+.unavailable {
+  border-color: #e5e7eb;
+  background-color: #f3f4f6;
+  color: #9ca3af;
+  cursor: not-allowed;
+  position: relative;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 10%;
+    right: 10%;
+    height: 1px;
+    background-color: #9ca3af;
+    transform: translateY(-50%);
+  }
+}
+
+.selectedText {
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+  color: #495949;
+  font-weight: 500;
+}

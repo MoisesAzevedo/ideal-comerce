@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 import { Teko } from 'next/font/google';
 import { getAssetPath } from '@/utils/paths';
 import './globals.css';
-import ScrollToTopButton from '@/app/components/ScrollToTopButton/ScrollToTopButton';
 import CartProvider from './Carrinho/cart';
 import FavoritesProvider from './Favoritos/favorites';
 
@@ -31,7 +30,6 @@ export default function RootLayout({
         <CartProvider>
           <FavoritesProvider>
             {children}
-            <ScrollToTopButton />
           </FavoritesProvider>
         </CartProvider>
       </body>

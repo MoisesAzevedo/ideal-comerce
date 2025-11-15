@@ -1,0 +1,19 @@
+/**
+ * Styles: ProductImagesSection
+ * Responsabilidade única: Estilos para a seção de imagens do produto
+ */
+
+.productImagesSection {
+  width: 100%;
+  display: block;
+}
+
+/* 
+ * Container responsivo para diferentes layouts
+ */
+@media (min-width: 768px) {
+  .productImagesSection {
+    /* Permite que o componente pai controle o layout */
+    flex: 1;
+  }
+}

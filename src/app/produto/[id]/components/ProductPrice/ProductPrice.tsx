@@ -32,24 +32,27 @@ export function ProductPrice({
 
   return (
     <div data-name="product-price-container" className={styles.container}>
-      {/* Desconto percentual */}
-      {hasDiscount && percentualDiscount && (
-        <div data-name="discount-badge" className={styles.discountBadge}>
-          -{percentualDiscount}% OFF
+      {/* Linha principal com todos os elementos de preço */}
+      <div className={styles.mainPriceRow}>
+        {/* Preço atual */}
+        <div data-name="current-price" className={styles.currentPrice}>
+          {formatPrice(currentPrice, currency)}
         </div>
-      )}
 
-      {/* Preço atual */}
-      <div data-name="current-price" className={styles.currentPrice}>
-        {formatPrice(currentPrice, currency)}
+        {/* Preço original (se houver desconto) */}
+        {hasDiscount && (
+          <div data-name="original-price" className={styles.originalPrice}>
+            {formatPrice(salePrice, currency)}
+          </div>
+        )}
+
+        {/* Badge de desconto */}
+        {hasDiscount && percentualDiscount && (
+          <div data-name="discount-badge" className={styles.discountBadge}>
+            -{percentualDiscount}% OFF
+          </div>
+        )}
       </div>
-
-      {/* Preço original (se houver desconto) */}
-      {hasDiscount && (
-        <div data-name="original-price" className={styles.originalPrice}>
-          De: {formatPrice(salePrice, currency)}
-        </div>
-      )}
 
       {/* Informações de parcelamento */}
       {installmentCount && installmentValue && (

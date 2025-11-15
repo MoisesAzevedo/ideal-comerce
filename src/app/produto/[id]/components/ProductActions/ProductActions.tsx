@@ -1,12 +1,14 @@
 /**
  * Component: ProductActions
- * Responsabilidade única: Ações do produto (adicionar ao carrinho, favoritos, compartilhar)
+ * Responsabilidade única: Ações do produto (adicionar à mochila, favoritos, compartilhar)
  */
 
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import { Product } from '../../../../../../db/types';
+import { getAssetPath } from '../../../../../utils/paths';
 import { useCart } from '../../../../Carrinho/cart';
 import ConfirmationModal from '../../../../Carrinho/Components/ModalConfirmation/ConfirmationModal';
 import aggregateCart from '../../../../Carrinho/utils/cartHelpers';
@@ -83,26 +85,37 @@ export function ProductActions({ product, stockQuantity }: ProductActionsProps) 
           </div>
         )}
 
-        {/* Botão adicionar ao carrinho */}
-        <button
-          data-name="add-to-cart-button"
-          onClick={handleAddToCart}
-          disabled={isOutOfStock}
-          className={`${styles.addToCartButton} ${
-            isOutOfStock ? styles.disabledButton : ''
-          }`}
-        >
-          {isOutOfStock ? 'Produto Esgotado' : 'Adicionar ao Carrinho'}
-        </button>
+        {/* Botões de ação lado a lado */}
+        <div data-name="action-buttons-container" className={styles.actionButtonsContainer}>
+          {/* Botão comprar agora */}
+          <button
+            data-name="buy-now-button"
+            className={`${styles.buyNowButton} ${
+              isOutOfStock ? styles.disabledButton : ''
+            }`}
+            disabled={isOutOfStock}
+          >
+            {isOutOfStock ? 'Esgotado' : 'Comprar agora'}
+          </button>
 
-        {/* Botão de favoritos (placeholder) */}
-        <button
-          data-name="add-to-favorites-button"
-          className={styles.favoritesButton}
-          aria-label="Adicionar aos favoritos"
-        >
-          ♡ Adicionar aos Favoritos
-        </button>
+          {/* Botão adicionar à mochila */}
+          <button
+            data-name="add-to-cart-button"
+            onClick={handleAddToCart}
+            disabled={isOutOfStock}
+            className={`${styles.addToCartButton} ${
+              isOutOfStock ? styles.disabledButton : ''
+            }`}
+          >
+            <Image
+              src={getAssetPath('/icons/bag.svg')}
+              alt="Mochila"
+              width={20}
+              height={20}
+            />
+            {isOutOfStock ? 'Esgotado' : 'Adicionar à mochila'}
+          </button>
+        </div>
       </div>
 
       {/* Modal de confirmação */}

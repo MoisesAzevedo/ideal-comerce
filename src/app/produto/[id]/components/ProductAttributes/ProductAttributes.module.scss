@@ -35,6 +35,20 @@
     justify-content: space-between;
     align-items: center;
     gap: 1rem;
+    position: relative;
+    
+    // Linha pontilhada conectando label ao value
+    &::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 120px; // Após o min-width do label
+      right: 0;
+      height: 1px;
+      border-top: 1px dotted #9ca3af;
+      z-index: 1;
+      margin-right: auto;
+    }
   }
 }
 
@@ -43,6 +57,13 @@
   font-weight: 600;
   color: #4b5563;
   min-width: 120px;
+  
+  @media (min-width: 480px) {
+    background-color: #f9fafb;
+    padding-right: 0.5rem;
+    position: relative;
+    z-index: 2;
+  }
 }
 
 .value {
@@ -52,5 +73,9 @@
   
   @media (min-width: 480px) {
     text-align: right;
+    background-color: #f9fafb;
+    padding-left: 0.5rem;
+    position: relative;
+    z-index: 2;
   }
 }

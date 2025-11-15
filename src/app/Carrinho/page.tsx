@@ -1,5 +1,7 @@
-'use client';
+"use client";
 import React from 'react';
+import Image from 'next/image';
+import { getAssetPath } from '@/utils/paths';
 import { useCart } from './cart';
 import { products } from '../../../db';
 import aggregateCart from './utils/cartHelpers';
@@ -21,11 +23,21 @@ export default function CartPage() {
   return (
     <SharedPageLayout showNavigation={false}>
       <div className="container mx-auto py-8 px-4 phone:px-6">
-        <h1 className="text-2xl phone:text-3xl font-bold mb-6">Seu Carrinho</h1>
+        <h1 className="text-2xl phone:text-3xl font-bold mb-6">Sua Mochila</h1>
 
         {items.length === 0 ? (
           <div className="text-center py-20">
-            <p className="mb-4">Seu carrinho está vazio.</p>
+            <div className="flex flex-col items-center gap-4 mb-4">
+              <div className="w-36 h-36 relative mx-auto">
+                <Image
+                  src={getAssetPath('/img/bag-vazia.png')}
+                  alt="Mochila vazia"
+                  fill
+                  className="object-contain"
+                />
+              </div>
+              <p className="mb-4">Sua mochila está vazia.</p>
+            </div>
             <Link
               href="/"
               className="inline-block px-4 py-2 bg-[#495949] text-white rounded"
@@ -90,7 +102,7 @@ export default function CartPage() {
                   onClick={() => clearCart()}
                   className="w-full px-4 py-3 border rounded"
                 >
-                  Limpar carrinho
+                  Limpar mochila
                 </button>
               </div>
             </aside>
