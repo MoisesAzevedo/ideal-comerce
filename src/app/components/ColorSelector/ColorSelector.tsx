@@ -6,7 +6,7 @@
 'use client';
 
 import { useState } from 'react';
-import { ColorOption } from '../../../db/types';
+import { ColorOption } from '../../../../db/types';
 import styles from './ColorSelector.module.scss';
 
 interface ColorSelectorProps {

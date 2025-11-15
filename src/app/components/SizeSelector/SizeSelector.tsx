@@ -6,7 +6,7 @@
 'use client';
 
 import { useState } from 'react';
-import { SizeOption } from '../../../db/types';
+import { SizeOption } from '../../../../db/types';
 import styles from './SizeSelector.module.scss';
 
 interface SizeSelectorProps {

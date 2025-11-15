@@ -22,13 +22,13 @@ export function useProductDisplay(product: Product) {
       isCashPayment: InstallmentChecker.isCashPayment(product),
       
       // Valores formatados
-      formattedPrice: PriceFormatter.formatCurrency(product.price),
+      formattedPrice: PriceFormatter.formatCurrency(product.price ?? product.sale_price),
       formattedOldPrice: hasOldPrice ? PriceFormatter.formatCurrency(product.oldPrice!) : null,
       formattedDiscount: hasDiscount ? PriceFormatter.formatDiscountPercentage(product.percentual_discount!) : null,
-      formattedInstallmentValue: PriceFormatter.formatInstallmentValue(product.installmentValue),
+      formattedInstallmentValue: PriceFormatter.formatInstallmentValue(product.installmentValue ?? 0),
       
       // Textos de exibição
-      installmentText: hasInstallments 
+      installmentText: hasInstallments && product.installmentCount && product.installmentValue
         ? `${product.installmentCount}x de R$ ${PriceFormatter.formatInstallmentValue(product.installmentValue)}`
         : 'Pagamento à vista',
       

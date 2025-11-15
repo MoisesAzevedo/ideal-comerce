@@ -5,7 +5,7 @@
 
 'use client';
 
-import { ProductImageGallery } from '../../../produto/[id]/components/ProductImageGallery/ProductImageGallery';
+import { ProductImageGallery } from '@/app/produto/[id]/components/ProductImageGallery/ProductImageGallery';
 import styles from './ProductImagesSection.module.scss';
 
 interface ProductImagesSectionProps {

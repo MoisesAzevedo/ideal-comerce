@@ -6,7 +6,6 @@ export { Menu, X, ShoppingCart } from 'lucide-react';
 // ShoppingCart é o ícone de mochila
 
 // Ícone de caminhão personalizado
-import { getAssetPath } from '../utils/paths';
 
 interface TruckIconProps {
   size?: number;

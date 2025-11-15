@@ -1,4 +1,4 @@
-import type { Product, ProductsResponse } from "../../../../../db";
+import type { ProductsResponse } from "../../../../../db";
 
 export interface ProductsApiResponse extends ProductsResponse {}
 

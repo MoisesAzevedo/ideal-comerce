@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { MockDatabase, type Product, type ProductsResponse } from "../../../../db";
+import { MockDatabase, type ProductsResponse } from "../../../../db";
 
 // Garantir que a rota API não seja exportada como HTML estático
 export const dynamic = "force-dynamic";

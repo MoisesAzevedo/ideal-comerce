@@ -7,7 +7,6 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
-import { getAssetPath } from '../../../../../utils/paths';
 import styles from './ProductImageGallery.module.scss';
 
 interface ProductImageGalleryProps {
