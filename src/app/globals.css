@@ -37,6 +37,19 @@ html {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-secondary);
+  overflow-x: hidden;
+  width: 100%;
+}
+
+/* Prevenção global de overflow horizontal */
+* {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Container para prevenir scroll horizontal */
+body {
+  max-width: 100vw;
 }
 
 /* Aplicar fonte primária especificamente para títulos */

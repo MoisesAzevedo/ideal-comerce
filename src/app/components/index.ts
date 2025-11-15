@@ -7,3 +7,5 @@ export { ShippingCalculator } from './ShippingCalculator';
 export type { ShippingCalculatorProps, ShippingOption } from './ShippingCalculator';
 export { ProductImagesSection } from './ProductImagesSection/ProductImagesSection';
 export { default as Thumbnails } from './Thumbnails/Thumbnails';
+export { CategoryProductCarousel } from './CategoryProductCarousel';
+export type { CategoryProductCarouselProps } from './CategoryProductCarousel';

@@ -42,14 +42,14 @@
 }
 
 .quantityButton {
-  width: 40px;
-  height: 40px;
+  width: 32px;
+  height: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: #f3f4f6;
   border: none;
-  font-size: 1.125rem;
+  font-size: 1rem;
   font-weight: 600;
   color: #374151;
   cursor: pointer;
@@ -66,14 +66,15 @@
 }
 
 .quantityDisplay {
-  width: 60px;
-  height: 40px;
+  width: 48px;
+  height: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: white;
   font-weight: 600;
   color: #1f2937;
+  font-size: 0.875rem;
 }
 
 .actionButtonsContainer {

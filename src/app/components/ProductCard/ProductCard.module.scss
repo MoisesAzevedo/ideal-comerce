@@ -11,10 +11,21 @@
   cursor: pointer;
   transition: background 0.2s, color 0.2s;
   letter-spacing: 1px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.07);
 }
 .buyButton:hover,
 .buyButton:focus {
   background: #b7c7b7;
   color: #222;
+}
+
+.productNameTruncate {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-wrap: normal;
+  word-break: normal;
 }

@@ -1,12 +1,10 @@
 'use client';
-import React, { useState } from 'react';
+import React from 'react';
 import type { Product } from '../../../../db/types';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useCart } from '../../Carrinho/cart';
-import ConfirmationModal from '../../Carrinho/Components/ModalConfirmation/ConfirmationModal';
-import aggregateCart from '../../Carrinho/utils/cartHelpers';
-import { products as allProducts } from '../../../../db';
+// botão de adicionar removido — imports relacionados ao carrinho removidos
+import styles from './ProductCard.module.scss';
 
 export const ProductCard = ({
   product,
@@ -15,24 +13,12 @@ export const ProductCard = ({
   product: Product;
   onBuy?: (productId: string) => void;
 }) => {
-  const { addToCart, cartIds } = useCart();
-  const [showConfirmation, setShowConfirmation] = useState(false);
-  const [lastSubtotal, setLastSubtotal] = useState<number | null>(null);
-
-  const handleAdd = (productId: string) => {
-    addToCart(productId);
-    // compute new subtotal after adding this id
-    const nextIds = [...cartIds, productId];
-    const items = aggregateCart(nextIds, allProducts);
-    const subtotal = items.reduce((s, it) => s + (it.product.price ?? it.product.sale_price) * it.qty, 0);
-    setLastSubtotal(subtotal);
-    setShowConfirmation(true);
-  };
+  // botão de adicionar foi removido — ações de carrinho delegadas a páginas/ações específicas
 
   return (
     <div
       data-name={`product-${product.id}`}
-      className="font-sans relative w-full max-w-[203px] h-auto flex flex-col items-start rounded shadow-sm p-2 phone:p-3 bg-black/[0.01]"
+      className="font-sans relative w-[203px] h-auto flex flex-col items-start rounded p-2 phone:p-3 bg-black/[0.01] shadow-sm hover:shadow-md transition-shadow duration-200"
     >
       {/* Link para página do produto cobrindo a imagem e informações principais */}
       <Link 
@@ -63,7 +49,7 @@ export const ProductCard = ({
 
         <div
           data-name={`product-name-${product.id}`}
-          className="w-full font-sans text-black text-base phone:text-lg lg:text-xl mb-1 phone:mb-2 whitespace-nowrap overflow-hidden text-ellipsis group-hover:text-blue-600 transition-colors"
+          className={`font-sans text-black text-base phone:text-lg lg:text-xl mb-1 phone:mb-2 group-hover:text-blue-600 transition-colors ${styles.productNameTruncate}`}
         >
           {product.name}
         </div>
@@ -114,7 +100,7 @@ export const ProductCard = ({
 
       <button
         data-name={`product-buy-${product.id}`}
-        className="w-full mt-2 phone:mt-2 p-2 phone:p-3 bg-[#495949] text-white font-sans text-sm phone:text-base lg:text-lg border-none rounded-md cursor-pointer transition-colors tracking-wide shadow-sm hover:bg-[#b7c7b7] hover:text-[#222]"
+        className="w-full mt-2 phone:mt-2 p-2 phone:p-3 bg-[#495949] text-white font-sans text-sm phone:text-base lg:text-lg border-none rounded-md cursor-pointer transition-colors tracking-wide hover:bg-[#b7c7b7] hover:text-[#222]"
         type="button"
         onClick={() => window.location.href = `/produto/${product.id}`}
         aria-label={`Ver detalhes de ${product.name}`}
@@ -122,21 +108,7 @@ export const ProductCard = ({
         Ver Detalhes
       </button>
 
-      <button
-        data-name={`product-addtocart-${product.id}`}
-        className="w-full mt-2 phone:mt-2 p-2 phone:p-3 bg-[#b7c7b7] text-[#222] font-sans text-sm phone:text-base lg:text-lg border-none rounded-md cursor-pointer transition-colors tracking-wide shadow-sm hover:bg-[#495949] hover:text-white"
-        type="button"
-        onClick={() => handleAdd(product.id)}
-      >
-        Adicionar à Mochila
-      </button>
-      <ConfirmationModal
-        open={showConfirmation}
-        onClose={() => setShowConfirmation(false)}
-        productName={product.name}
-        productPrice={product.price ?? product.sale_price}
-        subtotal={lastSubtotal ?? undefined}
-      />
+      {/* botão de adicionar removido conforme solicitado */}
     </div>
   );
 };

@@ -1,0 +1,298 @@
+/* Responsabilidade: Estilos para o CategoryProductCarousel seguindo breakpoints do projeto */
+
+.categoryCarousel {
+  --carousel-gap: 1rem;
+  --carousel-button-size: 3rem;
+  --carousel-button-color: var(--color-primary-green);
+  --carousel-button-hover: var(--color-light-green);
+  
+  position: relative;
+  width: 100%;
+  max-width: var(--max-width-container);
+  margin: 0 auto;
+  background-color: transparent;
+  /* Force remove any shadows that might come from external CSS */
+  box-shadow: none !important;
+}
+
+/* Remove shadows from all child elements as well */
+.categoryCarousel *,
+.categoryCarousel *::before,
+.categoryCarousel *::after {
+  box-shadow: none !important;
+}
+
+.categoryCarousel__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding: 0 calc(1rem + 0.5rem); /* 1rem (container) + 0.5rem (card padding compensation) */
+}
+
+/* Responsive adjustment to match ProductCard padding */
+@media (min-width: 480px) {
+  .categoryCarousel__header {
+    padding: 0 calc(1rem + 0.75rem); /* Match phone:p-3 */
+  }
+}
+
+.categoryCarousel__title {
+  font-family: var(--font-primary);
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--foreground);
+  margin: 0;
+}
+
+.categoryCarousel__viewMore {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0; /* texto apenas, sem fundo */
+  background-color: transparent;
+  color: var(--color-primary-green);
+  text-decoration: none;
+  border-radius: 0; /* sem canto arredondado quando não há fundo */
+  font-family: var(--font-secondary);
+  font-size: 0.875rem;
+  font-weight: 600;
+  transition: color 0.18s ease, transform 0.18s ease;
+}
+
+.categoryCarousel__viewMore:hover {
+  /* Texto com leve destaque no hover; seta anima para a direita */
+  color: color-mix(in srgb, var(--color-primary-green) 86%, #000 14%);
+  transform: translateY(-1px);
+}
+
+.categoryCarousel__viewMore svg {
+  width: 1rem;
+  height: 1rem;
+  transition: transform 0.18s ease, opacity 0.18s ease;
+  opacity: 0.95;
+}
+
+.categoryCarousel__viewMore:hover svg {
+  transform: translateX(3px);
+  opacity: 1;
+}
+
+/* Indicador de foco acessível para usuários de teclado */
+.categoryCarousel__viewMore:focus-visible {
+  outline: 2px solid var(--color-primary-green);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+.categoryCarousel__container {
+  position: relative;
+  padding: 0 1rem;
+}
+
+.categoryCarousel__viewport {
+  overflow: hidden;
+  cursor: grab;
+}
+
+.categoryCarousel__viewport:active {
+  cursor: grabbing;
+}
+
+.categoryCarousel__container_inner {
+  display: flex;
+  gap: var(--carousel-gap);
+  touch-action: pan-y;
+  -webkit-touch-callout: none;
+  -khtml-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.categoryCarousel__slide {
+  flex: 0 0 auto;
+  min-width: 0;
+  width: 203px;
+}
+
+.categoryCarousel__navigation {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+}
+
+.categoryCarousel__navigation--prev {
+  left: -1rem;
+}
+
+.categoryCarousel__navigation--next {
+  right: -1rem;
+}
+
+.categoryCarousel__navButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--carousel-button-size);
+  height: var(--carousel-button-size);
+  background-color: var(--carousel-button-color);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.categoryCarousel__navButton:hover:not(:disabled) {
+  /* Keep the base project color and apply a subtle brightness change
+     so the hover follows the project's color system instead of
+     switching to a different hard-coded green. */
+  background-color: var(--carousel-button-color);
+  transform: translateY(-50%) scale(1.05);
+  filter: brightness(1.08);
+}
+
+.categoryCarousel__navButton:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  /* Keep the vertical centering even when disabled */
+  transform: translateY(-50%);
+}
+
+.categoryCarousel__navButton svg {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.categoryCarousel__loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  font-family: var(--font-secondary);
+  color: var(--foreground);
+}
+
+.categoryCarousel__error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  padding: 2rem;
+  text-align: center;
+  font-family: var(--font-secondary);
+}
+
+.categoryCarousel__error h3 {
+  margin: 0 0 0.5rem;
+  color: #dc2626;
+  font-size: 1.125rem;
+}
+
+.categoryCarousel__error p {
+  margin: 0;
+  color: var(--foreground);
+  opacity: 0.7;
+}
+
+.categoryCarousel__empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  padding: 2rem;
+  text-align: center;
+  font-family: var(--font-secondary);
+  color: var(--foreground);
+  opacity: 0.7;
+}
+
+.categoryCarousel__divider {
+  margin: 2rem 0 0 0;
+  border: none;
+  border-top: 1px solid #e5e7eb;
+  width: 100%;
+}
+
+/* Breakpoints seguindo tailwind.config.js */
+
+/* xs: 350px */
+@media (max-width: 349px) {
+  .categoryCarousel__slide {
+    width: 180px;
+  }
+  
+  .categoryCarousel__title {
+    font-size: 1.25rem;
+  }
+  
+  .categoryCarousel__viewMore {
+    padding: 0.5rem 1rem;
+    font-size: 0.75rem;
+  }
+}
+
+/* phone: 480px */
+@media (min-width: 350px) and (max-width: 479px) {
+  .categoryCarousel__slide {
+    width: 190px;
+  }
+}
+
+/* tablet: 768px */
+@media (min-width: 480px) and (max-width: 767px) {
+  .categoryCarousel__slide {
+    width: 203px;
+  }
+  
+  .categoryCarousel__container {
+    padding: 0 1.5rem;
+  }
+}
+
+/* lg: 1050px */
+@media (min-width: 768px) and (max-width: 1049px) {
+  .categoryCarousel__navigation--prev {
+    left: 0;
+  }
+  
+  .categoryCarousel__navigation--next {
+    right: 0;
+  }
+  
+  .categoryCarousel__container {
+    padding: 0 4rem;
+  }
+}
+
+/* xl: 1280px */
+@media (min-width: 1050px) and (max-width: 1279px) {
+  .categoryCarousel__navigation--prev {
+    left: 0.5rem;
+  }
+  
+  .categoryCarousel__navigation--next {
+    right: 0.5rem;
+  }
+  
+  .categoryCarousel__container {
+    padding: 0 4rem;
+  }
+}
+
+/* 2xl: 1536px+ */
+@media (min-width: 1280px) {
+  .categoryCarousel__navigation--prev {
+    left: 1rem;
+  }
+  
+  .categoryCarousel__navigation--next {
+    right: 1rem;
+  }
+  
+  .categoryCarousel__container {
+    padding: 0 5rem;
+  }
+}

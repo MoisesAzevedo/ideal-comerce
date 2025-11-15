@@ -2,14 +2,23 @@
 
 import React from "react";
 import { ProductCard } from "../ProductCard/ProductCard";
-import useProducts from "./hooks/useProducts";
+import { usePaginatedProducts } from "./hooks/usePaginatedProducts";
 import { useProductNavigation } from "./hooks/useProductNavigation";
+import { LoadMoreButton } from "./components/LoadMoreButton";
 
 const Products = () => {
-  const { products, loading, error } = useProducts({ perPage: 16 });
+  const { 
+    products, 
+    loading, 
+    error, 
+    hasMore, 
+    loadMore, 
+    totalProducts 
+  } = usePaginatedProducts({ perPage: 20 });
+  
   const { buyProduct } = useProductNavigation();
 
-  // Exibe os produtos retornados pela API (já paginados)
+  // Exibe todos os produtos acumulados (paginação incremental)
   const visibleProducts = products ?? [];
 
   // Divide em linhas de 4 produtos
@@ -24,19 +33,19 @@ const Products = () => {
 
   return (
     <div className="flex flex-col items-center w-full mt-16">
-      <h2 className="text-3xl font-bold mb-8 mt-8 uppercase pb-3 w-full text-center">
-        PRODUTOS EM DESTAQUE
-      </h2>
 
-      {loading && (
+      {/* Estado de loading inicial */}
+      {loading && visibleProducts.length === 0 && (
         <div className="w-full text-center py-8 text-gray-500">Carregando produtos...</div>
       )}
 
+      {/* Estado de erro */}
       {error && (
         <div className="w-full text-center py-8 text-red-500">Erro ao carregar produtos: {error}</div>
       )}
 
-      {!loading && !error && (
+      {/* Grid de produtos */}
+      {!error && visibleProducts.length > 0 && (
         <div className="flex flex-col gap-8 justify-center w-full pb-8">
           {rows.map((row, idx) => (
             <div key={idx} className="flex flex-row gap-8 justify-center w-full">
@@ -50,6 +59,17 @@ const Products = () => {
             </div>
           ))}
         </div>
+      )}
+
+      {/* Botão "Ver mais" */}
+      {!error && visibleProducts.length > 0 && (
+        <LoadMoreButton
+          onClick={loadMore}
+          loading={loading}
+          hasMore={hasMore}
+          totalProducts={totalProducts}
+          currentProducts={visibleProducts.length}
+        />
       )}
     </div>
   );

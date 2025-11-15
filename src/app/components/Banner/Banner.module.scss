@@ -12,6 +12,8 @@
   margin: 0;
   position: relative;
   overflow: hidden;
+  max-width: 100vw;
+  box-sizing: border-box;
 }
 
 .bannerBg {

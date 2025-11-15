@@ -1,0 +1,86 @@
+/**
+ * Styles: LoadMoreButton
+ * Responsabilidade única: Estilos para o botão de carregar mais produtos
+ */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin: 2rem 0;
+  width: 100%;
+}
+
+.loadMoreButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1rem 2rem;
+  background-color: #495949; /* Cor padrão do projeto */
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 150px;
+  
+  &:hover:not(:disabled) {
+    background-color: #3d4a3d;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(73, 89, 73, 0.3);
+  }
+  
+  &:active:not(:disabled) {
+    transform: translateY(0);
+    box-shadow: 0 2px 6px rgba(73, 89, 73, 0.3);
+  }
+  
+  &:disabled {
+    background-color: #9ca3af;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+  }
+  
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(73, 89, 73, 0.3);
+  }
+}
+
+.buttonText {
+  font-family: inherit;
+  white-space: nowrap;
+}
+
+.arrow {
+  transition: transform 0.3s ease;
+  
+  .loadMoreButton:hover:not(:disabled) & {
+    transform: translateY(2px);
+  }
+}
+
+.counter {
+  font-size: 0.875rem;
+  color: #6b7280;
+  margin: 0;
+  text-align: center;
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+  .loadMoreButton {
+    padding: 0.875rem 1.5rem;
+    font-size: 0.9rem;
+    min-width: 120px;
+  }
+  
+  .counter {
+    font-size: 0.8rem;
+  }
+}

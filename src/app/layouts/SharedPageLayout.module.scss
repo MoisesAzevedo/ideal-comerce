@@ -4,4 +4,17 @@
   width: 100%;
   max-width: 1186px;
   margin: 0 auto;
+  padding: 0 1rem;
+  overflow-x: hidden;
+  
+  /* Ajustes específicos para telas médias onde o problema ocorre */
+  @media (min-width: 1024px) and (max-width: 1217px) {
+    max-width: calc(100vw - 2rem);
+    padding: 0 2rem;
+  }
+  
+  /* Para telas maiores, remover o padding lateral */
+  @media (min-width: 1218px) {
+    padding: 0;
+  }
 }

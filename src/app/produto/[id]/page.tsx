@@ -6,11 +6,15 @@
 'use client';
 
 import { useProduct } from './hooks/useProduct';
+import { useRelatedProducts } from './hooks/useRelatedProducts';
 import { ProductDetails } from './components/ProductDetails/ProductDetails';
 import { ProductAttributes } from './components/ProductAttributes/ProductAttributes';
 import { ProductNotFound } from './components/ProductNotFound/ProductNotFound';
 import { ProductLoading } from './components/ProductLoading/ProductLoading';
 import { ThumbCarouselEmbla } from '../../components/ThumbCarouselEmbla';
+import { CategoryProductCarousel } from '../../components/CategoryProductCarousel';
+import Products from '../../components/Product_pagination/Products';
+import { getCategoryDisplayInfo } from './utils/categoryUtils';
 import SharedPageLayout from '../../layouts/SharedPageLayout';
 import styles from './ProductPage.module.scss';
 import '../../components/ThumbCarouselEmbla/css/embla.css';
@@ -21,6 +25,25 @@ interface ProductPageProps {
 
 export default function ProductPage({ params }: ProductPageProps) {
   const { product, loading, error } = useProduct(params);
+
+  // Hook para verificar se há produtos suficientes para exibir o carrossel
+  const { shouldShowCarousel, isLoading: relatedLoading } = useRelatedProducts({
+    category: product?.category_id || product?.category || '',
+    excludeProductId: product?.id || '',
+    minProductsToShow: 2 // Mínimo de 2 produtos para exibir o carrossel
+  });
+
+  // Obter informações da categoria para exibição
+  const categoryInfo = product ? getCategoryDisplayInfo(product) : null;
+
+  // Debug logs
+  console.log('🔍 DEBUG - Produto:', {
+    id: product?.id,
+    name: product?.name,
+    category_id: product?.category_id,
+    category: product?.category,
+    categoryInfo
+  });
 
   if (loading) {
     return (
@@ -75,6 +98,26 @@ export default function ProductPage({ params }: ProductPageProps) {
             <ProductAttributes attributes={product.attributes} />
           </section>
         )}
+
+        {/* Carrossel de produtos relacionados da mesma categoria */}
+        {(product.category_id || product.category) && shouldShowCarousel && !relatedLoading && (
+          <section data-name="related-products-section" className="mt-12">
+            <CategoryProductCarousel 
+              category={product.category_id || product.category || ''}
+              title={categoryInfo ? `Mais produtos em ${categoryInfo.categoryName}` : 'Você Também Pode Gostar'}
+              maxProducts={12}
+              excludeProductId={product.id}
+              showViewMoreLink={true}
+              viewMoreUrl={categoryInfo ? `/categoria/${categoryInfo.categorySlug}` : '/produtos'}
+              className="bg-white rounded-lg shadow-sm p-6"
+            />
+          </section>
+        )}
+
+        {/* Produtos em destaque - sempre exibido, independente do carrossel de categoria */}
+        <section data-name="featured-products-section" className="mt-12">
+          <Products />
+        </section>
       </div>
     </SharedPageLayout>
   );

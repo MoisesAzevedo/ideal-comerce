@@ -1,5 +1,6 @@
 'use client';
 import React from 'react';
+import Image from 'next/image';
 import SharedPageLayout from '../layouts/SharedPageLayout';
 import { useFavorites } from './favorites';
 import { products } from '../../../db';
@@ -23,6 +24,15 @@ export default function FavoritesPage() {
 
         {favoriteProducts.length === 0 ? (
           <div className="text-center py-20">
+            <div className="mb-6">
+              <Image
+                src="/img/coturno-medalha.png"
+                alt="Favoritos vazios"
+                width={150}
+                height={150}
+                className="mx-auto"
+              />
+            </div>
             <p className="mb-4">Você ainda não adicionou favoritos.</p>
             <Link
               href="/"

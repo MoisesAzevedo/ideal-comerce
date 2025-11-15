@@ -9,6 +9,7 @@ export function useProducts(options?: { page?: number; perPage?: number; categor
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const [meta, setMeta] = useState<ProductsApiResponse['meta'] | null>(null);
 
 
   const fetchData = useCallback(async () => {
@@ -18,6 +19,7 @@ export function useProducts(options?: { page?: number; perPage?: number; categor
     try {
       const res = await fetchFeaturedProducts(options);
       setProducts(res.data ?? []);
+      setMeta(res.meta ?? null);
     } catch (err: any) {
       setError(err?.message ?? "Erro ao buscar produtos");
     } finally {
@@ -29,7 +31,7 @@ export function useProducts(options?: { page?: number; perPage?: number; categor
     fetchData();
   }, [fetchData]);
 
-  return { products, loading, error } as const;
+  return { products, loading, error, meta } as const;
 }
 
 export default useProducts;
