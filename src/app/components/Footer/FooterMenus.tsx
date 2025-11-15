@@ -2,6 +2,9 @@ import React from "react";
 import { Facebook, Instagram, Twitter, Youtube } from "lucide-react";
 import styles from "./FooterMenus.module.scss";
 
+// Log para diagnosticar carregamento do Footer
+console.log('🎯 Footer: Componente carregado', { styles, stylesKeys: Object.keys(styles || {}) });
+
 const FooterMenus = () => (
   <section className={styles.footerMenus}>
     <div className={styles.menusWrapper}>

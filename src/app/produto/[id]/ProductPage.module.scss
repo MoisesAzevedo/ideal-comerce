@@ -1,0 +1,22 @@
+/* Page: /produto/[id] - Product Layout Styles */
+
+.productContent {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  width: 100%;
+}
+
+@media (min-width: 1024px) { /* lg breakpoint */
+  .productContent {
+    grid-template-columns: calc(50% - 50px) calc(50% + 50px);
+  }
+}
+
+.productImagesSection {
+  /* Primeira parte do grid - 50px mais estreita */
+}
+
+.productDetailsSection {
+  /* Segunda parte do grid - 50px mais larga */
+}

@@ -26,7 +26,12 @@ export const featuredProducts: Product[] = [
       "https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=800&q=80",
        "https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=800&q=80",
         "https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=800&q=80",
-      "https://images.unsplash.com/photo-1594938291221-94f18fb5bef8?w=800&q=80"
+      "https://images.unsplash.com/photo-1594938291221-94f18fb5bef8?w=800&q=80",
+         "https://images.unsplash.com/photo-1542272604-787c3835535d?w=800&q=80",
+      "https://images.unsplash.com/photo-1473966968600-fa801b869a1a?w=800&q=80",
+      "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=800&q=80",
+      "https://images.unsplash.com/photo-1475178626620-a4d074967452?w=800&q=80",
+      "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=800&q=80"
     ],
     attributes: {
       material: "100% Algodão",
@@ -76,6 +81,11 @@ export const featuredProducts: Product[] = [
     length_cm: 40.0,
     images: [
       "https://images.unsplash.com/photo-1542272604-787c3835535d?w=800&q=80",
+      "https://images.unsplash.com/photo-1473966968600-fa801b869a1a?w=800&q=80",
+      "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=800&q=80",
+      "https://images.unsplash.com/photo-1475178626620-a4d074967452?w=800&q=80",
+      "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=800&q=80",
+         "https://images.unsplash.com/photo-1542272604-787c3835535d?w=800&q=80",
       "https://images.unsplash.com/photo-1473966968600-fa801b869a1a?w=800&q=80",
       "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=800&q=80",
       "https://images.unsplash.com/photo-1475178626620-a4d074967452?w=800&q=80",

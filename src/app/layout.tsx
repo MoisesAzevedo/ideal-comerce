@@ -5,6 +5,9 @@ import './globals.css';
 import CartProvider from './Carrinho/cart';
 import FavoritesProvider from './Favoritos/favorites';
 
+// Log para diagnosticar carregamento do RootLayout
+console.log('🎯 RootLayout: Layout principal carregado');
+
 const teko = Teko({
   subsets: ['latin'],
   weight: ['300', '400', '500', '600', '700'],
@@ -26,6 +29,31 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR" className={teko.variable}>
+      <head>
+        <script dangerouslySetInnerHTML={{
+          __html: `
+            console.log('🎯 RootLayout: HTML carregado');
+            window.addEventListener('DOMContentLoaded', function() {
+              console.log('🎯 DOMContentLoaded: Verificando CSS');
+              const rootStyles = getComputedStyle(document.documentElement);
+              const cssLoaded = rootStyles.getPropertyValue('--debug-css-loaded');
+              console.log('🎯 CSS Global carregado:', cssLoaded ? 'SIM' : 'NÃO');
+              
+              // Verificar se estilos dos módulos estão aplicados
+              setTimeout(() => {
+                const headerEl = document.querySelector('[data-name="main-header"]');
+                const footerEl = document.querySelector('[data-name="main-footer"]');
+                if (headerEl) {
+                  console.log('🎯 Header styles:', getComputedStyle(headerEl));
+                }
+                if (footerEl) {
+                  console.log('🎯 Footer styles:', getComputedStyle(footerEl));
+                }
+              }, 1000);
+            });
+          `
+        }} />
+      </head>
       <body className="antialiased">
         <CartProvider>
           <FavoritesProvider>

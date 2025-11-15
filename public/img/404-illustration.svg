@@ -1,0 +1,21 @@
+<svg width="400" height="300" viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background Circle -->
+  <circle cx="200" cy="150" r="120" fill="#f8f9fa" stroke="#e9ecef" stroke-width="2"/>
+  
+  <!-- 404 Text -->
+  <text x="200" y="170" text-anchor="middle" font-family="Arial, sans-serif" font-size="48" font-weight="bold" fill="#495949">404</text>
+  
+  <!-- Magnifying Glass -->
+  <circle cx="160" cy="110" r="25" fill="none" stroke="#6c757d" stroke-width="3"/>
+  <line x1="180" y1="130" x2="195" y2="145" stroke="#6c757d" stroke-width="3" stroke-linecap="round"/>
+  
+  <!-- Question Mark -->
+  <circle cx="240" cy="110" r="2" fill="#adb5bd"/>
+  <path d="M240 95 Q240 85 250 85 Q260 85 260 95 Q260 105 250 110 L250 115" stroke="#adb5bd" stroke-width="2" fill="none" stroke-linecap="round"/>
+  
+  <!-- Decorative Elements -->
+  <circle cx="120" cy="80" r="3" fill="#b7c7b7" opacity="0.6"/>
+  <circle cx="280" cy="90" r="4" fill="#b7c7b7" opacity="0.4"/>
+  <circle cx="100" cy="220" r="2" fill="#b7c7b7" opacity="0.8"/>
+  <circle cx="300" cy="210" r="3" fill="#b7c7b7" opacity="0.5"/>
+</svg>

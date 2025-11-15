@@ -11,6 +11,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { Menu } from "@/icons";
 
+// Log para diagnosticar carregamento do Header
+console.log('🎯 Header: Componente carregado', { styles, stylesKeys: Object.keys(styles || {}) });
+
 interface HeaderProps {
   showNavigation?: boolean;
 }

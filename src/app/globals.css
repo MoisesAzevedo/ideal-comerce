@@ -1,6 +1,8 @@
 @import "tailwindcss";
 
+/* Log para verificar se o globals.css está sendo carregado */
 :root {
+  --debug-css-loaded: true; /* Indicador de que o CSS foi carregado */
   --background: #e9e9e9;
   --foreground: #171717;
   --svg-color: #f5f5f5;

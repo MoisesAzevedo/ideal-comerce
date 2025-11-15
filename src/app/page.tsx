@@ -5,8 +5,7 @@ import InformativeBanners from "./components/InformativeBanner/InformativeBanner
 
 export default function Home() {
   return (
-    <SharedPageLayout showTopFrame={true}>
-      <Banner />
+    <SharedPageLayout showTopFrame={true} banner={<Banner />}>
       <InformativeBanners />
       <Products />
     </SharedPageLayout>
