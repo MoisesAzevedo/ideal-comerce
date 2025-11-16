@@ -18,7 +18,17 @@ export function FavoritesProvider({ children }: { children: React.ReactNode }) {
     try {
       if (typeof window === 'undefined') return [];
       const raw = localStorage.getItem('favoriteIds');
-      return raw ? JSON.parse(raw) : [];
+      if (!raw) return [];
+      const parsed = JSON.parse(raw);
+      if (!Array.isArray(parsed)) return [];
+      // normalize values to numbers for robustness (accept strings or numbers)
+      return parsed
+        .map((v: unknown) => {
+          if (typeof v === 'string') return v;
+          if (typeof v === 'number') return String(v);
+          return null;
+        })
+        .filter((s: string | null): s is string => s !== null);
     } catch {
       return [];
     }
