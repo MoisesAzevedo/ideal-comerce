@@ -6,6 +6,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { Product } from '../../../../../../db/types';
 import { getAssetPath } from '../../../../../utils/paths';
@@ -21,6 +22,7 @@ interface ProductActionsProps {
 }
 
 export function ProductActions({ product, stockQuantity }: ProductActionsProps) {
+  const router = useRouter();
   const { addToCart, cartIds } = useCart();
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [lastSubtotal, setLastSubtotal] = useState<number | null>(null);
@@ -42,6 +44,18 @@ export function ProductActions({ product, stockQuantity }: ProductActionsProps) 
     const subtotal = items.reduce((s, it) => s + (it.product.price ?? it.product.sale_price) * it.qty, 0);
     setLastSubtotal(subtotal);
     setShowConfirmation(true);
+  };
+
+  const handleBuyNow = () => {
+    if (isOutOfStock) return;
+
+    // Adicionar produto ao carrinho
+    handleAddToCart();
+    
+    // Redirecionar diretamente para o checkout
+    setTimeout(() => {
+      router.push('/Checkout');
+    }, 100); // Pequeno delay para garantir que o produto seja adicionado
   };
 
   const handleQuantityChange = (newQuantity: number) => {
@@ -90,6 +104,7 @@ export function ProductActions({ product, stockQuantity }: ProductActionsProps) 
           {/* Botão comprar agora */}
           <button
             data-name="buy-now-button"
+            onClick={handleBuyNow}
             className={`${styles.buyNowButton} ${
               isOutOfStock ? styles.disabledButton : ''
             }`}

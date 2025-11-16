@@ -1,0 +1,1 @@
+export { useBreadcrumb, type UseBreadcrumbOptions } from './useBreadcrumb';

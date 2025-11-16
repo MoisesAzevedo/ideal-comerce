@@ -3050,6 +3050,249 @@ export const featuredProducts: Product[] = [
     installmentCount: 10,
     installmentValue: 29.99,
     percentual_discount: 18.7
+  },
+  // Novos produtos Calças & Shorts
+  {
+    id: "p1b2c3d0-0007-0000-0000-000000000001",
+    sku: "CAL-JEA-007",
+    name: "Calça Jeans Slim Masculina",
+    slug: "calca-jeans-slim-masculina",
+    description: "Calça jeans masculina com corte slim, tecido de alta qualidade com elastano para maior conforto e mobilidade. Lavagem escura moderna.",
+    brand_id: null,
+    category_id: "a1b2c3d0-1002-0000-0000-000000000002", // Calças & Shorts
+    cost_price: 65.00,
+    sale_price: 129.90,
+    discount_price: 99.90,
+    currency: "BRL",
+    stock_quantity: 80,
+    width_cm: 30.0,
+    height_cm: 3.0,
+    length_cm: 40.0,
+    images: [
+      "https://images.unsplash.com/photo-1542272604-787c3835535d?w=800&q=80",
+      "https://images.unsplash.com/photo-1473966968600-fa801b869a1a?w=800&q=80",
+      "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=800&q=80"
+    ],
+    attributes: {
+      material: "98% Algodão, 2% Elastano",
+      corte: "Slim",
+      lavagem: "Escura",
+      estilo: "Casual"
+    },
+    sizes: [
+      { value: "36", label: "36", available: true },
+      { value: "38", label: "38", available: true },
+      { value: "40", label: "40", available: true },
+      { value: "42", label: "42", available: true },
+      { value: "44", label: "44", available: true }
+    ],
+    colors: [
+      { value: "azul-escuro", label: "Azul Escuro", hex: "#1e3a8a", available: true },
+      { value: "preto", label: "Preto", hex: "#000000", available: true }
+    ],
+    status: 'active' as const,
+    created_at: new Date("2024-11-15T10:00:00Z"),
+    updated_at: new Date("2025-11-15T08:00:00Z"),
+    category: "Calças & Shorts",
+    price: 99.90,
+    oldPrice: 129.90,
+    installmentCount: 5,
+    installmentValue: 19.98,
+    percentual_discount: 23.1
+  },
+  {
+    id: "p1b2c3d0-0008-0000-0000-000000000002",
+    sku: "SHO-TAC-008",
+    name: "Shorts Tactel Esportivo",
+    slug: "shorts-tactel-esportivo",
+    description: "Shorts masculino em tactel, ideal para atividades físicas e esportes. Tecido leve, respirável e de secagem rápida.",
+    brand_id: null,
+    category_id: "a1b2c3d0-1002-0000-0000-000000000002", // Calças & Shorts
+    cost_price: 25.00,
+    sale_price: 59.90,
+    discount_price: 45.90,
+    currency: "BRL",
+    stock_quantity: 120,
+    width_cm: 25.0,
+    height_cm: 2.0,
+    length_cm: 30.0,
+    images: [
+      "https://images.unsplash.com/photo-1591195853828-11db59a44f6b?w=800&q=80",
+      "https://images.unsplash.com/photo-1606890737304-57a1ca8a5b62?w=800&q=80",
+      "https://images.unsplash.com/photo-1594938291221-94f18fb5bef8?w=800&q=80"
+    ],
+    attributes: {
+      material: "100% Poliéster Tactel",
+      corte: "Solto",
+      comprimento: "Médio",
+      estilo: "Esportivo"
+    },
+    sizes: [
+      { value: "p", label: "P", available: true },
+      { value: "m", label: "M", available: true },
+      { value: "g", label: "G", available: true },
+      { value: "gg", label: "GG", available: true }
+    ],
+    colors: [
+      { value: "preto", label: "Preto", hex: "#000000", available: true },
+      { value: "azul-marinho", label: "Azul Marinho", hex: "#000080", available: true },
+      { value: "cinza", label: "Cinza", hex: "#808080", available: true }
+    ],
+    status: 'active' as const,
+    created_at: new Date("2024-11-15T10:00:00Z"),
+    updated_at: new Date("2025-11-15T08:00:00Z"),
+    category: "Calças & Shorts",
+    price: 45.90,
+    oldPrice: 59.90,
+    installmentCount: 3,
+    installmentValue: 15.30,
+    percentual_discount: 23.4
+  },
+  {
+    id: "p1b2c3d0-0009-0000-0000-000000000003",
+    sku: "CAL-SAR-009",
+    name: "Calça Sarja Chino Masculina",
+    slug: "calca-sarja-chino-masculina",
+    description: "Calça masculina em sarja chino, corte reto moderno. Perfeita para looks casuais e semi-formais. Tecido macio e resistente.",
+    brand_id: null,
+    category_id: "a1b2c3d0-1002-0000-0000-000000000002", // Calças & Shorts
+    cost_price: 55.00,
+    sale_price: 109.90,
+    discount_price: 89.90,
+    currency: "BRL",
+    stock_quantity: 60,
+    width_cm: 30.0,
+    height_cm: 3.0,
+    length_cm: 40.0,
+    images: [
+      "https://images.unsplash.com/photo-1473966968600-fa801b869a1a?w=800&q=80",
+      "https://images.unsplash.com/photo-1594938291221-94f18fb5bef8?w=800&q=80",
+      "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=800&q=80"
+    ],
+    attributes: {
+      material: "100% Algodão Sarja",
+      corte: "Reto",
+      modelo: "Chino",
+      estilo: "Casual/Social"
+    },
+    sizes: [
+      { value: "36", label: "36", available: true },
+      { value: "38", label: "38", available: true },
+      { value: "40", label: "40", available: true },
+      { value: "42", label: "42", available: true },
+      { value: "44", label: "44", available: true }
+    ],
+    colors: [
+      { value: "bege", label: "Bege", hex: "#f5f5dc", available: true },
+      { value: "verde-oliva", label: "Verde Oliva", hex: "#808000", available: true },
+      { value: "azul-marinho", label: "Azul Marinho", hex: "#000080", available: true }
+    ],
+    status: 'active' as const,
+    created_at: new Date("2024-11-15T10:00:00Z"),
+    updated_at: new Date("2025-11-15T08:00:00Z"),
+    category: "Calças & Shorts",
+    price: 89.90,
+    oldPrice: 109.90,
+    installmentCount: 4,
+    installmentValue: 22.48,
+    percentual_discount: 18.2
+  },
+  {
+    id: "p1b2c3d0-0010-0000-0000-000000000004",
+    sku: "BER-MOL-010",
+    name: "Bermuda Moletom Masculina",
+    slug: "bermuda-moletom-masculina",
+    description: "Bermuda masculina em moletom, ideal para momentos de relaxamento e atividades casuais. Tecido macio com cordão ajustável.",
+    brand_id: null,
+    category_id: "a1b2c3d0-1002-0000-0000-000000000002", // Calças & Shorts
+    cost_price: 35.00,
+    sale_price: 79.90,
+    discount_price: 59.90,
+    currency: "BRL",
+    stock_quantity: 90,
+    width_cm: 28.0,
+    height_cm: 2.5,
+    length_cm: 35.0,
+    images: [
+      "https://images.unsplash.com/photo-1594938291221-94f18fb5bef8?w=800&q=80",
+      "https://images.unsplash.com/photo-1606890737304-57a1ca8a5b62?w=800&q=80",
+      "https://images.unsplash.com/photo-1591195853828-11db59a44f6b?w=800&q=80"
+    ],
+    attributes: {
+      material: "80% Algodão, 20% Poliéster",
+      corte: "Solto",
+      modelo: "Moletom",
+      estilo: "Casual"
+    },
+    sizes: [
+      { value: "p", label: "P", available: true },
+      { value: "m", label: "M", available: true },
+      { value: "g", label: "G", available: true },
+      { value: "gg", label: "GG", available: true }
+    ],
+    colors: [
+      { value: "cinza-mescla", label: "Cinza Mescla", hex: "#a9a9a9", available: true },
+      { value: "preto", label: "Preto", hex: "#000000", available: true },
+      { value: "azul-marinho", label: "Azul Marinho", hex: "#000080", available: true }
+    ],
+    status: 'active' as const,
+    created_at: new Date("2024-11-15T10:00:00Z"),
+    updated_at: new Date("2025-11-15T08:00:00Z"),
+    category: "Calças & Shorts",
+    price: 59.90,
+    oldPrice: 79.90,
+    installmentCount: 3,
+    installmentValue: 19.97,
+    percentual_discount: 25.0
+  },
+  {
+    id: "p1b2c3d0-0011-0000-0000-000000000005",
+    sku: "CAL-LEG-011",
+    name: "Calça Legging Feminina",
+    slug: "calca-legging-feminina",
+    description: "Calça legging feminina de alta qualidade, tecido com elastano para máximo conforto e flexibilidade. Ideal para academia e uso diário.",
+    brand_id: null,
+    category_id: "a1b2c3d0-1002-0000-0000-000000000002", // Calças & Shorts
+    cost_price: 30.00,
+    sale_price: 69.90,
+    discount_price: 49.90,
+    currency: "BRL",
+    stock_quantity: 110,
+    width_cm: 25.0,
+    height_cm: 2.0,
+    length_cm: 38.0,
+    images: [
+      "https://images.unsplash.com/photo-1594938291221-94f18fb5bef8?w=800&q=80",
+      "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=800&q=80",
+      "https://images.unsplash.com/photo-1473966968600-fa801b869a1a?w=800&q=80"
+    ],
+    attributes: {
+      material: "92% Poliamida, 8% Elastano",
+      corte: "Ajustado",
+      modelo: "Legging",
+      estilo: "Esportivo/Casual"
+    },
+    sizes: [
+      { value: "pp", label: "PP", available: true },
+      { value: "p", label: "P", available: true },
+      { value: "m", label: "M", available: true },
+      { value: "g", label: "G", available: true },
+      { value: "gg", label: "GG", available: true }
+    ],
+    colors: [
+      { value: "preto", label: "Preto", hex: "#000000", available: true },
+      { value: "azul-marinho", label: "Azul Marinho", hex: "#000080", available: true },
+      { value: "grafite", label: "Grafite", hex: "#2f2f2f", available: true }
+    ],
+    status: 'active' as const,
+    created_at: new Date("2024-11-15T10:00:00Z"),
+    updated_at: new Date("2025-11-15T08:00:00Z"),
+    category: "Calças & Shorts",
+    price: 49.90,
+    oldPrice: 69.90,
+    installmentCount: 3,
+    installmentValue: 16.63,
+    percentual_discount: 28.6
   }
 ];
 
@@ -3069,13 +3312,37 @@ export function getProductsByCategory(categoryIdOrName: string): Product[] {
   });
 }
 
+// Helper function for multiple categories (comma-separated)
+export function getProductsByCategories(categoriesString: string): Product[] {
+  if (!categoriesString) return featuredProducts;
+  
+  const categoryIds = categoriesString.split(',').map(id => id.trim()).filter(Boolean);
+  
+  if (categoryIds.length === 0) return featuredProducts;
+  
+  return featuredProducts.filter(product => {
+    return categoryIds.some(categoryId => {
+      // Primeiro tenta match com category_id (UUID)
+      if (product.category_id === categoryId) {
+        return true;
+      }
+      
+      // Fallback para compatibilidade: busca por nome/slug da categoria
+      return (
+        product.category?.toLowerCase().includes(categoryId.toLowerCase()) ||
+        product.name.toLowerCase().includes(categoryId.toLowerCase())
+      );
+    });
+  });
+}
+
 export function getProductsByCategoryExcluding(categoryIdOrName: string, excludeProductId: string): Product[] {
   return getProductsByCategory(categoryIdOrName).filter(product => product.id !== excludeProductId);
 }
 
-export function searchProducts(query: string): Product[] {
+export function searchProducts(query: string, products: Product[] = featuredProducts): Product[] {
   const searchTerm = query.toLowerCase();
-  return featuredProducts.filter(product =>
+  return products.filter(product =>
     product.name.toLowerCase().includes(searchTerm) ||
     product.description?.toLowerCase().includes(searchTerm) ||
     product.category?.toLowerCase().includes(searchTerm) ||

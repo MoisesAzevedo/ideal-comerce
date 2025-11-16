@@ -10,6 +10,7 @@ export interface ProductsQueryParams {
   page?: number;
   perPage?: number;
   category?: string;
+  size?: string;
   q?: string;
 }
 
@@ -28,6 +29,7 @@ export class HttpProductsService implements ProductsService {
     if (params.page) searchParams.set('page', params.page.toString());
     if (params.perPage) searchParams.set('perPage', params.perPage.toString());
     if (params.category) searchParams.set('category', params.category);
+    if (params.size) searchParams.set('size', params.size);
     if (params.q) searchParams.set('q', params.q);
 
     const url = `${this.baseUrl}/products${searchParams.toString() ? `?${searchParams}` : ''}`;

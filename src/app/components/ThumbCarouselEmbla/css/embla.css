@@ -1,7 +1,6 @@
 .embla {
   max-width: 48rem;
   margin: auto;
-  padding: 0 1rem;
   --slide-height: 550px;
   --slide-spacing: 1rem;
   --slide-size: 100%;
@@ -11,15 +10,10 @@
   --text-body: #000;
 }
 
-@media (max-width: 768px) {
+/* Altura reduzida para telas menores que 480px (phone) */
+@media (max-width: 479px) {
   .embla {
-    padding: 0 0.75rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .embla {
-    padding: 0 0.5rem;
+    --slide-height: 400px;
   }
 }
 .embla__viewport {
@@ -49,6 +43,13 @@
   --thumbs-slide-spacing: 0.8rem;
   --thumbs-slide-height: 6rem;
   margin-top: var(--thumbs-slide-spacing);
+}
+
+/* Altura reduzida para os botões das thumbnails em telas menores que 480px (phone) */
+@media (max-width: 479px) {
+  .embla-thumbs {
+    --thumbs-slide-height: 60px;
+  }
 }
 .embla-thumbs__viewport {
   overflow: hidden;

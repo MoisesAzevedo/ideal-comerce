@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from "./Header.module.scss";
 import SearchInput from "./local-components/SearchInput/SearchInput";
 import UserActions from "./local-components/UserActions/UserActions";
@@ -20,11 +20,40 @@ interface HeaderProps {
 
 export default function Header({ showNavigation = true }: HeaderProps) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isHydrated, setIsHydrated] = useState(false);
+
+  useEffect(() => {
+    setIsHydrated(true);
+  }, []);
 
   return (
     <>
-      <header className={styles.header} data-name="header">
-        <div className={styles.content} data-name="header-content">
+      <header 
+        className={styles.header} 
+        data-name="header"
+        style={!isHydrated ? {
+          width: '100%',
+          minHeight: '60px',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          background: 'linear-gradient(90deg, #0d1a0e 0%, #1d2d1e 25.48%)',
+          padding: '0 1rem',
+          boxSizing: 'border-box'
+        } : {}}
+      >
+        <div 
+          className={styles.content} 
+          data-name="header-content"
+          style={!isHydrated ? {
+            display: 'flex',
+            width: '100%',
+            maxWidth: '1186px',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            gap: '1rem'
+          } : {}}
+        >
           {/* Burger Menu - Visível apenas em telas menores que tablet */}
           <button 
             className={styles.burgerMenu} 

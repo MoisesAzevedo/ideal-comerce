@@ -9,8 +9,11 @@ export default {
     screens: {
       'xs': '350px',       // Dispositivos muito pequenos
       'phone': '480px',    // Breakpoint customizado para dispositivos móveis
+      'sm700': '700px',    // Breakpoint customizado para 700px
       'tablet': '768px',   // Tablets
+      'desktop': '1024px', // Desktop pequeno
       'lg': '1050px',      // Laptops
+      'wide': '1250px',    // Desktop médio
       'xl': '1280px',      // Desktops
       '2xl': '1536px',     // Telas grandes
     },

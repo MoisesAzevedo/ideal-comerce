@@ -1,12 +1,18 @@
-import React from "react";
+'use client';
+
+import React, { useState, useEffect } from "react";
 import { Facebook, Instagram, Twitter, Youtube } from "lucide-react";
 import styles from "./FooterMenus.module.scss";
 
-// Log para diagnosticar carregamento do Footer
-console.log('🎯 Footer: Componente carregado', { styles, stylesKeys: Object.keys(styles || {}) });
+const FooterMenus = () => {
+  const [isHydrated, setIsHydrated] = useState(false);
 
-const FooterMenus = () => (
-  <section className={styles.footerMenus}>
+  useEffect(() => {
+    setIsHydrated(true);
+  }, []);
+
+  return (
+    <section className={styles.footerMenus}>
     <div className={styles.menusWrapper}>
       <div className={styles.menu}>
         <ul className={styles.menuList}>
@@ -170,6 +176,7 @@ const FooterMenus = () => (
       </div>
     </div>
   </section>
-);
+  );
+};
 
 export default FooterMenus;

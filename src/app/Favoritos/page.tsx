@@ -6,17 +6,23 @@ import { useFavorites } from './favorites';
 import { products } from '../../../db';
 import FavoriteItemRow from './Components/FavoriteItemRow';
 import Link from 'next/link';
+import { Breadcrumb, useBreadcrumb } from '../components';
 
 export default function FavoritesPage() {
   const { favoriteIds, clearFavorites } = useFavorites();
+  const breadcrumbItems = useBreadcrumb();
 
   const favoriteProducts = React.useMemo(
     () => products.filter((p) => favoriteIds.includes(p.id)),
     [favoriteIds],
   );
 
+  const breadcrumbComponent = (
+    <Breadcrumb items={breadcrumbItems} className="max-w-container mx-auto" />
+  );
+
   return (
-    <SharedPageLayout>
+    <SharedPageLayout breadcrumb={breadcrumbComponent}>
       <div className="container mx-auto py-8 px-4 phone:px-6">
         <h1 className="text-2xl phone:text-3xl font-bold mb-6">
           Seus Favoritos

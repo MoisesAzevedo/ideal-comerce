@@ -10,12 +10,15 @@ import '../css/embla.css'
 
 const OPTIONS: EmblaOptionsType = {}
 const SLIDE_COUNT = 10
-const SLIDES = Array.from(Array(SLIDE_COUNT).keys())
+// Criando imagens fictícias para o exemplo
+const MOCK_IMAGES = Array.from(Array(SLIDE_COUNT).keys()).map(
+  (index) => `/img/produto-${index + 1}.jpg`
+)
 
 const App: React.FC = () => (
   <>
     <Header />
-    <EmblaCarousel slides={SLIDES} options={OPTIONS} />
+    <EmblaCarousel images={MOCK_IMAGES} options={OPTIONS} />
     <Footer />
   </>
 )

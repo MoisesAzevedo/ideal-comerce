@@ -15,6 +15,7 @@ import { ThumbCarouselEmbla } from '../../components/ThumbCarouselEmbla';
 import { CategoryProductCarousel } from '../../components/CategoryProductCarousel';
 import Products from '../../components/Product_pagination/Products';
 import { getCategoryDisplayInfo } from './utils/categoryUtils';
+import { ProductPageBreadcrumb, FiltersProvider } from '../../components';
 import SharedPageLayout from '../../layouts/SharedPageLayout';
 import styles from './ProductPage.module.scss';
 import '../../components/ThumbCarouselEmbla/css/embla.css';
@@ -23,7 +24,7 @@ interface ProductPageProps {
   params: Promise<{ id: string }>;
 }
 
-export default function ProductPage({ params }: ProductPageProps) {
+function ProductContent({ params }: ProductPageProps) {
   const { product, loading, error } = useProduct(params);
 
   // Hook para verificar se há produtos suficientes para exibir o carrossel
@@ -35,15 +36,6 @@ export default function ProductPage({ params }: ProductPageProps) {
 
   // Obter informações da categoria para exibição
   const categoryInfo = product ? getCategoryDisplayInfo(product) : null;
-
-  // Debug logs
-  console.log('🔍 DEBUG - Produto:', {
-    id: product?.id,
-    name: product?.name,
-    category_id: product?.category_id,
-    category: product?.category,
-    categoryInfo
-  });
 
   if (loading) {
     return (
@@ -64,6 +56,13 @@ export default function ProductPage({ params }: ProductPageProps) {
   return (
     <SharedPageLayout>
       <div data-name="product-page" className="py-8">
+        {/* Breadcrumb */}
+        <ProductPageBreadcrumb 
+          productId={product.id}
+          productName={product.name}
+          categoryName={categoryInfo?.categoryName}
+        />
+        
         <div 
           data-name="product-content" 
           className={styles.productContent}
@@ -109,16 +108,27 @@ export default function ProductPage({ params }: ProductPageProps) {
               excludeProductId={product.id}
               showViewMoreLink={true}
               viewMoreUrl={categoryInfo ? `/categoria/${categoryInfo.categorySlug}` : '/produtos'}
-              className="bg-white rounded-lg shadow-sm p-6"
+              className="bg-white rounded-lg shadow-sm"
             />
           </section>
         )}
 
+        {/* Separador visual */}
+        <hr className="mt-8 mb-4 border-gray-300 mx-auto" style={{ maxWidth: '897px', width: '100%' }} />
+
         {/* Produtos em destaque - sempre exibido, independente do carrossel de categoria */}
         <section data-name="featured-products-section" className="mt-12">
-          <Products />
+          <Products pageSpecificItems={6} />
         </section>
       </div>
     </SharedPageLayout>
+  );
+}
+
+export default function ProductPage({ params }: ProductPageProps) {
+  return (
+    <FiltersProvider>
+      <ProductContent params={params} />
+    </FiltersProvider>
   );
 }

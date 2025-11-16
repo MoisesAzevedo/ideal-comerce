@@ -1,14 +1,14 @@
 /* Responsabilidade: Estilos para o CategoryProductCarousel seguindo breakpoints do projeto */
 
 .categoryCarousel {
-  --carousel-gap: 1rem;
+  --carousel-gap: 30px;
   --carousel-button-size: 3rem;
   --carousel-button-color: var(--color-primary-green);
   --carousel-button-hover: var(--color-light-green);
   
   position: relative;
   width: 100%;
-  max-width: var(--max-width-container);
+  max-width: 1105px;
   margin: 0 auto;
   background-color: transparent;
   /* Force remove any shadows that might come from external CSS */
@@ -28,6 +28,15 @@
   align-items: center;
   margin-bottom: 1.5rem;
   padding: 0 calc(1rem + 0.5rem); /* 1rem (container) + 0.5rem (card padding compensation) */
+}
+
+/* Mobile: header em coluna */
+@media (max-width: 479px) {
+  .categoryCarousel__header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
 }
 
 /* Responsive adjustment to match ProductCard padding */
@@ -104,7 +113,6 @@
   gap: var(--carousel-gap);
   touch-action: pan-y;
   -webkit-touch-callout: none;
-  -khtml-user-select: none;
   -webkit-tap-highlight-color: transparent;
 }
 
@@ -220,6 +228,10 @@
 
 /* xs: 350px */
 @media (max-width: 349px) {
+  .categoryCarousel {
+    --carousel-button-size: 30px;
+  }
+
   .categoryCarousel__slide {
     width: 180px;
   }
@@ -229,7 +241,6 @@
   }
   
   .categoryCarousel__viewMore {
-    padding: 0.5rem 1rem;
     font-size: 0.75rem;
   }
 }

@@ -1,0 +1,145 @@
+'use client';
+
+import { useFiltersContext } from '../context/FiltersContext';
+
+/**
+ * Hook simplificado para acessar e manipular filtros
+ * Responsabilidade: Fornecer interface simplificada para o contexto de filtros
+ */
+export const useFilters = () => {
+  try {
+    const {
+      filterState,
+      updateCategories,
+      updateSizes,
+      updateFilterState,
+      clearFilters,
+      clearCategories,
+      clearSizes,
+      isLoading,
+    } = useFiltersContext();
+
+  /**
+   * Remove uma categoria específica dos filtros
+   */
+  const removeCategory = (categoryId: string) => {
+    const newCategories = filterState.categories.filter(id => id !== categoryId);
+    updateCategories(newCategories);
+  };
+
+  /**
+   * Remove um tamanho específico dos filtros
+   */
+  const removeSize = (size: string) => {
+    const newSizes = filterState.sizes.filter(s => s !== size);
+    updateSizes(newSizes);
+  };
+
+  /**
+   * Adiciona uma categoria se não existir
+   */
+  const addCategory = (categoryId: string) => {
+    if (!filterState.categories.includes(categoryId)) {
+      updateCategories([...filterState.categories, categoryId]);
+    }
+  };
+
+  /**
+   * Adiciona um tamanho se não existir
+   */
+  const addSize = (size: string) => {
+    if (!filterState.sizes.includes(size)) {
+      updateSizes([...filterState.sizes, size]);
+    }
+  };
+
+  /**
+   * Alterna uma categoria (adiciona se não existir, remove se existir)
+   */
+  const toggleCategory = (categoryId: string) => {
+    const exists = filterState.categories.includes(categoryId);
+    if (exists) {
+      removeCategory(categoryId);
+    } else {
+      addCategory(categoryId);
+    }
+  };
+
+  /**
+   * Alterna um tamanho (adiciona se não existir, remove se existir)
+   */
+  const toggleSize = (size: string) => {
+    try {
+      const currentSizes = filterState.sizes;
+      const exists = currentSizes.includes(size);
+      
+      if (exists) {
+        const newSizes = currentSizes.filter(s => s !== size);
+        updateSizes(newSizes);
+      } else {
+        const newSizes = [...currentSizes, size];
+        updateSizes(newSizes);
+      }
+    } catch (error) {
+      console.error('❌ useFilters.toggleSize: Error toggling size:', error);
+    }
+  };
+
+  /**
+   * Verifica se há filtros ativos
+   */
+  const hasActiveFilters = filterState.categories.length > 0 || filterState.sizes.length > 0;
+
+  const getCategoryFilter = () => {
+    try {
+      return filterState.categories.length > 0 ? filterState.categories.join(',') : undefined;
+    } catch (error) {
+      console.error('❌ useFilters.getCategoryFilter: Error:', error);
+      return undefined;
+    }
+  };
+
+  const getSizeFilter = () => {
+    try {
+      return filterState.sizes.length > 0 ? filterState.sizes.join(',') : undefined;
+    } catch (error) {
+      console.error('❌ useFilters.getSizeFilter: Error:', error);
+      return undefined;
+    }
+  };
+
+  return {
+    // Estado atual
+    filterState,
+    isLoading,
+    hasActiveFilters,
+    
+    // Funções de atualização
+    updateCategories,
+    updateSizes,
+    updateFilterState,
+    
+    // Funções de limpeza
+    clearFilters,
+    clearCategories,
+    clearSizes,
+    
+    // Funções para manipular items individuais
+    addCategory,
+    removeCategory,
+    toggleCategory,
+    addSize,
+    removeSize,
+    toggleSize,
+    
+    // Funções utilitárias para API
+    getCategoryFilter,
+    getSizeFilter,
+  };
+  
+  } catch (error) {
+    console.error('❌ useFilters: Critical error in hook:', error);
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    throw new Error(`useFilters hook failed: ${errorMessage}`);
+  }
+};

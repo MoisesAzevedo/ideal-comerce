@@ -5,12 +5,13 @@
 
 'use client';
 
-import React, { useState, useCallback } from 'react';
-import { useProducts } from './useProducts'; // Importa o .ts que tem meta
+import React, { useState, useCallback, useMemo } from 'react';
+import { useProducts } from './useProducts'; // Agora importará o arquivo .ts
 
 interface UsePaginatedProductsParams {
   perPage?: number;
   category?: string;
+  size?: string;
   q?: string;
 }
 
@@ -28,17 +29,30 @@ interface UsePaginatedProductsReturn {
 export function usePaginatedProducts({
   perPage = 20,
   category,
+  size,
   q
 }: UsePaginatedProductsParams = {}): UsePaginatedProductsReturn {
   const [currentPage, setCurrentPage] = useState(1);
   const [allProducts, setAllProducts] = useState<any[]>([]);
 
-  // Hook que busca produtos da página atual
-  const { products, loading, error, meta } = useProducts({
+  const useProductsParams = useMemo(() => ({
     page: currentPage,
     perPage,
     category,
+    size,
     q
+  }), [currentPage, perPage, category, size, q]);
+  
+  console.log('🎯 usePaginatedProducts: Calling useProducts with:', useProductsParams);
+
+  // Hook que busca produtos da página atual
+  const { products, loading, error, meta } = useProducts(useProductsParams);
+  
+  console.log('🎯 usePaginatedProducts: useProducts returned:', { 
+    productsLength: products?.length, 
+    loading, 
+    error, 
+    meta 
   });
 
   // Atualiza a lista acumulada quando novos produtos chegam
@@ -70,7 +84,6 @@ export function usePaginatedProducts({
     }
   }, [loading, hasMore]);
 
-  // Função para resetar paginação
   const reset = useCallback(() => {
     setCurrentPage(1);
     setAllProducts([]);

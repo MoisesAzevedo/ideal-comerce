@@ -1,16 +1,23 @@
 import { useRouter } from 'next/navigation';
+import { useCart } from '../../../Carrinho/cart';
 
 export const useProductNavigation = () => {
   const router = useRouter();
+  const { addToCart } = useCart();
 
   const buyProduct = (productId: string) => {
-    // Navegar para a página do produto
-    router.push(`/pages/produto/${productId}`);
+    // Adicionar produto ao carrinho
+    addToCart(productId);
+    
+    // Redirecionar para o checkout
+    setTimeout(() => {
+      router.push('/Checkout');
+    }, 100); // Pequeno delay para garantir que o produto seja adicionado
   };
 
   const viewProduct = (productId: string) => {
     // Navegar para a página do produto
-    router.push(`/pages/produto/${productId}`);
+    router.push(`/produto/${productId}`);
   };
 
   return {

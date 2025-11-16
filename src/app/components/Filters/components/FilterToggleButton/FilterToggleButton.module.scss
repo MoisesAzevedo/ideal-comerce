@@ -1,0 +1,50 @@
+.toggleButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.5rem;
+  color: #374151;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+
+  &:hover {
+    background-color: #f8fafc;
+    border-color: #cbd5e1;
+    color: #1f2937;
+  }
+
+  &:active {
+    background-color: #f1f5f9;
+    transform: translateY(1px);
+  }
+
+  &:focus {
+    outline: 2px solid #3b82f6;
+    outline-offset: 2px;
+  }
+
+  .icon {
+    flex-shrink: 0;
+    transition: transform 0.2s ease-in-out;
+  }
+
+  .text {
+    flex-shrink: 0;
+  }
+
+  // Ocultar em telas maiores que tablet
+  @media (min-width: 768px) {
+    display: none;
+  }
+}
+
+// Estados de animação para o ícone
+.toggleButton:hover .icon {
+  transform: scale(1.1);
+}

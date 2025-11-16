@@ -9,9 +9,11 @@ import CartItemRow from './Components/CartItemRow';
 import Link from 'next/link';
 import { formatBRL } from './utils/format';
 import SharedPageLayout from '../layouts/SharedPageLayout';
+import { Breadcrumb, useBreadcrumb } from '../components';
 
 export default function CartPage() {
   const { cartIds, clearCart } = useCart();
+  const breadcrumbItems = useBreadcrumb();
 
   const items = React.useMemo(
     () => aggregateCart(cartIds, products),
@@ -20,8 +22,12 @@ export default function CartPage() {
 
   const subtotal = items.reduce((s, it) => s + (it.product.price ?? it.product.sale_price) * it.qty, 0);
 
+  const breadcrumbComponent = (
+    <Breadcrumb items={breadcrumbItems} className="max-w-container mx-auto" />
+  );
+
   return (
-    <SharedPageLayout showNavigation={false}>
+    <SharedPageLayout showNavigation={false} breadcrumb={breadcrumbComponent}>
       <div className="container mx-auto py-8 px-4 phone:px-6">
         <h1 className="text-2xl phone:text-3xl font-bold mb-6">Sua Mochila</h1>
 
@@ -95,9 +101,12 @@ export default function CartPage() {
               </div>
 
               <div className="flex flex-col gap-2 mt-4">
-                <button className="w-full px-4 py-3 bg-[#495949] text-white rounded">
+                <Link 
+                  href="/Checkout"
+                  className="w-full px-4 py-3 bg-[#495949] text-white rounded text-center hover:bg-[#3a453a] transition-colors"
+                >
                   Ir para pagamento
-                </button>
+                </Link>
                 <button
                   onClick={() => clearCart()}
                   className="w-full px-4 py-3 border rounded"

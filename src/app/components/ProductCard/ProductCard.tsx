@@ -18,7 +18,7 @@ export const ProductCard = ({
   return (
     <div
       data-name={`product-${product.id}`}
-      className="font-sans relative w-[203px] h-auto flex flex-col items-start rounded p-2 phone:p-3 bg-black/[0.01] shadow-sm hover:shadow-md transition-shadow duration-200"
+      className="font-sans relative w-full h-auto flex flex-col items-start rounded p-2 phone:p-3 bg-black/[0.01] shadow-sm hover:shadow-md transition-shadow duration-200"
     >
       {/* Link para página do produto cobrindo a imagem e informações principais */}
       <Link 
@@ -28,14 +28,14 @@ export const ProductCard = ({
       >
         <div
           data-name={`product-image-${product.id}`}
-          className="relative w-full aspect-[203/243] mb-2 phone:mb-3 overflow-hidden rounded"
+          className="relative w-full aspect-[4/5] mb-2 phone:mb-3 overflow-hidden rounded"
         >
           <Image
             className="absolute w-full h-full top-0 left-0 object-cover transition-transform duration-300 group-hover:scale-105"
             alt={product.name}
             src={product.images[0]}
             fill
-            sizes="(max-width: 350px) 150px, (max-width: 480px) 180px, 203px"
+            sizes="(max-width: 480px) 50vw, (max-width: 768px) 33vw, (max-width: 1024px) 25vw, 20vw"
             priority={true}
           />
         </div>

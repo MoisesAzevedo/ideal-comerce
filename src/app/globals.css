@@ -15,8 +15,11 @@
   /* Breakpoints */
   --breakpoint-xs: 350px;      /* Dispositivos muito pequenos */
   --breakpoint-phone: 480px;   /* Dispositivos móveis */
+  --breakpoint-sm700: 700px;   /* Breakpoint customizado 700px */
   --breakpoint-tablet: 768px;  /* Tablets */
+  --breakpoint-desktop: 1024px; /* Desktop pequeno */
   --breakpoint-lg: 1050px;     /* Laptops */
+  --breakpoint-wide: 1250px;   /* Desktop médio */
   --breakpoint-xl: 1280px;     /* Desktops */
   --breakpoint-2xl: 1536px;    /* Telas grandes */
   

@@ -1,0 +1,132 @@
+.filters {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  min-width: 280px;
+  width: 100%;
+  
+  .filterGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 1024px) {
+  .filters {
+    min-width: 200px;
+    gap: 0.75rem;
+    
+    .filterGroup {
+      gap: 0.375rem;
+    }
+  }
+}
+
+// Para telas de tablet e menores, os filtros serão gerenciados pelo ResponsiveFilters
+// Mantemos apenas ajustes para quando estão na sidebar mobile
+@media (max-width: 767px) {
+  .filters {
+    width: 100%;
+    min-width: auto;
+    margin-bottom: 0;
+    
+    .filterGroup {
+      width: 100%;
+      min-width: auto;
+      margin-bottom: 1rem;
+    }
+  }
+}
+
+// Size Filter Styles
+.filterSection {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.filterLabel {
+  h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #333;
+    margin: 0;
+    margin-bottom: 0.5rem;
+  }
+}
+
+.sizeGrid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 0.5rem;
+  width: 100%;
+  max-width: 280px;
+}
+
+.sizeButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border: 2px solid #555;
+  background-color: transparent;
+  color: #333;
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-radius: 0;
+
+  &:hover {
+    border-color: #333;
+  }
+
+  &.selected {
+    border-color: #007bff;
+    color: #007bff;
+  }
+
+  &.unavailable {
+    opacity: 0.5;
+    cursor: not-allowed;
+    
+    &:hover {
+      border-color: #555;
+    }
+  }
+}
+
+// Responsive adjustments for size filter
+@media (max-width: 1024px) {
+  .sizeGrid {
+    max-width: 240px;
+    gap: 0.375rem;
+    grid-template-columns: repeat(6, 1fr);
+  }
+  
+  .sizeButton {
+    width: 28px;
+    height: 28px;
+    font-size: 0.7rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .sizeGrid {
+    max-width: 100%;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.375rem;
+  }
+  
+  .sizeButton {
+    width: 26px;
+    height: 26px;
+    font-size: 0.65rem;
+  }
+}

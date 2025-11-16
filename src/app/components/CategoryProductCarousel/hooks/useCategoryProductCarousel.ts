@@ -31,8 +31,9 @@ export function useCategoryProductCarousel({
   carouselOptions = {
     align: 'start',
     slidesToScroll: 1,
-    containScroll: 'trimSnaps',
-    dragFree: true,
+    containScroll: 'keepSnaps',
+    dragFree: false,
+    skipSnaps: false,
   },
 }: UseCategoryProductCarouselParams): UseCategoryProductCarouselReturn {
   const [emblaRef, emblaApi] = useEmblaCarousel(carouselOptions);

@@ -1,0 +1,30 @@
+.toggleButtonContainer {
+  display: none;
+
+  // Mostrar apenas em telas menores que tablet
+  @media (max-width: 767px) {
+    display: block;
+    margin-bottom: 1rem;
+  }
+}
+
+.desktopFilters {
+  display: block;
+
+  // Ocultar em telas menores que tablet
+  @media (max-width: 767px) {
+    display: none;
+  }
+}
+
+.mobileFilters {
+  // Ajustes específicos para filtros na sidebar mobile
+  .filterGroup {
+    margin-bottom: 1.5rem;
+  }
+
+  // Remover espaçamento lateral para melhor aproveitamento na sidebar
+  padding: 0;
+  min-width: auto;
+  width: 100%;
+}

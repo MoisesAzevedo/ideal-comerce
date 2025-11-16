@@ -21,19 +21,38 @@ export class MockDatabase {
     page?: number;
     perPage?: number;
     category?: string;
+    size?: string;
     q?: string;
   }) {
-    const { featuredProducts, getProductsByCategory, searchProducts } = await import('./data/products');
+    const { featuredProducts, getProductsByCategory, getProductsByCategories, searchProducts } = await import('./data/products');
     
     let filteredProducts = featuredProducts;
 
-    // Apply filters
+    // Apply category filter
     if (params?.category) {
-      filteredProducts = getProductsByCategory(params.category);
+      if (params.category.includes(',')) {
+        filteredProducts = getProductsByCategories(params.category);
+      } else {
+        filteredProducts = getProductsByCategory(params.category);
+      }
+    }
+
+    // Apply size filter
+    if (params?.size) {
+      console.log('🗃️ DB: Filtering by sizes:', params.size);
+      const sizeFilters = params.size.split(',');
+      const beforeFilter = filteredProducts.length;
+      filteredProducts = filteredProducts.filter(product => 
+        product.sizes && product.sizes.some(size => 
+          sizeFilters.includes(size.value) && size.available
+        )
+      );
+      console.log('🗃️ DB: After size filter:', filteredProducts.length, 'products (was', beforeFilter, ')');
     }
     
+    // Apply search query
     if (params?.q) {
-      filteredProducts = searchProducts(params.q);
+      filteredProducts = searchProducts(params.q, filteredProducts);
     }
 
     // Apply pagination

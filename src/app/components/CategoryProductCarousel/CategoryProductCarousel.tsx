@@ -5,6 +5,7 @@ import React from 'react';
 import Link from 'next/link';
 import { ProductCard } from '../ProductCard/ProductCard';
 import { useCategoryProductCarousel } from './hooks/useCategoryProductCarousel';
+import { useProductNavigation } from '../Product_pagination/hooks/useProductNavigation';
 import { getCategoryNameById } from './utils/categoryUtils';
 import type { CategoryProductCarouselProps } from './types';
 import styles from './CategoryProductCarousel.module.scss';
@@ -22,6 +23,7 @@ export function CategoryProductCarousel({
   viewMoreUrl,
   className = '',
 }: CategoryProductCarouselProps) {
+  const { buyProduct } = useProductNavigation();
   const {
     products,
     isLoading,
@@ -37,13 +39,14 @@ export function CategoryProductCarousel({
     excludeProductId,
     carouselOptions: {
       align: 'start',
-      slidesToScroll: 'auto',
-      containScroll: 'trimSnaps',
-      dragFree: true,
+      slidesToScroll: 1,
+      containScroll: 'keepSnaps',
+      dragFree: false,
+      skipSnaps: false,
       breakpoints: {
         '(max-width: 349px)': { slidesToScroll: 1 },
-        '(min-width: 350px) and (max-width: 767px)': { slidesToScroll: 2 },
-        '(min-width: 768px)': { slidesToScroll: 3 },
+        '(min-width: 350px) and (max-width: 767px)': { slidesToScroll: 1 },
+        '(min-width: 768px)': { slidesToScroll: 1 },
       },
     },
   });
@@ -95,7 +98,7 @@ export function CategoryProductCarousel({
         data-name={`category-carousel-${category}`}
       >
         <div className={styles.categoryCarousel__empty}>
-          <p>Nenhum produto encontrado para a categoria "{categoryName}" (ID: {category})</p>
+          <p>Nenhum produto encontrado para a categoria &quot;{categoryName}&quot; (ID: {category})</p>
         </div>
       </div>
     );
@@ -185,8 +188,7 @@ export function CategoryProductCarousel({
                 <ProductCard 
                   product={product}
                   onBuy={(productId) => {
-                    // Handle buy action if needed
-                    console.log(`Buy product ${productId} from category ${category}`);
+                    buyProduct(productId);
                   }}
                 />
               </div>

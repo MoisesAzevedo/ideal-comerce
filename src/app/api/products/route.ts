@@ -7,22 +7,26 @@ export const dynamic = "force-dynamic";
 // API Response interfaces (re-export from central types)
 export type { ProductsResponse as ProductsApiResponse };
 
-// REST endpoint for products - Responsibility: Handle HTTP requests for products data
 export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
     const page = Math.max(1, parseInt(searchParams.get("page") || "1"));
     const perPage = Math.max(1, Math.min(50, parseInt(searchParams.get("perPage") || "16")));
     const category = searchParams.get("category") || undefined;
+    const size = searchParams.get("size") || undefined;
     const q = searchParams.get("q") || undefined;
 
-    // Use centralized database
+    console.log('🔍 API: /api/products called with:', { category, size, q });
+
     const response = await MockDatabase.getProducts({
       page,
       perPage,
       category,
+      size,
       q
     });
+
+    console.log('🔍 API: Returning', response.data.length, 'products');
 
     return NextResponse.json(response, { 
       status: 200,
