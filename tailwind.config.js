@@ -23,7 +23,7 @@ export default {
         'secondary': ['Calibri', 'Arial', 'sans-serif'],
       },
       maxWidth: {
-        'container': '1200px', // Container máximo do projeto
+        'container': '1185px', // Container máximo do projeto
       },
     },
   },

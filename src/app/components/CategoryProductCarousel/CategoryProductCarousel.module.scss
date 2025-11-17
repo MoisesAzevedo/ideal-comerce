@@ -120,6 +120,7 @@
   flex: 0 0 auto;
   min-width: 0;
   width: 203px;
+  height: 100%;
 }
 
 .categoryCarousel__navigation {
@@ -234,6 +235,7 @@
 
   .categoryCarousel__slide {
     width: 180px;
+    height: 100%;
   }
   
   .categoryCarousel__title {
@@ -249,6 +251,7 @@
 @media (min-width: 350px) and (max-width: 479px) {
   .categoryCarousel__slide {
     width: 190px;
+    height: 100%;
   }
 }
 
@@ -256,6 +259,7 @@
 @media (min-width: 480px) and (max-width: 767px) {
   .categoryCarousel__slide {
     width: 203px;
+    height: 100%;
   }
   
   .categoryCarousel__container {

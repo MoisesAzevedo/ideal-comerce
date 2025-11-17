@@ -23,6 +23,8 @@ export class MockDatabase {
     category?: string;
     size?: string;
     q?: string;
+    minPrice?: number;
+    maxPrice?: number;
   }) {
     const { featuredProducts, getProductsByCategory, getProductsByCategories, searchProducts } = await import('./data/products');
     
@@ -48,6 +50,25 @@ export class MockDatabase {
         )
       );
       console.log('🗃️ DB: After size filter:', filteredProducts.length, 'products (was', beforeFilter, ')');
+    }
+    
+    // Apply price filter
+    if (params?.minPrice !== undefined || params?.maxPrice !== undefined) {
+      console.log('🗃️ DB: Filtering by price range:', { min: params.minPrice, max: params.maxPrice });
+      const beforeFilter = filteredProducts.length;
+      filteredProducts = filteredProducts.filter(product => {
+        const price = product.sale_price || product.price || 0;
+        const minMatch = params.minPrice === undefined || params.minPrice === null || price >= params.minPrice;
+        const maxMatch = params.maxPrice === undefined || params.maxPrice === null || params.maxPrice === 999999 || price <= params.maxPrice;
+        const result = minMatch && maxMatch;
+        
+        if (process.env.NODE_ENV === 'development' && beforeFilter <= 10) {
+          console.log(`🗃️ DB: Product ${product.name} (${price}) - min: ${minMatch} max: ${maxMatch} result: ${result}`);
+        }
+        
+        return result;
+      });
+      console.log('🗃️ DB: After price filter:', filteredProducts.length, 'products (was', beforeFilter, ')');
     }
     
     // Apply search query

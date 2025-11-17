@@ -15,3 +15,4 @@ export { Filters, ResponsiveFilters, CategoryFilter, SelectedCategoriesBadges, F
 export type { FilterState, CategoryFilterProps } from './Filters';
 export { ProductSkeleton, ProductsSkeleton } from './ProductSkeleton';
 export type { ProductSkeletonProps, ProductsSkeletonProps } from './ProductSkeleton';
+export { HomeBannerCarousel } from './HomeBannerCarousel';

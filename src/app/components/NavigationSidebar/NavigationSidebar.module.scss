@@ -96,3 +96,51 @@
 .sidebarContent {
   padding: 1.5rem;
 }
+
+/* Categoria card dentro da sidebar */
+.categoryCard {
+  background: #fff;
+  border-radius: 6px;
+  padding: 8px;
+  margin-bottom: 10px;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+  width: 100%;
+}
+
+.categoryCardLink {
+  display: block;
+  font-weight: 700;
+  color: #1d2d1e;
+  text-decoration: none;
+  padding: 6px 8px;
+  border-radius: 4px;
+}
+
+.categoryCardLink:hover {
+  background-color: #1d2d1e;
+  color: #fff;
+}
+
+.subcategoryList {
+  list-style: none;
+  padding: 6px 0 0 0;
+  margin: 0;
+}
+
+.subcategoryItem {
+  margin: 0 0 4px 0;
+}
+
+.subcategoryLink {
+  display: block;
+  color: #444;
+  text-decoration: none;
+  padding: 4px 6px;
+  border-radius: 4px;
+  font-size: 0.95rem;
+}
+
+.subcategoryLink:hover {
+  background-color: #1d2d1e;
+  color: #fff;
+}

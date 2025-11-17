@@ -7,7 +7,10 @@ export async function fetchFeaturedProducts(params?: {
   page?: number;
   perPage?: number;
   category?: string;
+  size?: string;
   q?: string;
+  minPrice?: number;
+  maxPrice?: number;
 }): Promise<ProductsApiResponse> {
   const url = new URL("/api/products", getBaseUrl());
 
@@ -15,7 +18,10 @@ export async function fetchFeaturedProducts(params?: {
     if (params.page) url.searchParams.set("page", String(params.page));
     if (params.perPage) url.searchParams.set("perPage", String(params.perPage));
     if (params.category) url.searchParams.set("category", params.category);
+    if (params.size) url.searchParams.set("size", params.size);
     if (params.q) url.searchParams.set("q", params.q);
+    if (params.minPrice !== undefined) url.searchParams.set("minPrice", String(params.minPrice));
+    if (params.maxPrice !== undefined) url.searchParams.set("maxPrice", String(params.maxPrice));
   }
 
   const res = await fetch(url.toString());

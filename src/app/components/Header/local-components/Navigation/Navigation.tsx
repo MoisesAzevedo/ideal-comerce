@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useMemo } from "react";
+import Link from "next/link";
 import styles from "./Navigation.module.scss";
 import SelectArrow from "./SelectArrow";
 import { categories } from "../../../../../../db/data/categories";
@@ -15,12 +16,19 @@ const Navigation = () => {
       .sort((a, b) => a.sort_order - b.sort_order);
 
     return mains.map((main) => ({
+      id: main.id,
       title: main.name,
-      href: `/categorias/${main.slug}`,
+      slug: main.slug,
+      href: `/produtos?categories=${main.id}`,
       sub: categories
         .filter((s) => s.parent_id === main.id && s.is_active)
         .sort((a, b) => a.sort_order - b.sort_order)
-        .map((s) => ({ title: s.name, href: `/categorias/${main.slug}/${s.slug}` }))
+        .map((s) => ({ 
+          id: s.id,
+          title: s.name, 
+          slug: s.slug,
+          href: `/produtos?categories=${s.id}` 
+        }))
     }));
   }, []);
 
@@ -96,8 +104,9 @@ const Navigation = () => {
           paddingLeft: "2rem"
         }}>
           {menuCategories.slice(0, 5).map((cat) => (
-            <h2
-              key={cat.title}
+            <Link
+              key={cat.id}
+              href={cat.href}
               className={styles.item}
               style={{
                 fontFamily: "Teko, Helvetica, Arial, sans-serif",
@@ -109,12 +118,14 @@ const Navigation = () => {
                 cursor: "pointer",
                 transition: "color 0.2s",
                 margin: 0,
-                whiteSpace: "nowrap"
+                whiteSpace: "nowrap",
+                textDecoration: "none",
+                display: "block"
               }}
               data-name={`top-link-${cat.title}`}
             >
               {cat.title.toUpperCase()}
-            </h2>
+            </Link>
           ))}
         </div>
 
@@ -126,42 +137,25 @@ const Navigation = () => {
             data-name="categories-dropdown"
           >
             {menuCategories.map((cat) => (
-              <div key={cat.title} style={{ minWidth: 0, textAlign: "left" }} data-name={`category-${cat.title}`}>
-                <a
+              <div key={cat.id} className={styles.categoryColumn} data-name={`category-${cat.slug}`}>
+                <Link
                   href={cat.href}
-                  data-name={`category-link-${cat.title}`}
-                  style={{
-                    fontWeight: 700,
-                    fontSize: 18,
-                    color: "#1d2d1e",
-                    textDecoration: "none",
-                    marginBottom: 4,
-                    display: "block",
-                    letterSpacing: 1,
-                    fontFamily: "var(--font-primary)",
-                    textTransform: "uppercase"
-                  }}
+                  className={styles.categoryMainLink}
+                  data-name={`category-link-${cat.slug}`}
                 >
                   {cat.title}
-                </a>
+                </Link>
                 {cat.sub && cat.sub.length > 0 && (
-                  <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+                  <ul className={styles.subcategoryList}>
                     {cat.sub.map((sub) => (
-                      <li key={sub.title} style={{ marginBottom: 2 }} data-name={`subcategory-${sub.title}`}>
-                        <a
+                      <li key={sub.id} className={styles.subcategoryItem} data-name={`subcategory-${sub.slug}`}>
+                        <Link
                           href={sub.href}
-                          data-name={`subcategory-link-${sub.title}`}
-                          style={{
-                            color: "#444",
-                            fontSize: 13,
-                            textDecoration: "none",
-                            fontWeight: 400,
-                            letterSpacing: 0.2,
-                            fontFamily: "Calibri, Arial, sans-serif"
-                          }}
+                          className={styles.subcategoryLink}
+                          data-name={`subcategory-link-${sub.slug}`}
                         >
                           {sub.title}
-                        </a>
+                        </Link>
                       </li>
                     ))}
                   </ul>

@@ -12,6 +12,8 @@ export interface ProductsQueryParams {
   category?: string;
   size?: string;
   q?: string;
+  minPrice?: number;
+  maxPrice?: number;
 }
 
 // HTTP service implementation - Responsibility: Handle HTTP communication with products API
@@ -31,6 +33,8 @@ export class HttpProductsService implements ProductsService {
     if (params.category) searchParams.set('category', params.category);
     if (params.size) searchParams.set('size', params.size);
     if (params.q) searchParams.set('q', params.q);
+    if (params.minPrice !== undefined) searchParams.set('minPrice', params.minPrice.toString());
+    if (params.maxPrice !== undefined) searchParams.set('maxPrice', params.maxPrice.toString());
 
     const url = `${this.baseUrl}/products${searchParams.toString() ? `?${searchParams}` : ''}`;
     

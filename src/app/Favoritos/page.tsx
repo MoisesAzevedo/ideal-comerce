@@ -24,7 +24,7 @@ export default function FavoritesPage() {
 
         {favoriteProducts.length === 0 ? (
           <div className="flex flex-col items-center justify-center text-center py-20">
-            <Image src={'/img/Estrela-Verde.png'} width={70} height={70} alt='Estrela' />
+            <Image src={'/img/coturno-medalha.png'} width={150} height={150} alt='coturno' />
             <p className="mb-4"> <strong> Você ainda não adicionou nada ao seus favoritos. </strong> </p>
             <Link
               href="/"

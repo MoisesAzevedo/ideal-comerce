@@ -25,26 +25,31 @@ const Products = ({
   forceItems 
 }: ProductsProps) => {
   // Get filter state from centralized context
-  let getCategoryFilter, getSizeFilter;
+  let getCategoryFilter, getSizeFilter, getPriceFilter;
   try {
     const filtersHook = useFilters();
     getCategoryFilter = filtersHook.getCategoryFilter;
     getSizeFilter = filtersHook.getSizeFilter;
+    getPriceFilter = filtersHook.getPriceFilter;
   } catch (error) {
     console.error('❌ Products: Error accessing useFilters hook:', error);
     throw error;
   }
   
   // Get filters formatted for API
-  let categoryFilter, sizeFilter;
+  let categoryFilter, sizeFilter, priceFilter;
   try {
     categoryFilter = getCategoryFilter();
     sizeFilter = getSizeFilter();
-    console.log('🎯 Products: Filter values:', { categoryFilter, sizeFilter });
+    priceFilter = getPriceFilter();
+    if (process.env.NODE_ENV === 'development') {
+      console.log('🎯 Products: Filter values:', { categoryFilter, sizeFilter, priceFilter });
+    }
   } catch (error) {
     console.error('❌ Products: Error getting filter values:', error);
     categoryFilter = undefined;
     sizeFilter = undefined;
+    priceFilter = undefined;
   }
   
   // State to track when filters are changing
@@ -68,15 +73,21 @@ const Products = ({
     perPage: 20,
     category: categoryFilter,
     size: sizeFilter,
-    q: searchQuery 
+    q: searchQuery,
+    minPrice: priceFilter?.min,
+    maxPrice: priceFilter?.max
   });
   
-  console.log('🎯 Products: usePaginatedProducts params:', { 
-    perPage: 20,
-    category: categoryFilter,
-    size: sizeFilter,
-    q: searchQuery 
-  });
+  if (process.env.NODE_ENV === 'development') {
+    console.log('🎯 Products: usePaginatedProducts params:', { 
+      perPage: 20,
+      category: categoryFilter,
+      size: sizeFilter,
+      q: searchQuery,
+      minPrice: priceFilter?.min,
+      maxPrice: priceFilter?.max
+    });
+  }
   
   // Handle filter changes with smooth transition
   React.useEffect(() => {
@@ -93,7 +104,7 @@ const Products = ({
       console.error('❌ Products: Error in filter change effect:', error);
       setIsFiltering(false);
     }
-  }, [categoryFilter, sizeFilter, searchQuery, reset]);
+  }, [categoryFilter, sizeFilter, priceFilter, searchQuery]); // Removido reset das dependências
   
   const { buyProduct } = useProductNavigation();
 

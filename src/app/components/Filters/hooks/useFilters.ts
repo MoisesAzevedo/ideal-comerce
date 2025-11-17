@@ -12,6 +12,7 @@ export const useFilters = () => {
       filterState,
       updateCategories,
       updateSizes,
+      updatePriceRange,
       updateFilterState,
       clearFilters,
       clearCategories,
@@ -33,6 +34,13 @@ export const useFilters = () => {
   const removeSize = (size: string) => {
     const newSizes = filterState.sizes.filter(s => s !== size);
     updateSizes(newSizes);
+  };
+
+  /**
+   * Limpa filtro de preço
+   */
+  const clearPriceRange = () => {
+    updatePriceRange(undefined);
   };
 
   /**
@@ -88,7 +96,9 @@ export const useFilters = () => {
   /**
    * Verifica se há filtros ativos
    */
-  const hasActiveFilters = filterState.categories.length > 0 || filterState.sizes.length > 0;
+  const hasActiveFilters = filterState.categories.length > 0 || 
+                          filterState.sizes.length > 0 || 
+                          (filterState.priceRange && (filterState.priceRange.min !== undefined || filterState.priceRange.max !== undefined));
 
   const getCategoryFilter = () => {
     try {
@@ -108,6 +118,15 @@ export const useFilters = () => {
     }
   };
 
+  const getPriceFilter = () => {
+    try {
+      return filterState.priceRange;
+    } catch (error) {
+      console.error('❌ useFilters.getPriceFilter: Error:', error);
+      return undefined;
+    }
+  };
+
   return {
     // Estado atual
     filterState,
@@ -117,12 +136,14 @@ export const useFilters = () => {
     // Funções de atualização
     updateCategories,
     updateSizes,
+    updatePriceRange,
     updateFilterState,
     
     // Funções de limpeza
     clearFilters,
     clearCategories,
     clearSizes,
+    clearPriceRange,
     
     // Funções para manipular items individuais
     addCategory,
@@ -135,6 +156,7 @@ export const useFilters = () => {
     // Funções utilitárias para API
     getCategoryFilter,
     getSizeFilter,
+    getPriceFilter,
   };
   
   } catch (error) {

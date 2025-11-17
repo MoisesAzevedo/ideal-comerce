@@ -1,0 +1,271 @@
+.embla {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 0;
+  
+  // Remover todas as alturas fixas - deixar o conteúdo definir a altura
+  // A altura será determinada pelas imagens
+}
+
+.emblaViewport {
+  overflow: hidden;
+  width: 100%;
+  // Remover altura fixa - deixar o conteúdo definir
+}
+
+.emblaContainer {
+  display: flex;
+  touch-action: pan-y pinch-zoom;
+  // Remover altura fixa
+}
+
+.emblaSlide {
+  flex: 0 0 100%;
+  min-width: 0;
+  position: relative;
+  // Remover altura fixa - deixar o conteúdo definir
+}
+
+.emblaSlideInner {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  // Remover altura fixa - deixar a imagem definir a altura
+}
+
+.emblaSlideImg {
+  width: 100%;
+  height: auto; // Altura automática para manter proporção
+  display: block;
+  user-select: none;
+  object-fit: contain; // Manter proporções sem cortar
+  max-width: 100%;
+  
+  // Garantir responsividade em diferentes telas
+  @media (max-width: 480px) {
+    width: 100%;
+    height: auto;
+  }
+  
+  @media (min-width: 481px) and (max-width: 767px) {
+    width: 100%;
+    height: auto;
+  }
+  
+  @media (min-width: 768px) {
+    width: 100%;
+    height: auto;
+  }
+  
+  // Garantir que a imagem cubra toda a área
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.1);
+    z-index: 1;
+  }
+}
+
+// Navigation Controls
+.emblaControls {
+  position: absolute;
+  bottom: 0.5rem; // Alinhado com os dots
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 1rem;
+  z-index: 10;
+  pointer-events: none;
+  
+  @media (min-width: 768px) {
+    padding: 0 2rem;
+    bottom: 0.75rem; // Alinhado com os dots desktop
+  }
+  
+  @media (max-width: 480px) {
+    bottom: 0.25rem; // Alinhado com os dots mobile
+  }
+}
+
+.emblaButton {
+  pointer-events: all;
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  border-radius: 50%;
+  width: 30px; // Reduzido para 30px
+  height: 30px; // Reduzido para 30px
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #333;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  
+  @media (min-width: 768px) {
+    width: 36px; // Tamanho um pouco maior para desktop
+    height: 36px;
+  }
+  
+  &:hover {
+    background: rgba(255, 255, 255, 1);
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+  
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+.emblaButtonSvg {
+  width: 14px; // Reduzido de 20px para 14px
+  height: 14px; // Reduzido de 20px para 14px
+  
+  @media (min-width: 768px) {
+    width: 16px; // Reduzido de 24px para 16px
+    height: 16px; // Reduzido de 24px para 16px
+  }
+}
+
+// Estilos específicos podem ser adicionados posteriormente se necessário
+// .emblaPrev { }
+// .emblaNext { }
+
+// Dots Navigation
+.emblaDots {
+  position: absolute;
+  bottom: 0.5rem; // Movido para o bottom, abaixo das setas
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.25rem; // Gap reduzido
+  z-index: 10;
+  
+  @media (min-width: 768px) {
+    bottom: 0.75rem;
+    gap: 0.3rem;
+  }
+  
+  @media (max-width: 480px) {
+    bottom: 0.25rem;
+    gap: 0.2rem;
+  }
+}
+
+.emblaDot {
+  background: rgba(255, 255, 255, 0.6);
+  border: none;
+  border-radius: 50%;
+  width: 6px; // Reduzido de 8px para 6px
+  height: 6px; // Reduzido de 8px para 6px
+  cursor: pointer;
+  transition: all 0.3s ease;
+  
+  @media (min-width: 768px) {
+    width: 7px; // Reduzido de 10px para 7px
+    height: 7px; // Reduzido de 10px para 7px
+  }
+  
+  &:hover {
+    background: rgba(255, 255, 255, 0.8);
+    transform: scale(1.2);
+  }
+}
+
+.emblaDotSelected {
+  background: rgba(255, 255, 255, 1);
+  transform: scale(1.3);
+  
+  &:hover {
+    transform: scale(1.4);
+  }
+}
+
+// Responsividade aprimorada - apenas para controles, não para altura
+@media (max-width: 360px) {
+  // Para celulares muito pequenos - apenas ajustar controles
+  .emblaButton {
+    width: 24px; // Ainda menor para telas muito pequenas
+    height: 24px;
+  }
+  
+  .emblaButtonSvg {
+    width: 12px;
+    height: 12px;
+  }
+  
+  .emblaDot {
+    width: 4px; // Muito pequeno para telas pequenas
+    height: 4px;
+  }
+}
+
+@media (max-width: 480px) {
+  // Para celulares pequenos - apenas ajustar controles
+  .emblaControls {
+    padding: 0 0.5rem;
+    bottom: 0.25rem; // Alinhado exatamente com os dots
+  }
+  
+  .emblaButton {
+    width: 28px; // Tamanho intermediário para mobile
+    height: 28px;
+    background: rgba(255, 255, 255, 0.95);
+  }
+  
+  .emblaButtonSvg {
+    width: 12px;
+    height: 12px;
+  }
+  
+  .emblaDots {
+    bottom: 0.25rem; // Ajustar para ficar no bottom
+  }
+  
+  .emblaDot {
+    width: 4px; // Ainda menor para mobile
+    height: 4px;
+    background: rgba(255, 255, 255, 0.8);
+  }
+  
+  .emblaDotSelected {
+    background: rgba(255, 255, 255, 1);
+    transform: scale(1.5);
+  }
+}
+
+// Animações de entrada suave
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.embla {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+// Melhorar acessibilidade
+@media (prefers-reduced-motion: reduce) {
+  .emblaButton {
+    transition: none;
+  }
+  
+  .emblaDot {
+    transition: none;
+  }
+  
+  .embla {
+    animation: none;
+  }
+}

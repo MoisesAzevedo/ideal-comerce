@@ -1,3 +1,11 @@
+/* Container principal do componente de pesquisa */
+.searchContainer {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
 /* 3. formulario que sera um input de pesquisa dentro da content */
 .searchForm {
   display: flex;
@@ -7,8 +15,9 @@
   border-radius: 2px;
   align-items: center;
   position: relative;
+  overflow: visible; /* Permite que o dropdown ultrapasse os limites do form */
 
-  @media (max-width: 767px) {
+  @media (max-width: theme('screens.tablet')) {
     background: var(--background);
     border: 1px solid #e0e0e0;
     border-radius: 4px;
@@ -42,6 +51,17 @@
 .searchIcon {
   filter: brightness(0) invert(1);
   color: var(--svg-color);
+
+  @media (max-width: theme('screens.tablet')) {
+    filter: brightness(0) invert(0.2); /* Ajusta os ícones para o fundo claro */
+  }
+}
+
+/* 5. wrapper do botão categoria para posicionamento do dropdown */
+.categoryWrapper {
+  position: relative;
+  order: 2;
+  flex-shrink: 0;
 }
 
 /* 5. botão dentro do formulario */
@@ -60,8 +80,15 @@
   cursor: pointer;
   margin-left: 9px;
   position: relative;
-  order: 2;
   flex-shrink: 0; /* Impede que o botão encolha */
+  
+  span[data-name="category-label"] {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: calc(100% - 20px); /* Reserva espaço para a seta */
+    display: inline-block;
+  }
 }
 
 .selectArrow {
@@ -70,6 +97,92 @@
   margin-left: 6px;
   filter: brightness(0) invert(1);
   color: var(--svg-color);
+  transition: transform 0.2s ease;
+  
+  &.arrowRotated {
+    transform: rotate(180deg);
+  }
+
+  @media (max-width: theme('screens.tablet')) {
+    filter: brightness(0) invert(0.2); /* Ajusta os ícones para o fundo claro */
+  }
+}
+
+/* Dropdown */
+.dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 180px;
+  width: max-content;
+  background: #273728;
+  border: 1px solid #4d5f4e;
+  border-top: none;
+  border-radius: 0 0 4px 4px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 9999; /* Ajustado para 9999 */
+  max-height: 200px;
+  overflow-y: auto;
+  
+  /* Para telas maiores que tablet, ajustar posicionamento para evitar overflow */
+  @media (min-width: theme('screens.tablet')) {
+    /* Calcula se há espaço suficiente à direita, senão alinha à direita */
+    right: auto;
+    left: 0;
+    transform: translateX(0);
+    
+    /* Se necessário, pode ser ajustado dinamicamente via JS */
+    max-width: calc(100vw - 50px);
+    
+    /* Garante que não ultrapasse os limites da tela */
+    @supports (width: fit-content) {
+      width: fit-content;
+      min-width: max(180px, 100%);
+    }
+  }
+  
+  @media (max-width: theme('screens.tablet')) {
+    background: white;
+    border-color: #ccc;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    left: 0;
+    right: auto;
+  }
+}
+
+.dropdownItem {
+  width: 100%;
+  padding: 10px 12px;
+  border: none;
+  background: transparent;
+  color: white;
+  font-size: 14px;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  &:not(:last-child) {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  @media (max-width: theme('screens.tablet')) {
+    color: #333;
+    
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.05);
+    }
+    
+    &:not(:last-child) {
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    }
+  }
 }
 
 /* 6. input */
@@ -77,7 +190,7 @@
   background: transparent;
   border: none;
   outline: none;
-  color: inherit;
+  color: white; /* Cor padrão branca para desktop */
   font-weight: 100;
   font-size: 16px;
   line-height: 23px;
@@ -89,12 +202,16 @@
   order: 3;
   min-width: 100px;
 
-  @media (max-width: 767px) {
+  @media (max-width: theme('screens.tablet')) {
     background: transparent !important;
     border: none !important;
-    color: #222;
+    color: #222 !important; /* Cor escura para mobile */
     box-shadow: none !important;
     border-radius: 0 !important;
+  }
+
+  @media (min-width: theme('screens.tablet')) {
+    color: white; /* Garantir cor branca para tablet e maiores */
   }
 
   &::placeholder {
@@ -106,28 +223,27 @@
     text-align: right;
     background: transparent;
     border: none;
+
+    @media (max-width: theme('screens.tablet')) {
+      color: #999;
+    }
   }
 }
 
-@media (max-width: 767px) {
+@media (max-width: theme('screens.tablet')) {
   .searchForm {
     background: var(--background);
     border: none;
   }
 
   .searchInput {
-    color: #333;
+    color: #333 !important;
     background: transparent;
     border-radius: 4px;
     border: 1px solid #ccc;
     &::placeholder {
-      color: #999;
+      color: #999 !important;
     }
-  }
-
-  .searchIcon,
-  .selectArrow {
-    filter: brightness(0) invert(0.2); /* Ajusta os ícones para o fundo claro */
   }
 
   .categoryButton {

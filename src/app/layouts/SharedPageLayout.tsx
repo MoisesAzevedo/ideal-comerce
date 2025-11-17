@@ -10,7 +10,6 @@ import { Frame } from "../components/topInformation/componente";
 import Header from "../components/Header/Header";
 import FooterMenus from "../components/Footer/FooterMenus";
 import ScrollToTopButton from "../components/ScrollToTopButton/ScrollToTopButton";
-import styles from './SharedPageLayout.module.scss';
 
 // Log para diagnosticar carregamento do layout
 console.log('🎯 SharedPageLayout: Componente carregado');
@@ -39,10 +38,20 @@ export default function SharedPageLayout({
     const handleScroll = () => {
       const mainHeader = document.querySelector('[data-name="main-header"]') as HTMLElement;
       if (mainHeader) {
-        const headerOffsetTop = mainHeader.offsetTop;
         const scrollY = window.scrollY;
-        // Só fica sticky quando o scroll passou da posição original do header
-        const shouldBeSticky = scrollY > headerOffsetTop;
+        // Verifica se está em tela tablet ou maior (768px+)
+        const isTabletOrLarger = window.innerWidth >= 768;
+        
+        let shouldBeSticky;
+        if (isTabletOrLarger) {
+          // Para telas tablet+ usa o ponto específico de 21.09px
+          const stickyTriggerPoint = 21.09;
+          shouldBeSticky = scrollY > stickyTriggerPoint;
+        } else {
+          // Para mobile usa a posição original do header
+          const headerOffsetTop = mainHeader.offsetTop;
+          shouldBeSticky = scrollY > headerOffsetTop;
+        }
         
         if (shouldBeSticky !== isSticky) {
           setIsSticky(shouldBeSticky);
@@ -52,7 +61,11 @@ export default function SharedPageLayout({
     };
 
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener('resize', handleScroll); // Para recalcular em mudança de tela
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleScroll);
+    };
   }, [isSticky]);
   return (
     <div data-name="shared-page-layout" className={`min-h-screen flex flex-col ${className}`}>
@@ -64,14 +77,14 @@ export default function SharedPageLayout({
       )}
       
       {/* Header */}
-      <header data-name="main-header" className={isSticky ? styles.sticky : ''}>
+      <header data-name="main-header" className={isSticky ? 'fixed top-0 left-0 right-0 z-[1000] shadow-lg transition-all duration-300 ease-in-out' : ''}>
         <Header showNavigation={showNavigation} />
       </header>
 
       {/* Placeholder para evitar jump quando sticky é ativado */}
       {isSticky && (
         <div 
-          className={styles.stickyPlaceholder}
+          className="w-full"
           style={{ height: `${headerHeight}px` }}
         ></div>
       )}
@@ -94,7 +107,7 @@ export default function SharedPageLayout({
 
       {/* Conteúdo principal */}
       <main data-name="main-content" className="flex-1">
-        <div className={styles.globalContainer}>
+        <div data-name="main-container" className="w-full mx-auto px-4 overflow-x-hidden lg:px-8 xl:px-0" style={{ maxWidth: '1185px' }}>
           {children}
         </div>
       </main>

@@ -13,6 +13,8 @@ interface UsePaginatedProductsParams {
   category?: string;
   size?: string;
   q?: string;
+  minPrice?: number;
+  maxPrice?: number;
 }
 
 interface UsePaginatedProductsReturn {
@@ -30,7 +32,9 @@ export function usePaginatedProducts({
   perPage = 20,
   category,
   size,
-  q
+  q,
+  minPrice,
+  maxPrice
 }: UsePaginatedProductsParams = {}): UsePaginatedProductsReturn {
   const [currentPage, setCurrentPage] = useState(1);
   const [allProducts, setAllProducts] = useState<any[]>([]);
@@ -40,20 +44,26 @@ export function usePaginatedProducts({
     perPage,
     category,
     size,
-    q
-  }), [currentPage, perPage, category, size, q]);
+    q,
+    minPrice,
+    maxPrice
+  }), [currentPage, perPage, category, size, q, minPrice, maxPrice]);
   
-  console.log('🎯 usePaginatedProducts: Calling useProducts with:', useProductsParams);
+  if (process.env.NODE_ENV === 'development') {
+    console.log('🎯 usePaginatedProducts: Calling useProducts with:', useProductsParams);
+  }
 
   // Hook que busca produtos da página atual
   const { products, loading, error, meta } = useProducts(useProductsParams);
   
-  console.log('🎯 usePaginatedProducts: useProducts returned:', { 
-    productsLength: products?.length, 
-    loading, 
-    error, 
-    meta 
-  });
+  if (process.env.NODE_ENV === 'development') {
+    console.log('🎯 usePaginatedProducts: useProducts returned:', { 
+      productsLength: products?.length, 
+      loading, 
+      error, 
+      meta 
+    });
+  }
 
   // Atualiza a lista acumulada quando novos produtos chegam
   React.useEffect(() => {

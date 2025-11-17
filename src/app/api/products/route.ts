@@ -15,15 +15,23 @@ export async function GET(request: Request) {
     const category = searchParams.get("category") || undefined;
     const size = searchParams.get("size") || undefined;
     const q = searchParams.get("q") || undefined;
+    const minPriceStr = searchParams.get("minPrice");
+    const maxPriceStr = searchParams.get("maxPrice");
+    const minPrice = minPriceStr ? parseFloat(minPriceStr) : undefined;
+    const maxPrice = maxPriceStr ? parseFloat(maxPriceStr) : undefined;
 
-    console.log('🔍 API: /api/products called with:', { category, size, q });
+    console.log('🔍 API: /api/products called with:', { 
+      category, size, q, minPriceStr, maxPriceStr, minPrice, maxPrice 
+    });
 
     const response = await MockDatabase.getProducts({
       page,
       perPage,
       category,
       size,
-      q
+      q,
+      minPrice,
+      maxPrice
     });
 
     console.log('🔍 API: Returning', response.data.length, 'products');

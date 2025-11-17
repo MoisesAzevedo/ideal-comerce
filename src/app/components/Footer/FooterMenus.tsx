@@ -12,131 +12,71 @@ const FooterMenus = () => {
   }, []);
 
   return (
-    <section className={styles.footerMenus}>
-    <div className={styles.menusWrapper}>
-      <div className={styles.menu}>
-        <ul className={styles.menuList}>
-          <li className={styles.menuItem}>
-            <span className={styles.menuTitle}>Institucional</span>
-            <ul className={styles.submenu}>
-              <li>
-                <a href="/institucional/sobre">Sobre a Ideal Uniformes</a>
+    <section data-name="footer-menus" className={styles.footerMenus}>
+    <div data-name="footer-menus-wrapper" className={styles.menusWrapper}>
+      <div data-name="footer-menu-institucional" className={styles.menu}>
+        <ul data-name="menu-list-institucional" className={styles.menuList}>
+          <li data-name="menu-item-institucional" className={styles.menuItem}>
+            <span data-name="menu-title-institucional" className={styles.menuTitle}>Institucional</span>
+            <ul data-name="submenu-institucional" className={styles.submenu}>
+              <li data-name="link-quem-somos">
+                <a href="/quem-somos">Quem Somos</a>
               </li>
-              <li>
-                <a href="/institucional/politica-de-privacidade">
-                  Política de Privacidade
+              <li data-name="link-fale-conosco">
+                <a href="/fale-conosco">Fale Conosco</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+
+      <div data-name="footer-menu-endereco" className={styles.menu}>
+        <ul data-name="menu-list-endereco" className={styles.menuList}>
+          <li data-name="menu-item-endereco" className={styles.menuItem}>
+            <span data-name="menu-title-endereco" className={styles.menuTitle}>Endereço</span>
+            <ul data-name="submenu-endereco" className={styles.submenu}>
+              <li data-name="endereco-completo">Rua Serra Grande Nº 244, Uberlândia 38410394</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <div data-name="footer-menu-vendas" className={styles.menu}>
+        <ul data-name="menu-list-vendas" className={styles.menuList}>
+          <li data-name="menu-item-vendas" className={styles.menuItem}>
+            <span data-name="menu-title-vendas" className={styles.menuTitle}>Central de vendas</span>
+            <ul data-name="submenu-vendas" className={styles.submenu}>
+              <li data-name="telefone-vendas">
+                <a 
+                  href="https://wa.me/553484183311" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  title="Clique para conversar no WhatsApp"
+                  style={{ 
+                    color: 'inherit', 
+                    textDecoration: 'underline',
+                    transition: 'color 0.2s ease'
+                  }}
+                  onMouseEnter={(e) => e.target.style.color = '#25D366'}
+                  onMouseLeave={(e) => e.target.style.color = 'inherit'}
+                >
+                  +55 (34) 8418-3311
                 </a>
               </li>
-              <li>
-                <a href="/institucional/afiliados">Programa de Afiliados</a>
-              </li>
-              <li>
-                <a href="/institucional/solucoes-corporativas">
-                  Soluções Corporativas
-                </a>
-              </li>
-              <li>
-                <a href="/institucional/regulamentos">Regulamentos</a>
-              </li>
-              <li>
-                <a href="/institucional/relatorios">Relatórios</a>
-              </li>
-              <li>
-                <a href="/institucional/integridade">Programa de Integridade</a>
-              </li>
-              <li>
-                <a href="/blog">Blog</a>
-              </li>
-              <li>
-                <a href="/institucional/lojasfisicas">Lojas Físicas</a>
+              <li data-name="qrcode-whatsapp">
+                <img 
+                  src="/img/contact/QrCode-whats.png" 
+                  alt="QR Code WhatsApp" 
+                  style={{ width: '80px', height: '80px', marginTop: '8px' }}
+                />
               </li>
             </ul>
           </li>
         </ul>
       </div>
-      <div className={styles.menu}>
-        <ul className={styles.menuList}>
-          <li className={styles.menuItem}>
-            <span className={styles.menuTitle}>Especiais</span>
-            <ul className={styles.submenu}>
-              <li>
-                <a href="/especiais/uniformes">Uniformes</a>
-              </li>
-              <li>
-                <a href="/especiais/promocao">Promoções</a>
-              </li>
-              <li>
-                <a href="/especiais/industriais">Industriais</a>
-              </li>
-              <li>
-                <a href="/especiais/escolares">Escolares</a>
-              </li>
-              <li>
-                <a href="/especiais/empresariais">Empresariais</a>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-      <div className={styles.menu}>
-        <ul className={styles.menuList}>
-          <li className={styles.menuItem}>
-            <span className={styles.menuTitle}>Ajuda</span>
-            <ul className={styles.submenu}>
-              <li>
-                <a href="/ajuda/trocas-e-devolucoes">Trocas e devoluções</a>
-              </li>
-              <li>
-                <a href="/ajuda/entregas">Entregas</a>
-              </li>
-              <li>
-                <a href="/ajuda/minha-conta">Minha Conta</a>
-              </li>
-              <li>
-                <a href="/ajuda/meus-pedidos">Meus Pedidos</a>
-              </li>
-              <li>
-                <a href="/ajuda/pagamentos">Pagamentos</a>
-              </li>
-              <li>
-                <a href="/ajuda/cancelamentos">Cancelamentos</a>
-              </li>
-              <li>
-                <a href="/ajuda/seguranca">Segurança &amp; Privacidade</a>
-              </li>
-              <li>
-                <a href="/ajuda/como-comprar">Como Comprar</a>
-              </li>
-              <li>
-                <a href="/ajuda/acessibilidade">Acessibilidade</a>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-      <div className={styles.menu}>
-        <ul className={styles.menuList}>
-          <li className={styles.menuItem}>
-            <span className={styles.menuTitle}>Central de Relacionamento</span>
-            <ul className={styles.submenu}>
-              <li>
-                <a href="/ajuda">TIRE SUAS DÚVIDAS</a>
-              </li>
-            </ul>
-          </li>
-        </ul>
-        <ul className={styles.menuList}>
-          <li className={styles.menuItem}>
-            <span className={styles.menuTitle}>Central de vendas</span>
-            <ul className={styles.submenu}>
-              <li>(11) 4000-0000</li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-      <div className={styles.menu}>
-        <div className={styles.socialMedia}>
+      <div data-name="footer-menu-social" className={styles.menu}>
+        <div data-name="social-media-container" className={styles.socialMedia}>
           <a
+            data-name="social-facebook"
             href="https://www.facebook.com/idealuniformes"
             aria-label="facebook"
             className={styles.socialIcon}
@@ -146,6 +86,7 @@ const FooterMenus = () => {
             <Facebook size={22} />
           </a>
           <a
+            data-name="social-instagram"
             href="https://www.instagram.com/idealuniformes"
             aria-label="instagram"
             className={styles.socialIcon}
@@ -155,6 +96,7 @@ const FooterMenus = () => {
             <Instagram size={22} />
           </a>
           <a
+            data-name="social-twitter"
             href="https://twitter.com/idealuniformes"
             aria-label="twitter"
             className={styles.socialIcon}
@@ -162,15 +104,6 @@ const FooterMenus = () => {
             rel="noopener noreferrer"
           >
             <Twitter size={22} />
-          </a>
-          <a
-            href="https://www.youtube.com/idealuniformes"
-            aria-label="youtube"
-            className={styles.socialIcon}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Youtube size={22} />
           </a>
         </div>
       </div>

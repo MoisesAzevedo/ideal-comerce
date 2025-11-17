@@ -1,6 +1,7 @@
 'use client';
 
-import React, { createContext, useContext, useCallback, useEffect, useState } from 'react';
+import React, { createContext, useContext, useCallback, useEffect, useState, useRef } from 'react';
+import { useSearchParams } from 'next/navigation';
 import type { FilterState } from '../types';
 
 /**
@@ -14,6 +15,7 @@ interface FiltersContextType {
   // Funções para atualizar filtros específicos
   updateCategories: (categories: string[]) => void;
   updateSizes: (sizes: string[]) => void;
+  updatePriceRange: (priceRange?: { min?: number; max?: number }) => void;
   
   // Função para atualizar todo o estado dos filtros
   updateFilterState: (filterState: FilterState) => void;
@@ -45,6 +47,7 @@ const FILTERS_CACHE_KEY = 'ideal-comerce-filters';
 const INITIAL_FILTER_STATE: FilterState = {
   categories: [],
   sizes: [],
+  priceRange: undefined,
 };
 
 /**
@@ -53,7 +56,10 @@ const INITIAL_FILTER_STATE: FilterState = {
  */
 export const FiltersProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [filterState, setFilterState] = useState<FilterState>(INITIAL_FILTER_STATE);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [hasInitializedFromUrl, setHasInitializedFromUrl] = useState<boolean>(false);
+  const updateTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const searchParams = useSearchParams();
 
   /**
    * Carrega filtros do cache do navegador
@@ -73,10 +79,68 @@ export const FiltersProvider: React.FC<{ children: React.ReactNode }> = ({ child
       }
     } catch (error) {
       console.warn('⚠️ Erro ao carregar filtros do cache:', error);
+    }
+  }, []);
+
+  /**
+   * Aplica filtros a partir dos parâmetros de URL
+   */
+  const applyFiltersFromUrl = useCallback(() => {
+    try {
+      let hasUrlFilters = false;
+      const newFilterState: FilterState = { ...INITIAL_FILTER_STATE };
+      
+      // Ler parâmetro de categorias
+      const categoriesParam = searchParams.get('categories');
+      if (categoriesParam) {
+        const categoryIds = categoriesParam.split(',').filter(Boolean);
+        if (categoryIds.length > 0) {
+          console.log('🔗 URL Params: Applying categories from URL:', categoryIds);
+          newFilterState.categories = categoryIds;
+          hasUrlFilters = true;
+        }
+      }
+
+      // Ler parâmetro de tamanhos
+      const sizesParam = searchParams.get('sizes');
+      if (sizesParam) {
+        const sizes = sizesParam.split(',').filter(Boolean);
+        if (sizes.length > 0) {
+          console.log('🔗 URL Params: Applying sizes from URL:', sizes);
+          newFilterState.sizes = sizes;
+          hasUrlFilters = true;
+        }
+      }
+
+      // Ler parâmetros de preço
+      const minPriceParam = searchParams.get('minPrice');
+      const maxPriceParam = searchParams.get('maxPrice');
+      if (minPriceParam || maxPriceParam) {
+        const priceRange = {
+          min: minPriceParam ? parseFloat(minPriceParam) : undefined,
+          max: maxPriceParam ? parseFloat(maxPriceParam) : undefined,
+        };
+        console.log('🔗 URL Params: Applying price range from URL:', priceRange);
+        newFilterState.priceRange = priceRange;
+        hasUrlFilters = true;
+      }
+      
+      if (hasUrlFilters) {
+        setFilterState(newFilterState);
+        console.log('✅ URL Params: Filters applied from URL:', newFilterState);
+      } else if (!hasInitializedFromUrl) {
+        // Se não há parâmetros na URL e ainda não inicializamos, carrega do cache
+        loadFromBrowserCache();
+      }
+      
+      setHasInitializedFromUrl(true);
+    } catch (error) {
+      console.error('❌ URL Params: Error applying filters from URL:', error);
+      setHasInitializedFromUrl(true);
     } finally {
       setIsLoading(false);
     }
-  }, []);
+  }, [searchParams, hasInitializedFromUrl, loadFromBrowserCache]);
 
   /**
    * Salva filtros no cache do navegador
@@ -117,6 +181,40 @@ export const FiltersProvider: React.FC<{ children: React.ReactNode }> = ({ child
   }, []);
 
   /**
+   * Atualiza a faixa de preço selecionada
+   */
+  const updatePriceRange = useCallback((priceRange?: { min?: number; max?: number }) => {
+    try {
+      console.log('🔄 FiltersContext: Updating price range:', priceRange);
+      
+      // Limpa timeout anterior se existir para evitar atualizações duplas
+      if (updateTimeoutRef.current) {
+        clearTimeout(updateTimeoutRef.current);
+      }
+
+      // Debounce de 100ms para prevenir atualizações muito rápidas
+      updateTimeoutRef.current = setTimeout(() => {
+        setFilterState(prev => {
+          // Verifica se realmente há mudança para evitar re-renders desnecessários
+          const hasChanged = JSON.stringify(prev.priceRange) !== JSON.stringify(priceRange);
+          if (!hasChanged) {
+            console.log('🔄 FiltersContext: Price range unchanged, skipping update');
+            return prev;
+          }
+
+          console.log('✅ FiltersContext: Price range updated successfully');
+          return {
+            ...prev,
+            priceRange,
+          };
+        });
+      }, 100);
+    } catch (error) {
+      console.error('❌ FiltersContext.updatePriceRange: Error updating price range:', error);
+    }
+  }, []);
+
+  /**
    * Atualiza todo o estado dos filtros
    */
   const updateFilterState = useCallback((newFilterState: FilterState) => {
@@ -151,25 +249,59 @@ export const FiltersProvider: React.FC<{ children: React.ReactNode }> = ({ child
   }, []);
 
   /**
-   * Carrega filtros do cache na inicialização
+   * Carrega filtros na inicialização - prioriza URL sobre cache
+   * Recarrega sempre que a URL muda, mesmo já estando na página
    */
   useEffect(() => {
-    loadFromBrowserCache();
-  }, [loadFromBrowserCache]);
+    // Reset estado para forçar reaplicação
+    setHasInitializedFromUrl(false);
+    setIsLoading(true);
+    
+    // Primeiro tenta aplicar filtros da URL
+    if (searchParams.toString()) {
+      console.log('🔄 URL mudou, reaplicando filtros da URL:', searchParams.toString());
+      applyFiltersFromUrl();
+    } else {
+      // Se não há parâmetros de URL, carrega do cache
+      loadFromBrowserCache();
+      setIsLoading(false);
+    }
+  }, [searchParams.toString()]); // Usa toString() para detectar mudanças nos parâmetros
 
   /**
    * Salva filtros no cache sempre que o estado muda
+   * Mas não salva se os filtros vieram diretamente da URL
    */
   useEffect(() => {
-    if (!isLoading) {
-      saveToBrowserCache();
+    if (!isLoading && hasInitializedFromUrl) {
+      // Só salva no cache se não há parâmetros ativos na URL
+      const hasUrlParams = searchParams.get('categories') || 
+                          searchParams.get('sizes') || 
+                          searchParams.get('minPrice') || 
+                          searchParams.get('maxPrice');
+      
+      if (!hasUrlParams) {
+        saveToBrowserCache();
+      }
     }
-  }, [filterState, isLoading, saveToBrowserCache]);
+  }, [filterState, isLoading, hasInitializedFromUrl, saveToBrowserCache, searchParams]);
+
+  /**
+   * Cleanup ao desmontar componente
+   */
+  useEffect(() => {
+    return () => {
+      if (updateTimeoutRef.current) {
+        clearTimeout(updateTimeoutRef.current);
+      }
+    };
+  }, []);
 
   const contextValue: FiltersContextType = {
     filterState,
     updateCategories,
     updateSizes,
+    updatePriceRange,
     updateFilterState,
     clearFilters,
     clearCategories,

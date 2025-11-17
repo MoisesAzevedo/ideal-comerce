@@ -3,8 +3,8 @@ import AboutHero from './components/AboutHero';
 import Section from './components/Section';
 import TeamCard from './components/TeamCard';
 import type { TeamMember } from './types';
-import FooterMenus from '../components/Footer/FooterMenusNew';
-import Header from '../components/Header/Header';
+import SharedPageLayout from '../layouts/SharedPageLayout';
+import { Breadcrumb } from '../components';
 
 export const metadata: Metadata = {
   title: 'Quem Somos | Ideal E-commerce',
@@ -16,12 +16,17 @@ const team: TeamMember[] = [
 ];
 
 export default function QuemSomosPage() {
+  const breadcrumbItems = [
+    { label: 'Quem Somos', href: '/quem-somos' }
+  ];
+
+  const breadcrumbComponent = (
+    <Breadcrumb items={breadcrumbItems} className="max-w-container mx-auto" />
+  );
+
   return (
-    <main data-name="quem-somos-page" className="font-sans">
-         <div data-name="header-wrapper">
-           <Header />
-          </div>
-      <div className="w-full bg-white">
+    <SharedPageLayout className="font-sans" breadcrumb={breadcrumbComponent}>
+      <section className="w-full bg-white">
         <div className="mx-auto max-w-container px-4 phone:px-6 lg:px-8 py-12 phone:py-16">
           <AboutHero
             title="Quem somos?"
@@ -34,11 +39,8 @@ export default function QuemSomosPage() {
               para melhorar a experiência de quem nos escolhe.
             </p>
           </Section>
-
         </div>
-      </div>
-   <FooterMenus />
-  
-    </main>
+      </section>
+    </SharedPageLayout>
   );
 }

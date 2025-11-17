@@ -1,6 +1,6 @@
 'use client';
 
-import { CategoryFilter, SizeFilter } from './components';
+import { CategoryFilter, SizeFilter, PriceFilter } from './components';
 import styles from './Filters.module.scss';
 
 interface FiltersProps {
@@ -14,10 +14,11 @@ interface FiltersProps {
  */
 const Filters = ({ className = '' }: FiltersProps) => {
   return (
-    <div className={`${styles.filters} ${className}`} data-name="filters-container">
+    <div className={`${styles.filters} ${styles.filtersContainer} ${className}`} data-name="filters-container">
       <div className={styles.filterGroup} data-name="filter-group">
         <CategoryFilter />
         <SizeFilter />
+        <PriceFilter />
       </div>
     </div>
   );

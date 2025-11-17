@@ -8,10 +8,11 @@
 .menusWrapper {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 2rem;
   max-width: 1200px;
   margin: 0 auto;
+  padding: 0 1rem;
 }
 
 .menu {
@@ -39,7 +40,7 @@
 
 .submenu {
   list-style: none;
-  padding-left: 0.5rem;
+  padding-left: 0;
   margin: 0.2rem 0 0.5rem 0;
 }
 

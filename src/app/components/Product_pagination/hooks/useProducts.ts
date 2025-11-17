@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useCallback, useMemo } from "react";
+import { useEffect, useState, useCallback, useMemo, useRef } from "react";
 import type { Product } from "../../../../../db";
 import type { ProductsQueryParams } from "../services/products-service";
 import { createProductsService } from "../services/products-service";
@@ -24,59 +24,82 @@ export interface UseProductsReturn extends UseProductsState {
 }
 
 export function useProducts(params: ProductsQueryParams = {}): UseProductsReturn {
-  console.log('🎯 useProducts: HOOK INITIALIZED with params:', params);
+  if (process.env.NODE_ENV === 'development') {
+    console.log('🎯 useProducts: HOOK INITIALIZED with params:', params);
+  }
   
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [meta, setMeta] = useState<UseProductsState['meta']>(null);
+  const [isRequesting, setIsRequesting] = useState<boolean>(false);
+  const requestTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  console.log('🎯 useProducts: State initialized, creating productsService...');
+  if (process.env.NODE_ENV === 'development') {
+    console.log('🎯 useProducts: State initialized, creating productsService...');
+  }
 
   const productsService = useMemo(() => createProductsService(), []);
 
   const fetchProducts = useCallback(async () => {
-    console.log('🎯 useProducts: Fetching products with:', params);
-    try {
-      setLoading(true);
-      setError(null);
-      
-      const response = await productsService.getProducts(params);
-      
-      console.log('🎯 useProducts: Response received:', {
-        dataLength: response.data.length,
-        meta: response.meta
-      });
-      
-      setProducts(response.data);
-      setMeta(response.meta);
-    } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : "Unknown error occurred";
-      console.error('❌ useProducts: Error:', err);
-      setError(errorMessage);
-      setProducts([]);
-      setMeta(null);
-    } finally {
-      setLoading(false);
+    // Previne múltiplas requisições simultâneas
+    if (isRequesting) {
+      console.log('🚫 useProducts: Requisição já em andamento, ignorando...');
+      return;
     }
-  }, [params.page, params.perPage, params.category, params.size, params.q]);
+
+    // Limpa timeout anterior se existir
+    if (requestTimeoutRef.current) {
+      clearTimeout(requestTimeoutRef.current);
+    }
+
+    // Debounce de 200ms para evitar múltiplas chamadas consecutivas
+    requestTimeoutRef.current = setTimeout(async () => {
+      if (process.env.NODE_ENV === 'development') {
+        console.log('🎯 useProducts: Fetching products with:', params);
+      }
+      
+      try {
+        setIsRequesting(true);
+        setLoading(true);
+        setError(null);
+        
+        const response = await productsService.getProducts(params);
+        
+        if (process.env.NODE_ENV === 'development') {
+          console.log('🎯 useProducts: Response received:', {
+            dataLength: response.data.length,
+            meta: response.meta
+          });
+        }
+        
+        setProducts(response.data);
+        setMeta(response.meta);
+      } catch (err) {
+        const errorMessage = err instanceof Error ? err.message : "Unknown error occurred";
+        console.error('❌ useProducts: Error:', err);
+        setError(errorMessage);
+        setProducts([]);
+        setMeta(null);
+      } finally {
+        setLoading(false);
+        setIsRequesting(false);
+      }
+    }, 200);
+  }, [params.page, params.perPage, params.category, params.size, params.q, params.minPrice, params.maxPrice, productsService]); // Removido isRequesting das dependências
 
   useEffect(() => {
-    console.log('🎯 useProducts: useEffect TRIGGERED with params:', params);
-    let mounted = true;
+    if (process.env.NODE_ENV === 'development') {
+      console.log('🎯 useProducts: useEffect TRIGGERED with params:', params);
+    }
+    
+    fetchProducts();
 
-    fetchProducts().then(() => {
-      if (!mounted) {
-        // Reset state if component unmounted during fetch
-        setProducts([]);
-        setLoading(false);
-        setError(null);
-        setMeta(null);
-      }
-    });
-
+    // Cleanup ao desmontar
     return () => {
-      mounted = false;
+      if (requestTimeoutRef.current) {
+        clearTimeout(requestTimeoutRef.current);
+      }
     };
   }, [fetchProducts]); // Re-fetch when any parameter changes
 

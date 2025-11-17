@@ -1,0 +1,166 @@
+/* Dropdown de resultados de pesquisa */
+.dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-top: none;
+  border-radius: 0 0 4px 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 9998;
+  max-height: 300px;
+  overflow-y: auto;
+
+  @media (min-width: theme('screens.tablet')) {
+    background: white;
+    border-color: #e0e0e0;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+  }
+
+  @media (max-width: theme('screens.tablet')) {
+    background: white;
+    border-color: #ccc;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  }
+}
+
+/* Estado de carregamento */
+.loading {
+  padding: 16px;
+  text-align: center;
+  color: #666;
+  font-size: 14px;
+}
+
+/* Lista de resultados */
+.resultsList {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Item individual do resultado */
+.resultItem {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  border: none;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  width: 100%;
+  gap: 12px;
+
+  &:hover {
+    background-color: #f5f5f5;
+  }
+
+  &.selected {
+    background-color: #e3f2fd;
+  }
+
+  &:not(:last-child) {
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  @media (max-width: theme('screens.phone')) {
+    padding: 10px 12px;
+    gap: 10px;
+  }
+}
+
+/* Container da imagem do produto */
+.resultImage {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid #e0e0e0;
+
+  @media (max-width: theme('screens.phone')) {
+    width: 35px;
+    height: 35px;
+  }
+}
+
+/* Imagem do produto */
+.productImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Informações do produto */
+.resultInfo {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 2px;
+  min-width: 0; /* Permite que o texto seja truncado */
+}
+
+/* Nome do produto */
+.productName {
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  @media (max-width: theme('screens.phone')) {
+    font-size: 13px;
+  }
+}
+
+/* Preço do produto */
+.productPrice {
+  font-size: 13px;
+  font-weight: 600;
+  color: #2e7d32;
+
+  @media (max-width: theme('screens.phone')) {
+    font-size: 12px;
+  }
+}
+
+/* Estado sem resultados */
+.noResults {
+  padding: 20px 16px;
+  text-align: center;
+  color: #999;
+  font-size: 14px;
+  
+  @media (max-width: theme('screens.phone')) {
+    padding: 16px 12px;
+    font-size: 13px;
+  }
+}
+
+/* Melhorias de acessibilidade */
+.resultItem:focus {
+  outline: 2px solid #1976d2;
+  outline-offset: -2px;
+}
+
+/* Scrollbar customizada */
+.dropdown::-webkit-scrollbar {
+  width: 6px;
+}
+
+.dropdown::-webkit-scrollbar-track {
+  background: #f5f5f5;
+}
+
+.dropdown::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 3px;
+}
+
+.dropdown::-webkit-scrollbar-thumb:hover {
+  background: #999;
+}

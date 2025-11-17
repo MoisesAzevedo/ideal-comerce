@@ -70,14 +70,158 @@
   background: #fff;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   border-radius: 6px;
-  z-index: 10;
+  z-index: 9999; /* Aumentado para 9999 */
   padding: 24px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+  gap: 8px;
   align-items: start;
   justify-items: start;
   overflow-y: auto;
+  
+  /* Estilização da barra de rolagem */
+  &::-webkit-scrollbar {
+    width: 4px; /* Barra mais fina */
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: transparent; /* Sem fundo */
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background-color: #000; /* Cor preta */
+    border-radius: 2px;
+  }
+  
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: #333; /* Cor um pouco mais clara no hover */
+  }
+
+/* Estilo para cada coluna de categoria */
+.categoryColumn {
+  background: #fff;
+  border-radius: 8px;
+  padding: 6px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  min-width: 0; /* allow column to shrink inside grid */
+  box-sizing: border-box;
+  width: 100%;
+  
+  &:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+  }
+}
+
+/* Estilo para o link principal da categoria */
+.categoryMainLink {
+  display: block;
+  font-weight: 700;
+  font-size: 15px;
+  color: #1d2d1e;
+  text-decoration: none;
+  margin-bottom: 0;
+  letter-spacing: 1px;
+  font-family: var(--font-primary);
+  text-transform: uppercase;
+  padding: 4px 6px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    background-color: #1d2d1e;
+    color: #fff;
+    transform: translateX(4px);
+  }
+}
+
+/* Lista de subcategorias */
+.subcategoryList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Item de subcategoria */
+.subcategoryItem {
+  margin-bottom: 4px;
+}
+
+/* Link da subcategoria */
+.subcategoryLink {
+  display: block;
+  color: #666;
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 400;
+  letter-spacing: 0.2px;
+  font-family: Calibri, Arial, sans-serif;
+  padding: 3px 6px;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    background-color: #1d2d1e;
+    color: #fff;
+    transform: translateX(4px);
+  }
+}
+  /* Para Firefox */
+  scrollbar-width: thin;
+  scrollbar-color: #000 transparent;
+}
+
+/* Ajustes responsivos para as colunas de categoria */
+@media (min-width: 1050px) and (max-width: 1279px) {
+  .categoryColumn {
+    padding: 14px;
+    min-width: 0;
+  }
+  
+  .categoryMainLink {
+    font-size: 16px;
+    padding: 6px 10px;
+  }
+  
+  .subcategoryLink {
+    font-size: 13px;
+    padding: 5px 10px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1049px) {
+  .categoryColumn {
+    padding: 12px;
+    min-width: 0;
+  }
+  
+  .categoryMainLink {
+    font-size: 15px;
+    padding: 5px 8px;
+  }
+  
+  .subcategoryLink {
+    font-size: 12px;
+    padding: 4px 8px;
+  }
+}
+
+@media (max-width: 767px) {
+  .categoryColumn {
+    padding: 10px;
+    min-width: 0;
+  }
+  
+  .categoryMainLink {
+    font-size: 14px;
+    padding: 4px 6px;
+  }
+  
+  .subcategoryLink {
+    font-size: 11px;
+    padding: 3px 6px;
+  }
 }
 
 /* Ajustes para telas de laptop (1050px - 1279px) */
@@ -86,7 +230,7 @@
     min-width: 900px;
     height: 380px;
     padding: 20px;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
     gap: 14px;
   }
 }
@@ -98,9 +242,8 @@
     max-width: calc(100vw - 2rem);
     height: 350px;
     padding: 16px;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
     gap: 12px;
-    font-size: 0.9rem;
   }
 }
 
@@ -113,9 +256,8 @@
     height: auto;
     max-height: 70vh;
     padding: 12px;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
     gap: 10px;
-    font-size: 0.85rem;
     left: 0.5rem;
     right: 0.5rem;
   }

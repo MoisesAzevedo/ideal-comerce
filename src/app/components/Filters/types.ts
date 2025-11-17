@@ -4,6 +4,19 @@ import type { Category } from '../../../../db/types';
 export interface FilterState {
   categories: string[];
   sizes: string[];
+  priceRange?: {
+    min?: number;
+    max?: number;
+  };
+}
+
+export interface PriceRange {
+  min?: number;
+  max?: number;
+}
+
+export interface PriceFilterProps {
+  className?: string;
 }
 
 export interface CategoryFilterProps {
