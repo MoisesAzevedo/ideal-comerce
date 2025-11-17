@@ -118,7 +118,7 @@ function ProductContent({ params }: ProductPageProps) {
 
         {/* Produtos em destaque - sempre exibido, independente do carrossel de categoria */}
         <section data-name="featured-products-section" className="mt-12">
-          <Products pageSpecificItems={6} />
+          <Products pageSpecificItems={6} ignoreFilters />
         </section>
       </div>
     </SharedPageLayout>

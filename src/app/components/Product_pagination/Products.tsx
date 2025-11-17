@@ -16,40 +16,38 @@ interface ProductsProps {
   pageSpecificItems?: number;
   /** Forçar um número específico de itens (sobrescreve responsividade) */
   forceItems?: number;
+  /** Se true, ignora o contexto global de filtros (útil em páginas de produto) */
+  ignoreFilters?: boolean;
 }
 
-const Products = ({ 
-  searchQuery, 
-  className = '',
-  pageSpecificItems,
-  forceItems 
-}: ProductsProps) => {
-  // Get filter state from centralized context
-  let getCategoryFilter, getSizeFilter, getPriceFilter;
-  try {
-    const filtersHook = useFilters();
-    getCategoryFilter = filtersHook.getCategoryFilter;
-    getSizeFilter = filtersHook.getSizeFilter;
-    getPriceFilter = filtersHook.getPriceFilter;
-  } catch (error) {
-    console.error('❌ Products: Error accessing useFilters hook:', error);
-    throw error;
-  }
-  
-  // Get filters formatted for API
-  let categoryFilter, sizeFilter, priceFilter;
-  try {
-    categoryFilter = getCategoryFilter();
-    sizeFilter = getSizeFilter();
-    priceFilter = getPriceFilter();
-    if (process.env.NODE_ENV === 'development') {
-      console.log('🎯 Products: Filter values:', { categoryFilter, sizeFilter, priceFilter });
+const Products = (props: ProductsProps) => {
+  const {
+    searchQuery,
+    className = '',
+    pageSpecificItems,
+    forceItems,
+    ignoreFilters = false
+  } = props;
+  // Get filter state from centralized context unless explicitly ignored
+  let categoryFilter: any = undefined;
+  let sizeFilter: any = undefined;
+  let priceFilter: any = undefined;
+
+  if (!ignoreFilters) {
+    try {
+      const filtersHook = useFilters();
+      categoryFilter = filtersHook.getCategoryFilter?.();
+      sizeFilter = filtersHook.getSizeFilter?.();
+      priceFilter = filtersHook.getPriceFilter?.();
+      if (process.env.NODE_ENV === 'development') {
+        console.log('🎯 Products: Filter values:', { categoryFilter, sizeFilter, priceFilter });
+      }
+    } catch (error) {
+      console.warn('⚠️ Products: useFilters not available or failed, proceeding without filters.', error);
+      categoryFilter = undefined;
+      sizeFilter = undefined;
+      priceFilter = undefined;
     }
-  } catch (error) {
-    console.error('❌ Products: Error getting filter values:', error);
-    categoryFilter = undefined;
-    sizeFilter = undefined;
-    priceFilter = undefined;
   }
   
   // State to track when filters are changing

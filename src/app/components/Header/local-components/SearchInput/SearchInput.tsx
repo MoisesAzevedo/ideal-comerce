@@ -1,8 +1,11 @@
+"use client";
+
 import Image from "next/image";
 import { useState, useRef, useEffect } from "react";
+import { useRouter } from 'next/navigation';
 import styles from "./SearchInput.module.scss";
 import { getAssetPath } from "@/utils/paths";
-import { searchCategories, defaultCategory } from "./utils/searchCategories";
+import { searchCategoriesWithAll as searchCategories, defaultCategory } from "./utils/searchCategories";
 import { useSearch } from "./hooks/useSearch";
 import { SearchResultsDropdown } from "./components/SearchResultsDropdown";
 import type { SearchCategory, SearchInputProps, SearchResult } from "./types";
@@ -18,7 +21,8 @@ export default function SearchInput({
   const dropdownRef = useRef<HTMLDivElement>(null);
   const searchRef = useRef<HTMLDivElement>(null);
 
-  const { searchState, performSearch, updateQuery, setIsOpen: setSearchResultsOpen, clearResults } = useSearch();
+  const router = useRouter();
+  const { searchState, performSearch, searchNow, updateQuery, setIsOpen: setSearchResultsOpen, clearResults } = useSearch();
 
   // Fechar dropdowns ao clicar fora
   useEffect(() => {
@@ -87,8 +91,14 @@ export default function SearchInput({
       console.log('Navegando para:', `/produtos?${searchParams.toString()}`);
     }
 
-    // Fechar dropdown de resultados após submissão
-    setSearchResultsOpen(false);
+    // Executa a pesquisa imediatamente e abre o dropdown de resultados
+    // use searchNow to bypass debounce for immediate submit
+    if (typeof searchNow === 'function') {
+      searchNow({ term: searchQuery, categoryId: selectedCategory.id });
+    } else {
+      performSearch({ term: searchQuery, categoryId: selectedCategory.id });
+    }
+    setSearchResultsOpen(true);
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -99,10 +109,15 @@ export default function SearchInput({
     if (onSelectProduct) {
       onSelectProduct(result.id);
     } else {
-      // Implementação padrão de navegação
-      console.log('Navegando para produto:', `/produto/${result.id}`);
+      // Navega para a página do produto no client
+      try {
+        router.push(`/produto/${result.id}`);
+      } catch (err) {
+        // Fallback simples
+        window.location.href = `/produto/${result.id}`;
+      }
     }
-    
+
     // Limpar pesquisa e fechar dropdown
     setSearchQuery("");
     clearResults();

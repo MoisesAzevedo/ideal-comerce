@@ -14,7 +14,7 @@
 }
 
 .item {
-  font-family: "Teko", Helvetica, Arial, sans-serif;
+  font-family: var(--font-primary) !important;
   font-weight: 400;
   color: #1d2d1e;
   font-size: 1.5rem;
@@ -23,10 +23,41 @@
   cursor: pointer;
   transition: color 0.2s;
   position: relative;
+  text-decoration: none;
+}
+
+/* Estilo específico para os links do topo para ficar igual ao título "TODAS AS CATEGORIAS" */
+.topLink {
+  font-family: var(--font-primary) !important;
+  font-weight: 400;
+  color: #1d2d1e;
+  font-size: 1.5rem;
+  letter-spacing: 2px;
+  line-height: 23px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin: 0;
+  white-space: nowrap;
 }
 
 .item:hover {
   color: #2b4d2b;
+}
+
+/* Underline only for top navigation links (data-name starts with "top-link-") */
+.item[data-name^="top-link-"] {
+  text-decoration: none;
+  text-decoration-color: transparent;
+  text-decoration-thickness: 2px;
+  transition: color 0.18s ease, text-decoration-color 0.18s ease;
+}
+
+.item[data-name^="top-link-"]:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  /* underline color matches hover text color */
+  text-decoration-color: #2b4d2b;
 }
 
 /* Oculta a partir do 5º item em telas de laptop (1050px - 1279px) */
@@ -73,7 +104,8 @@
   z-index: 9999; /* Aumentado para 9999 */
   padding: 24px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+  /* Desktop padrão: 4 colunas */
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 8px;
   align-items: start;
   justify-items: start;
@@ -123,7 +155,7 @@
   text-decoration: none;
   margin-bottom: 0;
   letter-spacing: 1px;
-  font-family: var(--font-primary);
+  font-family: var(--font-primary) !important;
   text-transform: uppercase;
   padding: 4px 6px;
   border-radius: 6px;
@@ -156,7 +188,7 @@
   text-decoration: none;
   font-weight: 400;
   letter-spacing: 0.2px;
-  font-family: Calibri, Arial, sans-serif;
+  font-family: var(--font-primary) !important;
   padding: 3px 6px;
   border-radius: 4px;
   transition: all 0.3s ease;
@@ -230,7 +262,7 @@
     min-width: 900px;
     height: 380px;
     padding: 20px;
-    grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 14px;
   }
 }
@@ -242,7 +274,8 @@
     max-width: calc(100vw - 2rem);
     height: 350px;
     padding: 16px;
-    grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+    /* Tablet: 2 colunas */
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 12px;
   }
 }
@@ -256,7 +289,8 @@
     height: auto;
     max-height: 70vh;
     padding: 12px;
-    grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+    /* Mobile: 1 coluna para evitar overflow */
+    grid-template-columns: 1fr;
     gap: 10px;
     left: 0.5rem;
     right: 0.5rem;

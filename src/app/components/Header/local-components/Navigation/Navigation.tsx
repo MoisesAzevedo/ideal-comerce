@@ -73,22 +73,7 @@ const Navigation = () => {
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >
-          <h2
-            style={{
-              fontFamily: "Teko, Helvetica, Arial, sans-serif",
-              fontWeight: 400,
-              color: "#1d2d1e",
-              fontSize: "1.5rem",
-              letterSpacing: 2,
-              lineHeight: "23px",
-              display: "flex",
-              alignItems: "center",
-              gap: 4,
-              margin: 0,
-              whiteSpace: "nowrap"
-            }}
-            data-name="title-all-categories"
-          >
+          <h2 className={styles.topLink} data-name="title-all-categories">
             TODAS AS CATEGORIAS
             <SelectArrow rotated={open} color="#1d2d1e" />
           </h2>
@@ -107,21 +92,7 @@ const Navigation = () => {
             <Link
               key={cat.id}
               href={cat.href}
-              className={styles.item}
-              style={{
-                fontFamily: "Teko, Helvetica, Arial, sans-serif",
-                fontWeight: 400,
-                color: "#1d2d1e",
-                fontSize: "1.5rem",
-                letterSpacing: 2,
-                lineHeight: "normal",
-                cursor: "pointer",
-                transition: "color 0.2s",
-                margin: 0,
-                whiteSpace: "nowrap",
-                textDecoration: "none",
-                display: "block"
-              }}
+              className={`${styles.item} ${styles.topLink}`}
               data-name={`top-link-${cat.title}`}
             >
               {cat.title.toUpperCase()}

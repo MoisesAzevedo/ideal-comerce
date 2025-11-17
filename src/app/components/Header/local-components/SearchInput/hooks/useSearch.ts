@@ -29,7 +29,36 @@ export const useSearch = () => {
     setSearchState(prev => ({ ...prev, isLoading: true }));
 
     debounceTimeout.current = setTimeout(() => {
+      try {
+        const results = searchService.current.searchProducts(query);
+        // Log temporário para debug: mostrar query e resultados
+        // Remova este log em produção
+        // eslint-disable-next-line no-console
+        console.log('[useSearch] performSearch', { query, results });
+        setSearchState(prev => ({
+          ...prev,
+          results,
+          isLoading: false,
+          isOpen: results.length > 0,
+          selectedIndex: -1
+        }));
+      } catch (err) {
+        // eslint-disable-next-line no-console
+        console.error('[useSearch] performSearch error', err);
+        setSearchState(prev => ({ ...prev, results: [], isLoading: false, isOpen: false }));
+      }
+    }, 300);
+  }, []);
+
+  /**
+   * Executa a pesquisa imediatamente (sem debounce)
+   */
+  const searchNow = useCallback((query: SearchQuery) => {
+    setSearchState(prev => ({ ...prev, isLoading: true }));
+    try {
       const results = searchService.current.searchProducts(query);
+      // eslint-disable-next-line no-console
+      console.log('[useSearch] searchNow', { query, results });
       setSearchState(prev => ({
         ...prev,
         results,
@@ -37,7 +66,11 @@ export const useSearch = () => {
         isOpen: results.length > 0,
         selectedIndex: -1
       }));
-    }, 300);
+    } catch (err) {
+      // eslint-disable-next-line no-console
+      console.error('[useSearch] searchNow error', err);
+      setSearchState(prev => ({ ...prev, results: [], isLoading: false, isOpen: false }));
+    }
   }, []);
 
   /**
@@ -98,6 +131,7 @@ export const useSearch = () => {
   return {
     searchState,
     performSearch,
+    searchNow,
     updateQuery,
     setIsOpen,
     navigateResults,

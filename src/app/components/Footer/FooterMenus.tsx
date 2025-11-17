@@ -56,8 +56,8 @@ const FooterMenus = () => {
                     textDecoration: 'underline',
                     transition: 'color 0.2s ease'
                   }}
-                  onMouseEnter={(e) => e.target.style.color = '#25D366'}
-                  onMouseLeave={(e) => e.target.style.color = 'inherit'}
+                  onMouseEnter={(e: React.MouseEvent<HTMLAnchorElement>) => e.currentTarget.style.color = '#25D366'}
+                  onMouseLeave={(e: React.MouseEvent<HTMLAnchorElement>) => e.currentTarget.style.color = 'inherit'}
                 >
                   +55 (34) 8418-3311
                 </a>
