@@ -160,8 +160,43 @@ export const useFilters = () => {
   };
   
   } catch (error) {
-    console.error('❌ useFilters: Critical error in hook:', error);
-    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
-    throw new Error(`useFilters hook failed: ${errorMessage}`);
+    console.error('❌ useFilters: Critical error in hook (returning safe fallback):', error);
+    // Return a safe fallback implementation instead of throwing so components
+    // can call this hook unconditionally (avoids runtime crashes and ESLint
+    // false-positives where hooks are wrapped in try/catch).
+    const safeFilterState = {
+      categories: [] as string[],
+      sizes: [] as string[],
+      priceRange: undefined as undefined | { min?: number; max?: number },
+    };
+
+    const noop = () => {};
+
+    return {
+      filterState: safeFilterState,
+      isLoading: false,
+      hasActiveFilters: false,
+
+      updateCategories: noop,
+      updateSizes: noop,
+      updatePriceRange: noop,
+      updateFilterState: noop,
+
+      clearFilters: noop,
+      clearCategories: noop,
+      clearSizes: noop,
+      clearPriceRange: noop,
+
+      addCategory: noop,
+      removeCategory: noop,
+      toggleCategory: noop,
+      addSize: noop,
+      removeSize: noop,
+      toggleSize: noop,
+
+      getCategoryFilter: () => undefined,
+      getSizeFilter: () => undefined,
+      getPriceFilter: () => undefined,
+    } as any;
   }
 };

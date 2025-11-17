@@ -13,11 +13,11 @@
   }
 }
 
-// Container com sticky behavior específico para telas maiores que tablet
+// Container: removido sticky do container para delegar o comportamento sticky
+// ao elemento interno `filter-group` via JS (evita conflitos entre dois sticky)
 .filtersContainer {
   @media (min-width: 768px) {
-    position: sticky;
-    top: 100px;
+    position: static;
     z-index: 10;
   }
 }

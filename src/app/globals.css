@@ -141,3 +141,8 @@ html::-webkit-scrollbar-thumb:hover,
 body::-webkit-scrollbar-thumb:hover {
   background-color: #333;
 }
+
+/* Forçar largura fixa do wrapper com atributo data-name="filters" */
+[data-name="filters"] {
+  width: 414.48px;
+}

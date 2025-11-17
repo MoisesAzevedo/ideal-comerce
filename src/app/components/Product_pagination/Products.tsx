@@ -28,25 +28,20 @@ const Products = (props: ProductsProps) => {
     forceItems,
     ignoreFilters = false
   } = props;
-  // Get filter state from centralized context unless explicitly ignored
+  // Call the filters hook at the top-level (hooks must not be called conditionally)
+  const filtersHook = useFilters();
+
+  // Resolve filter values only when not explicitly ignoring filters
   let categoryFilter: any = undefined;
   let sizeFilter: any = undefined;
   let priceFilter: any = undefined;
 
-  if (!ignoreFilters) {
-    try {
-      const filtersHook = useFilters();
-      categoryFilter = filtersHook.getCategoryFilter?.();
-      sizeFilter = filtersHook.getSizeFilter?.();
-      priceFilter = filtersHook.getPriceFilter?.();
-      if (process.env.NODE_ENV === 'development') {
-        console.log('🎯 Products: Filter values:', { categoryFilter, sizeFilter, priceFilter });
-      }
-    } catch (error) {
-      console.warn('⚠️ Products: useFilters not available or failed, proceeding without filters.', error);
-      categoryFilter = undefined;
-      sizeFilter = undefined;
-      priceFilter = undefined;
+  if (!ignoreFilters && filtersHook) {
+    categoryFilter = filtersHook.getCategoryFilter?.();
+    sizeFilter = filtersHook.getSizeFilter?.();
+    priceFilter = filtersHook.getPriceFilter?.();
+    if (process.env.NODE_ENV === 'development') {
+      console.log('🎯 Products: Filter values:', { categoryFilter, sizeFilter, priceFilter });
     }
   }
   
