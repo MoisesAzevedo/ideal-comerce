@@ -7,18 +7,17 @@ import { useFiltersContext } from '../context/FiltersContext';
  * Responsabilidade: Fornecer interface simplificada para o contexto de filtros
  */
 export const useFilters = () => {
-  try {
-    const {
-      filterState,
-      updateCategories,
-      updateSizes,
-      updatePriceRange,
-      updateFilterState,
-      clearFilters,
-      clearCategories,
-      clearSizes,
-      isLoading,
-    } = useFiltersContext();
+  const {
+    filterState,
+    updateCategories,
+    updateSizes,
+    updatePriceRange,
+    updateFilterState,
+    clearFilters,
+    clearCategories,
+    clearSizes,
+    isLoading,
+  } = useFiltersContext();
 
   /**
    * Remove uma categoria específica dos filtros
@@ -77,19 +76,15 @@ export const useFilters = () => {
    * Alterna um tamanho (adiciona se não existir, remove se existir)
    */
   const toggleSize = (size: string) => {
-    try {
-      const currentSizes = filterState.sizes;
-      const exists = currentSizes.includes(size);
-      
-      if (exists) {
-        const newSizes = currentSizes.filter(s => s !== size);
-        updateSizes(newSizes);
-      } else {
-        const newSizes = [...currentSizes, size];
-        updateSizes(newSizes);
-      }
-    } catch (error) {
-      console.error('❌ useFilters.toggleSize: Error toggling size:', error);
+    const currentSizes = filterState.sizes;
+    const exists = currentSizes.includes(size);
+
+    if (exists) {
+      const newSizes = currentSizes.filter(s => s !== size);
+      updateSizes(newSizes);
+    } else {
+      const newSizes = [...currentSizes, size];
+      updateSizes(newSizes);
     }
   };
 
@@ -101,30 +96,15 @@ export const useFilters = () => {
                           (filterState.priceRange && (filterState.priceRange.min !== undefined || filterState.priceRange.max !== undefined));
 
   const getCategoryFilter = () => {
-    try {
-      return filterState.categories.length > 0 ? filterState.categories.join(',') : undefined;
-    } catch (error) {
-      console.error('❌ useFilters.getCategoryFilter: Error:', error);
-      return undefined;
-    }
+    return filterState.categories.length > 0 ? filterState.categories.join(',') : undefined;
   };
 
   const getSizeFilter = () => {
-    try {
-      return filterState.sizes.length > 0 ? filterState.sizes.join(',') : undefined;
-    } catch (error) {
-      console.error('❌ useFilters.getSizeFilter: Error:', error);
-      return undefined;
-    }
+    return filterState.sizes.length > 0 ? filterState.sizes.join(',') : undefined;
   };
 
   const getPriceFilter = () => {
-    try {
-      return filterState.priceRange;
-    } catch (error) {
-      console.error('❌ useFilters.getPriceFilter: Error:', error);
-      return undefined;
-    }
+    return filterState.priceRange;
   };
 
   return {
@@ -158,45 +138,4 @@ export const useFilters = () => {
     getSizeFilter,
     getPriceFilter,
   };
-  
-  } catch (error) {
-    console.error('❌ useFilters: Critical error in hook (returning safe fallback):', error);
-    // Return a safe fallback implementation instead of throwing so components
-    // can call this hook unconditionally (avoids runtime crashes and ESLint
-    // false-positives where hooks are wrapped in try/catch).
-    const safeFilterState = {
-      categories: [] as string[],
-      sizes: [] as string[],
-      priceRange: undefined as undefined | { min?: number; max?: number },
-    };
-
-    const noop = () => {};
-
-    return {
-      filterState: safeFilterState,
-      isLoading: false,
-      hasActiveFilters: false,
-
-      updateCategories: noop,
-      updateSizes: noop,
-      updatePriceRange: noop,
-      updateFilterState: noop,
-
-      clearFilters: noop,
-      clearCategories: noop,
-      clearSizes: noop,
-      clearPriceRange: noop,
-
-      addCategory: noop,
-      removeCategory: noop,
-      toggleCategory: noop,
-      addSize: noop,
-      removeSize: noop,
-      toggleSize: noop,
-
-      getCategoryFilter: () => undefined,
-      getSizeFilter: () => undefined,
-      getPriceFilter: () => undefined,
-    } as any;
-  }
 };

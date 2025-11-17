@@ -1,6 +1,7 @@
 export type ModalProps = {
   open: boolean;
   onClose: () => void;
+  panelClassName?: string;
 };
 
 export type ConfirmationModalProps = ModalProps & {

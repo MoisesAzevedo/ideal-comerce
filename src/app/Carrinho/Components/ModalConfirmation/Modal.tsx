@@ -6,6 +6,7 @@ export function Modal({
   open,
   onClose,
   children,
+  panelClassName = '',
 }: React.PropsWithChildren<ModalProps>) {
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
@@ -29,7 +30,7 @@ export function Modal({
       <div
         role="document"
         onClick={(e) => e.stopPropagation()}
-        className="relative w-full max-w-md phone:max-w-lg bg-white rounded-lg shadow-lg p-4 phone:p-6"
+        className={`relative bg-white shadow-lg ${panelClassName} `}
       >
         {children}
       </div>

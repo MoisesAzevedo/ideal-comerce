@@ -1,3 +1,4 @@
+import React from 'react';
 import type { Metadata } from 'next';
 import { Teko } from 'next/font/google';
 import { getAssetPath } from '@/utils/paths';
@@ -55,11 +56,13 @@ export default function RootLayout({
         }} />
       </head>
       <body className="antialiased">
-        <CartProvider>
-          <FavoritesProvider>
-            {children}
-          </FavoritesProvider>
-        </CartProvider>
+        <React.Suspense fallback={null}>
+          <CartProvider>
+            <FavoritesProvider>
+              {children}
+            </FavoritesProvider>
+          </CartProvider>
+        </React.Suspense>
       </body>
     </html>
   );
