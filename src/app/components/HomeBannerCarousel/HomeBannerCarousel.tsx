@@ -42,8 +42,9 @@ const HomeBannerCarousel: React.FC<PropType> = (props) => {
   const [selectedIndex, setSelectedIndex] = useState(0)
   const isTabletOrLarger = useIsTabletOrLarger()
   
-  // Escolher imagens baseadas no tamanho da tela
-  const currentImages = isTabletOrLarger && desktopImages ? desktopImages : images
+  // Sempre usar `desktopImages` (images removido da decisão conforme solicitado)
+  // Garantir fallback para array vazio para evitar `undefined` em `map`
+  const currentImages = desktopImages ?? []
   
   const [emblaRef, emblaApi] = useEmblaCarousel(options, [
     Fade(),
@@ -89,18 +90,18 @@ const HomeBannerCarousel: React.FC<PropType> = (props) => {
         <div className={styles.emblaContainer}>
           {currentImages.map((image, index) => (
             <div className={styles.emblaSlide} key={index}>
-              <div className={styles.emblaSlideInner}>
-                <Image
-                  src={getAssetPath(image)}
-                  alt={`Banner ${index + 1}`}
-                  width={1200}
-                  height={600}
-                  className={styles.emblaSlideImg}
-                  priority={index === 0}
-                  sizes="(max-width: 480px) 100vw, (max-width: 768px) 100vw, (max-width: 1024px) 100vw, 100vw"
-                  quality={90}
-                />
-              </div>
+                  <div className={styles.emblaSlideInner}>
+                    {/* Usar Image com `fill` e deixar o pai controlar a altura via `aspect-ratio` */}
+                    <Image
+                      src={getAssetPath(image)}
+                      alt={`Banner ${index + 1}`}
+                      fill
+                      className={styles.emblaSlideImg}
+                      priority={index === 0}
+                      sizes="(max-width: 480px) 100vw, (max-width: 768px) 100vw, (max-width: 1024px) 100vw, 100vw"
+                      quality={90}
+                    />
+                  </div>
             </div>
           ))}
         </div>

@@ -31,44 +31,39 @@
   position: relative;
   width: 100%;
   overflow: hidden;
-  // Remover altura fixa - deixar a imagem definir a altura
+    /* Alturas responsivas:
+       - desktop / tablet+: 500px
+       - telas menores que tablet (max-width: 767px): 250px
+       - telas muito pequenas (max-width: 350px): 200px */
+    height: 500px;
+    min-height: 500px;
+    max-height: 500px;
+
+    @media (max-width: 767px) {
+      height: 250px;
+      min-height: 250px;
+      max-height: 250px;
+    }
+
+    @media (max-width: 350px) {
+      height: 200px;
+      min-height: 200px;
+      max-height: 200px;
+    }
 }
 
 .emblaSlideImg {
+  /* Usado com <Image fill />: ocupa todo o container pai (.emblaSlideInner)
+     e cobre a área sem deixar espaços vazios. */
+  position: absolute;
+  inset: 0;
   width: 100%;
-  height: auto; // Altura automática para manter proporção
+  height: 100%;
   display: block;
   user-select: none;
-  object-fit: contain; // Manter proporções sem cortar
-  max-width: 100%;
-  
-  // Garantir responsividade em diferentes telas
-  @media (max-width: 480px) {
-    width: 100%;
-    height: auto;
-  }
-  
-  @media (min-width: 481px) and (max-width: 767px) {
-    width: 100%;
-    height: auto;
-  }
-  
-  @media (min-width: 768px) {
-    width: 100%;
-    height: auto;
-  }
-  
-  // Garantir que a imagem cubra toda a área
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.1);
-    z-index: 1;
-  }
+  object-fit: cover;
+  object-position: center;
+  z-index: 0;
 }
 
 // Navigation Controls
