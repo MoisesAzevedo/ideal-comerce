@@ -40,9 +40,6 @@ const Products = (props: ProductsProps) => {
     categoryFilter = filtersHook.getCategoryFilter?.();
     sizeFilter = filtersHook.getSizeFilter?.();
     priceFilter = filtersHook.getPriceFilter?.();
-    if (process.env.NODE_ENV === 'development') {
-      console.log('🎯 Products: Filter values:', { categoryFilter, sizeFilter, priceFilter });
-    }
   }
   
   // State to track when filters are changing
@@ -71,16 +68,7 @@ const Products = (props: ProductsProps) => {
     maxPrice: priceFilter?.max
   });
   
-  if (process.env.NODE_ENV === 'development') {
-    console.log('🎯 Products: usePaginatedProducts params:', { 
-      perPage: 20,
-      category: categoryFilter,
-      size: sizeFilter,
-      q: searchQuery,
-      minPrice: priceFilter?.min,
-      maxPrice: priceFilter?.max
-    });
-  }
+  // debug logs removed for production cleanliness
   
   // Handle filter changes with smooth transition
   React.useEffect(() => {

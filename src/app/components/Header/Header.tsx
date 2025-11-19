@@ -12,7 +12,7 @@ import Link from "next/link";
 import { Menu } from "@/icons";
 
 // Log para diagnosticar carregamento do Header
-console.log('🎯 Header: Componente carregado', { styles, stylesKeys: Object.keys(styles || {}) });
+// debug log removed
 
 interface HeaderProps {
   showNavigation?: boolean;

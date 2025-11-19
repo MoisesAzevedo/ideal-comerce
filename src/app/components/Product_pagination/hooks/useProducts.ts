@@ -24,9 +24,6 @@ export interface UseProductsReturn extends UseProductsState {
 }
 
 export function useProducts(params: ProductsQueryParams = {}): UseProductsReturn {
-  if (process.env.NODE_ENV === 'development') {
-    console.log('🎯 useProducts: HOOK INITIALIZED with params:', params);
-  }
   
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
@@ -35,16 +32,13 @@ export function useProducts(params: ProductsQueryParams = {}): UseProductsReturn
   const [isRequesting, setIsRequesting] = useState<boolean>(false);
   const requestTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  if (process.env.NODE_ENV === 'development') {
-    console.log('🎯 useProducts: State initialized, creating productsService...');
-  }
+  // debug logs removed for production cleanliness
 
   const productsService = useMemo(() => createProductsService(), []);
 
   const fetchProducts = useCallback(async () => {
     // Previne múltiplas requisições simultâneas
     if (isRequesting) {
-      console.log('🚫 useProducts: Requisição já em andamento, ignorando...');
       return;
     }
 
@@ -55,9 +49,7 @@ export function useProducts(params: ProductsQueryParams = {}): UseProductsReturn
 
     // Debounce de 200ms para evitar múltiplas chamadas consecutivas
     requestTimeoutRef.current = setTimeout(async () => {
-      if (process.env.NODE_ENV === 'development') {
-        console.log('🎯 useProducts: Fetching products with:', params);
-      }
+      // debug logs removed for production cleanliness
       
       try {
         setIsRequesting(true);
@@ -66,12 +58,7 @@ export function useProducts(params: ProductsQueryParams = {}): UseProductsReturn
         
         const response = await productsService.getProducts(params);
         
-        if (process.env.NODE_ENV === 'development') {
-          console.log('🎯 useProducts: Response received:', {
-            dataLength: response.data.length,
-            meta: response.meta
-          });
-        }
+        // debug logs removed for production cleanliness
         
         setProducts(response.data);
         setMeta(response.meta);
@@ -89,10 +76,6 @@ export function useProducts(params: ProductsQueryParams = {}): UseProductsReturn
   }, [params.page, params.perPage, params.category, params.size, params.q, params.minPrice, params.maxPrice, productsService]); // Removido isRequesting das dependências
 
   useEffect(() => {
-    if (process.env.NODE_ENV === 'development') {
-      console.log('🎯 useProducts: useEffect TRIGGERED with params:', params);
-    }
-    
     fetchProducts();
 
     // Cleanup ao desmontar
@@ -104,20 +87,10 @@ export function useProducts(params: ProductsQueryParams = {}): UseProductsReturn
   }, [fetchProducts]); // Re-fetch when any parameter changes
 
   const refetch = () => {
-    if (process.env.NODE_ENV === 'development') {
-      console.log('🎯 useProducts: Manual refetch called');
-    }
     fetchProducts();
   };
 
-  if (process.env.NODE_ENV === 'development') {
-    console.log('🎯 useProducts: RETURNING state:', { 
-      productsLength: products.length, 
-      loading, 
-      error,
-      meta 
-    });
-  }
+  // debug logs removed for production cleanliness
 
   return {
     products,

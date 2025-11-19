@@ -6,8 +6,7 @@ import './globals.css';
 import CartProvider from './Carrinho/cart';
 import FavoritesProvider from './Favoritos/favorites';
 
-// Log para diagnosticar carregamento do RootLayout
-console.log('🎯 RootLayout: Layout principal carregado');
+// Logs removidos para produção
 
 const teko = Teko({
   subsets: ['latin'],
@@ -33,22 +32,19 @@ export default function RootLayout({
       <head>
         <script dangerouslySetInnerHTML={{
           __html: `
-            console.log('🎯 RootLayout: HTML carregado');
             window.addEventListener('DOMContentLoaded', function() {
-              console.log('🎯 DOMContentLoaded: Verificando CSS');
               const rootStyles = getComputedStyle(document.documentElement);
               const cssLoaded = rootStyles.getPropertyValue('--debug-css-loaded');
-              console.log('🎯 CSS Global carregado:', cssLoaded ? 'SIM' : 'NÃO');
               
-              // Verificar se estilos dos módulos estão aplicados
+              // Verificar se estilos dos módulos estão aplicados (não logando em console)
               setTimeout(() => {
                 const headerEl = document.querySelector('[data-name="main-header"]');
                 const footerEl = document.querySelector('[data-name="main-footer"]');
                 if (headerEl) {
-                  console.log('🎯 Header styles:', getComputedStyle(headerEl));
+                  // headerEl exists; debugging info removed
                 }
                 if (footerEl) {
-                  console.log('🎯 Footer styles:', getComputedStyle(footerEl));
+                  // footerEl exists; debugging info removed
                 }
               }, 1000);
             });

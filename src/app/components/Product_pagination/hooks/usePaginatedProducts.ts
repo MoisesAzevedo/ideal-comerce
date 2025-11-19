@@ -49,21 +49,12 @@ export function usePaginatedProducts({
     maxPrice
   }), [currentPage, perPage, category, size, q, minPrice, maxPrice]);
   
-  if (process.env.NODE_ENV === 'development') {
-    console.log('🎯 usePaginatedProducts: Calling useProducts with:', useProductsParams);
-  }
+  // debug logs removed for production cleanliness
 
   // Hook que busca produtos da página atual
   const { products, loading, error, meta } = useProducts(useProductsParams);
   
-  if (process.env.NODE_ENV === 'development') {
-    console.log('🎯 usePaginatedProducts: useProducts returned:', { 
-      productsLength: products?.length, 
-      loading, 
-      error, 
-      meta 
-    });
-  }
+  // debug logs removed for production cleanliness
 
   // Atualiza a lista acumulada quando novos produtos chegam
   React.useEffect(() => {

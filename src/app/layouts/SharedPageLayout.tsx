@@ -12,7 +12,7 @@ import FooterMenus from "../components/Footer/FooterMenus";
 import ScrollToTopButton from "../components/ScrollToTopButton/ScrollToTopButton";
 
 // Log para diagnosticar carregamento do layout
-console.log('🎯 SharedPageLayout: Componente carregado');
+// debug log removed
 
 interface SharedPageLayoutProps {
   children: React.ReactNode;
