@@ -83,11 +83,12 @@
   flex-shrink: 0; /* Impede que o botão encolha */
   
   span[data-name="category-label"] {
+    display: inline-block;
+    width: 94px; /* Largura fixa conforme solicitado */
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    max-width: calc(100% - 20px); /* Reserva espaço para a seta */
-    display: inline-block;
+    vertical-align: middle;
   }
 }
 
