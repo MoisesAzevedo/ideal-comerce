@@ -19,16 +19,16 @@ function HomeContent() {
 
   // Imagens dos banners
   const bannerImages = [
-    '/img/banners/banner1-alta-performance.png',
-    '/img/banners/banner2-bota.png',
-    '/img/banners/banner3-corvus u2.png'
+    '/img/banners/banner1.jpg',
+    '/img/banners/banner2.jpg',
+    '/img/banners/banner3.jpg'
   ];
 
   // Imagens desktop dos banners
   const desktopBannerImages = [
-    '/img/banners/desktop/banner1-alta-performance-desktop.png',
-    '/img/banners/desktop/banner2-bota-desktop.png',
-    '/img/banners/desktop/banner3-corvus-u2-desktop.png'
+    '/img/banners/banner1.jpg',
+    '/img/banners/banner2.jpg',
+    '/img/banners/banner3.jpg'
   ];
 
   return (
